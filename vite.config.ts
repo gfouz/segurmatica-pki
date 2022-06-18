@@ -6,3 +6,5 @@ export default defineConfig({
   base: "/segurmatica-pki/",
   plugins: [react()]
 })
+
+https://gfouz.github.io/segurmatica-pki/
