@@ -10,7 +10,7 @@ function Revocation() {
        <StyledResgister>
         <section className="login">
           <div className="login__divider bg-grey">
-            <img className="login__image" src="./images/forms.png" />
+            <img className="login__image" src="./images/contact.png" />
           </div>
           <div className="login__divider">
             <Form/>

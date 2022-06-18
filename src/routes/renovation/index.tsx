@@ -10,10 +10,7 @@ function Renovation() {
       <StyledResgister>
         <section className="login">
           <div className="login__divider">
-            <div className="login__logo">
-              
-            </div>
-            <img className="login__image" src="./images/forms.png" />
+            <img className="login__image" src="./images/contact.png" />
           </div>
           <div className="login__divider">
             <Form/>
@@ -42,6 +39,7 @@ const StyledResgister = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .login__logo {
     width: 300px;
@@ -60,6 +58,5 @@ const StyledResgister = styled.div`
   .login__image {
     max-width: 100%;
     height: auto;
-    object-fit: cover;
   }
 `;

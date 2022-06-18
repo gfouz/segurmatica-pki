@@ -7,12 +7,33 @@ import ContactForm from '../../components/ContactForm'
 function Contacts() {
 
   return (
-    <Layout {...layoutProps}>
+    <Layout>
       <StyledContact>
         <section className="contact">
           <article className="contact__divider">
-              <h2 className="contact__title"> Contacte nos aquí!</h2>
-              <img src="./images/habana.jpg"  />
+              <section className="contact__information">
+               <a href="mailto: comercial@segurmatica.cu ">
+                  <p className="contact__text">
+                     Email: comercial@segurmatica.cu   
+                  </p>
+               </a>   
+               <a href="mailto: soporte@segurmatica.cu ">
+                  <p className="contact__text">  
+                    Email: soporte@segurmatica.cu
+                  </p>
+               </a> 
+                <a href="tel: +5378703536">
+                   <p className="contact__text">
+                    Tel: Comercial: 78703536 ext 133 y 134 .
+                  </p>
+                </a>
+                <a href="tel: +5378703536">
+                   <p className="contact__text">
+                   Tel: Soporte Técnico: +78703536 ext 135 y 136 .
+                  </p>
+                </a>
+              </section>
+              <img src="./images/contact.png" alt="contact" />
           </article>
           <article className="contact__divider">
             <ContactForm />
@@ -35,25 +56,29 @@ const StyledContact = styled.div`
       align-items: center;
     }
     }
-   .contact__title {
-    color: #222222;
-    position: absolute;
-    top: 40%;
-    left:50%;
-    white-space: nowrap;
-    font-size: 1.6em;
-    font-weight: bolder;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 10px #ffffff;
-    transform: translate(-50%, -50%);
-   } 
    .contact__divider {
     display: flex;
     flex-direction: column;
-  
     align-items: center;
     text-align: center;
+
     width: 100%;
     position:relative;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+   }
+   .contact__information {
+    position: absolute;
+    top: 57%;
+    margin: 0 auto;
+    color: #555555;
+    max-width: 320px;
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: bolder;
    }
 `;
+//0099FF

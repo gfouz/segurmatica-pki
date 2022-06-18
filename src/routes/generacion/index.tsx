@@ -3,16 +3,13 @@ import styled from "styled-components";
 import Layout from "../layout/Layout";
 import Register from "../../patterns/Register";
 
-function Login() {
+function Generation() {
   return (
     <Layout>
       <StyledResgister>
         <section className="login">
           <div className="login__divider">
-            <div className="login__logo">
-              
-            </div>
-            <img className="login__image" src="./images/forms.png" />
+            <img className="login__image" src="./images/contact.png" />
           </div>
           <div className="login__divider">
             <Register />
@@ -22,7 +19,7 @@ function Login() {
     </Layout>
   );
 }
-export default Login;
+export default Generation;
 const StyledResgister = styled.div`
   width: 100%;
   background-color: #f8f8f8;
@@ -39,6 +36,7 @@ const StyledResgister = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .login__logo {
     width: 300px;
@@ -57,9 +55,21 @@ const StyledResgister = styled.div`
   .login__image {
     max-width: 100%;
     height: auto;
-    object-fit: cover;
   }
 `;
 
-//<p>PKI Servicio de llave pública.</p>
-//<p>Formulario de solicitud.</p>
+
+
+/*
+EMAIL: 
+comercial@segurmatica.cu    
+soporte@segurmatica.cu
+
+TELÉFONOS: 
+Comercial: 78703536 ext 133 y 134
+Soporte Técnico: +78703536 ext 135 y 136
+
+DIRECCIÓN: 
+Calle Zanja No.651 esquina a Soledad, municipio Centro Habana, Cuba
+
+*/

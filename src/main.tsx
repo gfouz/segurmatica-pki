@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ChakraProvider } from '@chakra-ui/react'
 import Card from "./components/Card";
 const Homepage = lazy(() => import("./routes/homepage/index"));
-const Login = lazy(() => import("./routes/registro/index"));
+const Generation = lazy(() => import("./routes/generacion/index"));
 const Request = lazy(() => import("./routes/consultas/index"));
 const Services = lazy(() => import("./routes/services/index"));
 const Contacts = lazy(() => import("./routes/contacts/index"));
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Suspense fallback={<Card />}>
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/generacion" element={<Login />} />
+            <Route path="/generacion" element={<Generation />} />
             <Route path="/consultas" element={<Request />} />
             <Route path="/servicios" element={<Services />} />
             <Route path="/contacto" element={<Contacts />} />
@@ -36,5 +36,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </>
   </React.StrictMode>
 );
-
-
