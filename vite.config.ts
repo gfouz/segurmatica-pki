@@ -7,4 +7,3 @@ export default defineConfig({
   plugins: [react()]
 })
 
-https://gfouz.github.io/segurmatica-pki/
