@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyledRenewal } from "./Renewal.Styled";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { OnlyNumberInputProps, TextInputProps, IdRegisterRules } from "./constants";
+import { OnlyNumberInputProps, TextInputProps, IdGenerationRules } from "./constants";
 
 interface IFormInput {
   //these are also! nominals for register props.
@@ -92,7 +92,7 @@ export default function Resgister() {
                 _placeholder={{ color: errors.id ? "red.400" : "#666666" }}
                 placeholder={errors.id ? "Valido 11 dígitos" : " "}
                 {...register("id", {
-                  ...IdRegisterRules,
+                  ...IdGenerationRules,
                   onChange: (e) => eventHandler(e)
                 })}
               />

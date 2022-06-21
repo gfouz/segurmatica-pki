@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Validate, ValidateResult } from "react-hook-form";
 
 export interface IFormInput {
   //these are also! nominals for register props.
@@ -79,45 +78,48 @@ export const InputLabelProps: InputLableProps = {
   type: "text",
   variant: "flushed",
 };
-type Validations = {
-  isGrownUp: () => {};
-  monthMin: () => boolean;
-  monthMax: () => boolean;
-  dayMin: () => boolean;
-  dayMax: () => boolean;
+
+type TValidations = {
+  isGrownUp: (color: string) => boolean;
+  monthMin: (color: string) => boolean;
+  monthMax: (color: string) => boolean;
+  dayMin: (color: string) => boolean;
+  dayMax: (color: string) => boolean;
 };
-interface IdRegisterRulesTypes {
+
+interface IGeneration {
   required: boolean;
   maxLength: number;
   minLength: number;
-  validate: any;
+  validate: TValidations;
 }
 
-function fix(value: number | string, start: number, end: number) {
+function convertInt(value: number | string, start: number, end: number) {
   return parseInt(value.toString().substring(start, end));
 }
 
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth() + 1;
-currentYear = fix(currentYear, 2, 4);
-currentMonth = fix(currentMonth, 2, 4);
+currentYear = convertInt(currentYear, 2, 4);
+currentMonth = convertInt(currentMonth, 2, 4);
 
-export const IdRegisterRules: IdRegisterRulesTypes = {
+export const IdGenerationRules: IGeneration = {
   required: true,
   maxLength: 11,
   minLength: 11,
   validate: {
-    isGrownUp: (tip: string) =>
-      (currentYear > fix(tip, 0, 2) && currentYear - fix(tip, 0, 2) > 18) ||
-      (currentYear < fix(tip, 0, 2) && fix(tip, 0, 2) < 99),
-    monthMin: (tip: string) => parseInt(tip.substring(2, 4)) >= 1,
-    monthMax: (tip: string) => parseInt(tip.substring(2, 4)) <= 12,
-    dayMin: (tip: string) => parseInt(tip.substring(4, 6)) >= 1,
-    dayMax: (tip: string) => parseInt(tip.substring(4, 6)) <= 31,
+    isGrownUp: (color: string) =>
+      (currentYear > convertInt(color, 0, 2) &&
+        currentYear - convertInt(color, 0, 2) > 18) ||
+      (currentYear < convertInt(color, 0, 2) && convertInt(color, 0, 2) < 99),
+    monthMin: (color: string) => parseInt(color.substring(2, 4)) >= 1,
+    monthMax: (color: string) => parseInt(color.substring(2, 4)) <= 12,
+    dayMin: (color: string) => parseInt(color.substring(4, 6)) >= 1,
+    dayMax: (color: string) => parseInt(color.substring(4, 6)) <= 31,
   },
 };
 
-interface IWarningState {
+interface IState {
   id: string;
   tel: string;
   tomo: string;
@@ -133,7 +135,7 @@ interface IWarningState {
   condiciones: boolean;
 }
 
-export const warningState: IWarningState = {
+export const initialState: IState = {
   id: "",
   tel: "",
   tomo: "",
@@ -149,18 +151,18 @@ export const warningState: IWarningState = {
   condiciones: false,
 };
 
-export const green = (prev: IWarningState) => {
+export const green = (prev: IState) => {
   return { ...prev, color: "#00FF00" };
 };
 
-export const red = (prev: IWarningState) => {
+export const red = (prev: IState) => {
   return { ...prev, color: "#FF0000" };
 };
 
-export const grey = (prev: IWarningState) => {
+export const grey = (prev: IState) => {
   return { ...prev, color: "#CCCCCC" };
 };
 
-export const black = (prev: IWarningState) => {
+export const black = (prev: IState) => {
   return { ...prev, color: "#666666" };
 };

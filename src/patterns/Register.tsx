@@ -3,8 +3,8 @@ import Option from "../components/Option";
 import { StyledRegister } from "./Register.Styled";
 import {
   IFormInput,
-  IdRegisterRules,
-  warningState,
+  IdGenerationRules,
+  initialState,
   green,
   red,
   grey,
@@ -37,7 +37,7 @@ import {
 } from "@chakra-ui/react";
 
 export default function Resgister() {
-  const [tip, setTip] = React.useState(warningState);
+  const [state, setState] = React.useState(initialState);
   const [alert, setAlert] = React.useState("");
   const [radio, setRadio] = React.useState("juridica");
   const {
@@ -51,12 +51,12 @@ export default function Resgister() {
   function idEventHandler(evt: React.ChangeEvent<HTMLInputElement>) {
     let { value } = evt.target;
     let length = value.length;
-    setTip((prev) => {
+    setState((prev) => {
       return { ...prev, id: value };
     });
-    length === 11 ? setTip((prev) => green(prev)) : setAlert("warning");
-    length > 11 ? setTip((prev) => red(prev)) : setAlert("warning");
-    length < 11 ? setTip((prev) => grey(prev)) : setAlert("warning");
+    length === 11 ? setState((prev) => green(prev)) : setAlert("warning");
+    length > 11 ? setState((prev) => red(prev)) : setAlert("warning");
+    length < 11 ? setState((prev) => grey(prev)) : setAlert("warning");
   }
 
   return (
@@ -73,15 +73,15 @@ export default function Resgister() {
           </Center>
           <HStack spacing={2} p="0.7em">
             <Container>
-              <label style={{ color: `${tip.color}` }}>
+              <label style={{ color: `${state.color}` }}>
                 <strong>ID</strong>
               </label>
               <Input
                 {...OnlyNumberInputProps}
                 _placeholder={{ color: errors.id ? "red.400" : "#666666" }}
-                placeholder={errors.id ? "Valido 11 dígitos" : " "}
+                placeholder={errors.id ? "Válido 11 dígitos" : " "}
                 {...register("id", {
-                  ...IdRegisterRules,
+                  ...IdGenerationRules,
                   onChange: (e) => idEventHandler(e),
                 })}
               />
