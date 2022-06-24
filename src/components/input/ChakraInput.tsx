@@ -23,8 +23,8 @@ interface InputProps {
 
 const ChakraInput = ({
   idEvt,
-  register,
   label,
+  register,
   validations,
   placeholder,
   _placeholder,

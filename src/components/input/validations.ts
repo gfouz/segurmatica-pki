@@ -6,7 +6,7 @@ function turnToInt(value: number | string, start: number, end: number) {
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth() + 1;
 currentYear = turnToInt(currentYear, 2, 4);
-//----------------------------------------------------------------//
+/*-------------------------------------------------------------------*/
 
 //css styles and Chakra properties.
 type chakraProps = {
