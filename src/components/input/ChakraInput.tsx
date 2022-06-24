@@ -3,16 +3,18 @@ import { Input } from "@chakra-ui/react";
 import {
   IFormInput,
   IDates,
+  ILabel,
+  chakraProps,
   numberInput,
-  idRequirements,
   IRequirements,
 } from "./validations";
-import { UseFormRegister, FieldErrors, Path, Validate } from "react-hook-form";
+import { UseFormRegister, FieldErrors, Path } from "react-hook-form";
 import { CSSObject } from "@emotion/react";
 
 interface InputProps {
   idEvt: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label: Path<IFormInput> | any;
+  label: ILabel;
+  chakraProps: chakraProps;
   register: UseFormRegister<IFormInput>;
   errors: FieldErrors;
   placeholder: string | undefined;
@@ -24,6 +26,7 @@ interface InputProps {
 const ChakraInput = ({
   idEvt,
   label,
+  chakraProps,
   register,
   validations,
   placeholder,
@@ -33,7 +36,7 @@ const ChakraInput = ({
   return (
     <>
       <Input
-        {...numberInput}
+        {...chakraProps}
         _placeholder={_placeholder}
         placeholder={placeholder}
         {...register(label, {

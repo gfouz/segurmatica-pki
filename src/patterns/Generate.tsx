@@ -2,7 +2,14 @@ import * as React from "react";
 import Option from "../components/Option";
 import { StyledGenerate } from "./Generate.Styled";
 import ChakraInput from '../components/input/ChakraInput';
-import { idRequirements, onlyRequired, dates } from '../components/input/validations';
+import { 
+  idValidation, 
+  onlyRequired, 
+  dates, 
+  telValidation, 
+  numberType,
+  telType
+  } from '../components/input/validations';
 import {
   IFormInput,
   IdGenerationRules,
@@ -82,10 +89,10 @@ export default function Generate() {
               <ChakraInput
                 label="id"
                 register={register}
-                errors={errors}
+                chakraProps={numberType}
                 idEvt={idEventHandler}
                 validations={dates}
-                requirements={idRequirements}
+                requirements={idValidation}
                 placeholder={errors.id ? "Olvido su ID!" : ""}
                 _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
@@ -95,7 +102,7 @@ export default function Generate() {
               <ChakraInput
                 label="tomo"
                 register={register}
-                errors={errors}
+                chakraProps={numberType}
                 idEvt={idEventHandler}
                 requirements={onlyRequired}
                 placeholder={errors.id ? "Olvido su ID!" : ""}
@@ -108,7 +115,7 @@ export default function Generate() {
               <ChakraInput
                 label="folio"
                 register={register}
-                errors={errors}
+                chakraProps={numberType}
                 idEvt={idEventHandler}
                 requirements={onlyRequired}
                 placeholder={errors.id ? "Olvido su ID!" : ""}
@@ -127,14 +134,14 @@ export default function Generate() {
                 }
                 {...register("email", { required: true })}
               />
-              <Input
-                m="0 0.7em"
-                {...OnlyNumberInputProps}
-                _placeholder={{ color: errors.tel ? "red.400" : "gray.500" }}
-                placeholder={
-                  errors.tel ? "Teléfono requerido!" : "Nro de Teléfono"
-                }
-                {...register("tel", { required: true })}
+              <ChakraInput
+                label="tel"
+                register={register}
+                chakraProps={telType}
+                idEvt={idEventHandler}
+                requirements={telValidation}
+                placeholder={errors.id ? "Su télefono!" : ""}
+                _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
             </Flex>
           </Box>

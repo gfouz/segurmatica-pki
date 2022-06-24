@@ -8,32 +8,37 @@ let currentMonth = new Date().getMonth() + 1;
 currentYear = turnToInt(currentYear, 2, 4);
 /*-------------------------------------------------------------------*/
 
-//css styles and Chakra properties.
-type chakraProps = {
+/*-----------css styles and Chakra properties types.--------*/
+export type chakraProps = {
   size: string;
   type: string;
   variant: string;
 };
-export const numberInput: chakraProps = {
+export const numberType: chakraProps = {
   size: "sm",
   type: "number",
   variant: "flushed",
 };
-export const emailInput: chakraProps = {
+export const emailType: chakraProps = {
   size: "sm",
   type: "email",
   variant: "flushed",
 };
-export const textInput: chakraProps = {
+export const textType: chakraProps = {
   size: "sm",
   type: "text",
   variant: "flushed",
 };
+export const telType: chakraProps = {
+  size: "sm",
+  type: "tel",
+  variant: "flushed",
+};
 
-//-------------------------------------------------------------------//
-//names for react-hook-form registers.
+/*----------Names for react-hook-form registers.---------------------*/
+
 export interface IFormInput {
-  //these are also! nominals for register props.
+  /*_______these are also! nominals for register props________*/
   id: string;
   tel: string;
   tomo: string;
@@ -47,7 +52,7 @@ export interface IFormInput {
   condiciones: boolean;
 }
 
-//Dates validations and limits on time.
+/*-----------------Dates validations and limits on time.------------*/
 export interface IDates {
   isgrownup: (id: string) => boolean;
   monthover: (id: string) => boolean;
@@ -55,8 +60,9 @@ export interface IDates {
   dayover: (id: string) => boolean;
   dayunder: (id: string) => boolean;
 }
+
+/*-----------Object of callback functions that receive the input value as args--------*/
 export const dates: IDates = {
-  //Object of callback functions that receive the input value as args.
   isgrownup: (id) =>
     (currentYear - turnToInt(id, 0, 2) == 18 &&
       currentMonth > turnToInt(id, 2, 4)) ||
@@ -75,7 +81,7 @@ export interface IRequirements {
   maxLength: number;
   minLength: number;
 }
-export const idRequirements: IRequirements = {
+export const idValidation: IRequirements = {
   required: true,
   maxLength: 11,
   minLength: 11,
@@ -85,3 +91,11 @@ export const onlyRequired: IRequirements = {
   maxLength: 4,
   minLength: 4,
 };
+export const telValidation: IRequirements = {
+  required: true,
+  maxLength: 12,
+  minLength: 8,
+};
+/*-----------------------Literal types for registering inputs---------------------------------*/
+
+export type ILabel = "id" | "tel" | "tomo" | "folio" | "email";
