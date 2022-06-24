@@ -80,11 +80,11 @@ export const InputLabelProps: InputLableProps = {
 };
 
 type TValidations = {
-  isGrownUp: (color: string) => boolean;
-  monthMin: (color: string) => boolean;
-  monthMax: (color: string) => boolean;
-  dayMin: (color: string) => boolean;
-  dayMax: (color: string) => boolean;
+  isGrownUp: (id: string) => boolean;
+  monthMin: (id: string) => boolean;
+  monthMax: (id: string) => boolean;
+  dayMin: (id: string) => boolean;
+  dayMax: (id: string) => boolean;
 };
 
 interface IGeneration {
@@ -94,28 +94,29 @@ interface IGeneration {
   validate: TValidations;
 }
 
-function convertInt(value: number | string, start: number, end: number) {
+function turnToInt(value: number | string, start: number, end: number) {
   return parseInt(value.toString().substring(start, end));
 }
 
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth() + 1;
-currentYear = convertInt(currentYear, 2, 4);
-currentMonth = convertInt(currentMonth, 2, 4);
+currentYear = turnToInt(currentYear, 2, 4);
 
 export const IdGenerationRules: IGeneration = {
   required: true,
   maxLength: 11,
   minLength: 11,
   validate: {
-    isGrownUp: (color: string) =>
-      (currentYear > convertInt(color, 0, 2) &&
-        currentYear - convertInt(color, 0, 2) > 18) ||
-      (currentYear < convertInt(color, 0, 2) && convertInt(color, 0, 2) < 99),
-    monthMin: (color: string) => parseInt(color.substring(2, 4)) >= 1,
-    monthMax: (color: string) => parseInt(color.substring(2, 4)) <= 12,
-    dayMin: (color: string) => parseInt(color.substring(4, 6)) >= 1,
-    dayMax: (color: string) => parseInt(color.substring(4, 6)) <= 31,
+    isGrownUp: (id: string) =>
+      (currentYear - turnToInt(id, 0, 2) == 18 &&
+        currentMonth > turnToInt(id, 2, 4)) ||
+      (currentYear > turnToInt(id, 0, 2) &&
+        currentYear - turnToInt(id, 0, 2) > 18) ||
+      (currentYear < turnToInt(id, 0, 2) && turnToInt(id, 0, 2) < 99),
+    monthMin: (id: string) => parseInt(id.substring(2, 4)) >= 1,
+    monthMax: (id: string) => parseInt(id.substring(2, 4)) <= 12,
+    dayMin: (id: string) => parseInt(id.substring(4, 6)) >= 1,
+    dayMax: (id: string) => parseInt(id.substring(4, 6)) <= 31,
   },
 };
 

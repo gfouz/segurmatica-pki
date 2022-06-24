@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
-import Register from "../../patterns/Register";
+import Generate from "../../patterns/Generate";
 
 function Generation() {
   return (
@@ -12,7 +12,7 @@ function Generation() {
             <img className="login__image" src="./images/contact.png" />
           </div>
           <div className="login__divider">
-            <Register />
+            <Generate />
           </div>
         </section>
       </StyledResgister>

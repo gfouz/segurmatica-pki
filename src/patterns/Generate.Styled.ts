@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const StyledRegister = styled.div`
+export const StyledGenerate = styled.div`
   background-color: #fefefe;
   width: 100%;
   display: flex;

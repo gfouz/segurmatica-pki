@@ -1,6 +1,8 @@
 import * as React from "react";
 import Option from "../components/Option";
-import { StyledRegister } from "./Register.Styled";
+import { StyledGenerate } from "./Generate.Styled";
+import ChakraInput from '../components/input/ChakraInput';
+import { idRequirements, onlyRequired, dates } from '../components/input/validations';
 import {
   IFormInput,
   IdGenerationRules,
@@ -36,7 +38,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 
-export default function Resgister() {
+export default function Generate() {
   const [state, setState] = React.useState(initialState);
   const [alert, setAlert] = React.useState("");
   const [radio, setRadio] = React.useState("juridica");
@@ -54,6 +56,7 @@ export default function Resgister() {
     setState((prev) => {
       return { ...prev, id: value };
     });
+
     length === 11 ? setState((prev) => green(prev)) : setAlert("warning");
     length > 11 ? setState((prev) => red(prev)) : setAlert("warning");
     length < 11 ? setState((prev) => grey(prev)) : setAlert("warning");
@@ -61,7 +64,7 @@ export default function Resgister() {
 
   return (
     <>
-      <StyledRegister>
+      <StyledGenerate>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Center w="100%" p="1.5em">
             <Heading as="h3" size="lg" color="#B22222">
@@ -76,32 +79,40 @@ export default function Resgister() {
               <label style={{ color: `${state.color}` }}>
                 <strong>ID</strong>
               </label>
-              <Input
-                {...OnlyNumberInputProps}
-                _placeholder={{ color: errors.id ? "red.400" : "#666666" }}
-                placeholder={errors.id ? "Válido 11 dígitos" : " "}
-                {...register("id", {
-                  ...IdGenerationRules,
-                  onChange: (e) => idEventHandler(e),
-                })}
+              <ChakraInput
+                label="id"
+                register={register}
+                errors={errors}
+                idEvt={idEventHandler}
+                validations={dates}
+                requirements={idRequirements}
+                placeholder={errors.id ? "Olvido su ID!" : ""}
+                _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
             </Container>
             <Container>
               <label>Tomo</label>
-              <Input
-                {...OnlyNumberInputProps}
-                _placeholder={{ color: errors.tomo ? "red.400" : "gray.500" }}
-                placeholder={errors.tomo ? "Olvido su Tomo!" : ""}
-                {...register("tomo", { required: true })}
+              <ChakraInput
+                label="tomo"
+                register={register}
+                errors={errors}
+                idEvt={idEventHandler}
+                requirements={onlyRequired}
+                placeholder={errors.id ? "Olvido su ID!" : ""}
+                _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
+
             </Container>
             <Container>
               <label>Folio</label>
-              <Input
-                {...OnlyNumberInputProps}
-                _placeholder={{ color: errors.folio ? "red.400" : "gray.500" }}
-                placeholder={errors.folio ? "Olvido su Folio!" : ""}
-                {...register("folio", { required: true })}
+              <ChakraInput
+                label="folio"
+                register={register}
+                errors={errors}
+                idEvt={idEventHandler}
+                requirements={onlyRequired}
+                placeholder={errors.id ? "Olvido su ID!" : ""}
+                _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
             </Container>
           </HStack>
@@ -233,7 +244,7 @@ export default function Resgister() {
             </Flex>
           </Box>
         </form>
-      </StyledRegister>
+      </StyledGenerate>
     </>
   );
 }
