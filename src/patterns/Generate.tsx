@@ -2,32 +2,19 @@ import * as React from "react";
 import Option from "../components/Option";
 import { StyledGenerate } from "./Generate.Styled";
 import ChakraInput from '../components/input/ChakraInput';
-import { 
-  idValidation, 
-  onlyRequired, 
-  dates, 
-  telValidation, 
-  numberType,
-  telType
-  } from '../components/input/validations';
-import {
-  IFormInput,
-  IdGenerationRules,
-  initialState,
-  green,
-  red,
-  grey,
-  black,
-} from "./constants";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   ORGANISMOS,
   EMPRESAS,
   ENTIDADES,
-  OnlyNumberInputProps,
-  EmailInputProps,
-  TextInputProps,
+  IFormInput,
+  initialState,
+  color,
+  inputType,
+  dates,
+  attributes
 } from "./constants";
+
 
 import {
   Box,
@@ -64,9 +51,9 @@ export default function Generate() {
       return { ...prev, id: value };
     });
 
-    length === 11 ? setState((prev) => green(prev)) : setAlert("warning");
-    length > 11 ? setState((prev) => red(prev)) : setAlert("warning");
-    length < 11 ? setState((prev) => grey(prev)) : setAlert("warning");
+    length === 11 ? setState((prev) => color.green(prev)) : setAlert("warning");
+    length > 11 ? setState((prev) => color.red(prev)) : setAlert("warning");
+    length < 11 ? setState((prev) => color.grey(prev)) : setAlert("warning");
   }
 
   return (
@@ -89,10 +76,10 @@ export default function Generate() {
               <ChakraInput
                 label="id"
                 register={register}
-                chakraProps={numberType}
+                htmlAttributes={inputType.number()}
                 idEvt={idEventHandler}
                 validations={dates}
-                requirements={idValidation}
+                requirements={attributes.id()}
                 placeholder={errors.id ? "Olvido su ID!" : ""}
                 _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
@@ -102,10 +89,10 @@ export default function Generate() {
               <ChakraInput
                 label="tomo"
                 register={register}
-                chakraProps={numberType}
+                htmlAttributes={inputType.number()}
                 idEvt={idEventHandler}
-                requirements={onlyRequired}
-                placeholder={errors.id ? "Olvido su ID!" : ""}
+                requirements={attributes.tomo()}
+                placeholder={errors.id ? "Olvido su Tomo!" : ""}
                 _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
 
@@ -115,10 +102,10 @@ export default function Generate() {
               <ChakraInput
                 label="folio"
                 register={register}
-                chakraProps={numberType}
+                htmlAttributes={inputType.number()}
                 idEvt={idEventHandler}
-                requirements={onlyRequired}
-                placeholder={errors.id ? "Olvido su ID!" : ""}
+                requirements={attributes.folio()}
+                placeholder={errors.id ? "Olvido su Folio!" : ""}
                 _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
             </Container>
@@ -126,7 +113,7 @@ export default function Generate() {
           <Box p="2em 0.7em" w="100%">
             <Flex justifyContent="space-evenly">
               <Input
-                {...EmailInputProps}
+                {...inputType.email}
                 m="0 0.7em"
                 _placeholder={{ color: errors.email ? "red.400" : "gray.500" }}
                 placeholder={
@@ -137,9 +124,9 @@ export default function Generate() {
               <ChakraInput
                 label="tel"
                 register={register}
-                chakraProps={telType}
+                htmlAttributes={inputType.telephone()}
                 idEvt={idEventHandler}
-                requirements={telValidation}
+                requirements={attributes.tel()}
                 placeholder={errors.id ? "Su télefono!" : ""}
                 _placeholder={{ color: errors.id ? "red.400" : "gray.500" }}
               />
@@ -191,7 +178,7 @@ export default function Generate() {
                 <Flex justifyContent="space-evenly">
                   <Input
                     m="0 0.7em"
-                    {...TextInputProps}
+                    {...inputType.text()}
                     _placeholder={{
                       color: errors.cargo ? "red.400" : "gray.500",
                     }}
@@ -202,7 +189,7 @@ export default function Generate() {
                   />
                   <Input
                     m="0 0.7em"
-                    {...TextInputProps}
+                    {...inputType.text()}
                     _placeholder={{
                       color: errors.representante ? "red.400" : "gray.500",
                     }}
@@ -255,3 +242,5 @@ export default function Generate() {
     </>
   );
 }
+
+

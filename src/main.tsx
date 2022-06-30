@@ -10,6 +10,7 @@ const Contacts = lazy(() => import("./routes/contacts/index"));
 const Downloads = lazy(() => import("./routes/downloads/index"));
 const Renovation = lazy(() => import("./routes/renovation/index"));
 const Revocation = lazy(() => import("./routes/revocation/index"));
+const Login = lazy(() => import("./routes/login/index"));
 import { HashRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/descargas" element={<Downloads />} />
             <Route path="/renovacion" element={<Renovation />} />
             <Route path="/revocacion" element={<Revocation />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Suspense>
       </HashRouter>

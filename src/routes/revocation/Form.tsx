@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyledForm } from "./Form.Styled";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { OnlyNumberInputProps, TextInputProps, IdRegisterRules } from "./constants";
+import { number_input, text_input, IdRegisterRules } from "./constants";
 
 interface IFormInput {
   //these are also! nominals for register props.
@@ -88,7 +88,7 @@ export default function Form() {
                 <strong>Nro de ID</strong>
               </label>
               <Input
-                {...OnlyNumberInputProps}
+                {...number_input}
                 _placeholder={{ color: errors.id ? "red.400" : "#666666" }}
                 placeholder={errors.id ? "Valido 11 dígitos" : " "}
                 {...register("id", {
@@ -100,7 +100,7 @@ export default function Form() {
             <Container>
               <label>Nro de Serie o DN</label>
               <Input
-                {...OnlyNumberInputProps}
+                {...number_input}
                 _placeholder={{ color: errors.dn ? "red.400" : "gray.500" }}
                 placeholder={errors.dn ? "Olvido su DN!" : ""}
                 {...register("dn", { required: true })}
@@ -115,7 +115,7 @@ export default function Form() {
                 <Flex justifyContent="space-evenly">
                   <Input
                     m="0 0.7em"
-                    {...TextInputProps}
+                    {...text_input}
                     _placeholder={{
                       color: errors.motive ? "red.400" : "gray.500",
                     }}
@@ -132,8 +132,8 @@ export default function Form() {
 
           <Box p="0 1em" w="100%">
             <Flex justifyContent="flex-start">
-              <Checkbox 
-                m="0 0.7em" 
+              <Checkbox
+                m="0 0.7em"
                 colorScheme='red'
                 {...register("policy", { required: true })}
               >

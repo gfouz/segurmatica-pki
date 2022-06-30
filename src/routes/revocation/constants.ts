@@ -36,45 +36,33 @@ export const EMPRESAS: string[] = [
 
 export const ENTIDADES: string[] = ["BANDEC", "BPA"];
 
-// do not forget to organize this in a better way to avoid repetitions.
-type InputProps = {
+/*-----------css styles and Chakra properties types.--------*/
+export type chakraProps = {
   size: string;
   type: string;
   variant: string;
 };
-type EmailInputProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-type TextInputProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-type InputLableProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-
-export const OnlyNumberInputProps: InputProps = {
+export const number_input: chakraProps = {
   size: "sm",
   type: "number",
   variant: "flushed",
 };
-
-export const EmailInputProps: EmailInputProps = {
+export const email_input: chakraProps = {
   size: "sm",
   type: "email",
   variant: "flushed",
 };
-export const TextInputProps: TextInputProps = {
+export const tel_input: chakraProps = {
   size: "sm",
-  type: "text",
+  type: "tel",
   variant: "flushed",
 };
-export const InputLabelProps: InputLableProps = {
+export const password_input: chakraProps = {
+  size: "sm",
+  type: "password",
+  variant: "flushed",
+};
+export const text_input: chakraProps = {
   size: "sm",
   type: "text",
   variant: "flushed",

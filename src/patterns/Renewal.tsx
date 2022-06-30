@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyledRenewal } from "./Renewal.Styled";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { OnlyNumberInputProps, TextInputProps, IdGenerationRules } from "./constants";
+import { inputType, attributes } from "./constants";
 
 interface IFormInput {
   //these are also! nominals for register props.
@@ -43,16 +43,22 @@ export default function Resgister() {
   function eventHandler(evt: React.ChangeEvent<HTMLInputElement>) {
     let { value } = evt.target;
     let items = value.length;
-    items && items === 11 ? setColor("#66CC00") : setAlert("Validos 11 números");
+    items && items === 11
+      ? setColor("#66CC00")
+      : setAlert("Validos 11 números");
     items && items > 11 ? setColor("#ff0000") : setAlert("Complete 11 numeros");
-    items && items < 11 ? setColor("#CCCCCC") : setAlert("Número excedido de 11");
+    items && items < 11
+      ? setColor("#CCCCCC")
+      : setAlert("Número excedido de 11");
   }
   return (
     <>
       <StyledRenewal>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Center w="100%" p="1.5em">
-            <Heading as="h3" size="lg" color="#B22222">Solicitud:</Heading>
+            <Heading as="h3" size="lg" color="#B22222">
+              Solicitud:
+            </Heading>
           </Center>
           <Center w="100%" p="0.3em 0">
             <Text color="#666666">Tipo de solicitud:</Text>
@@ -64,7 +70,7 @@ export default function Resgister() {
                 <Radio
                   m="0 1em"
                   value="renewal"
-                  colorScheme='red'
+                  colorScheme="red"
                   isChecked={radio == "renewal" ? true : false}
                 >
                   Renovación
@@ -72,7 +78,7 @@ export default function Resgister() {
                 <Radio
                   m="0 1em"
                   value="revocation"
-                  colorScheme='red'
+                  colorScheme="red"
                   isChecked={radio == "natural" ? true : false}
                 >
                   Revocación
@@ -81,26 +87,25 @@ export default function Resgister() {
             </Box>
           </RadioGroup>
 
-
           <HStack spacing={2} p="0.7em">
             <Container>
               <label style={{ color: `${color}` }}>
                 <strong>Nro de ID</strong>
               </label>
               <Input
-                {...OnlyNumberInputProps}
+                {...inputType.number()}
                 _placeholder={{ color: errors.id ? "red.400" : "#666666" }}
                 placeholder={errors.id ? "Valido 11 dígitos" : " "}
                 {...register("id", {
-                  ...IdGenerationRules,
-                  onChange: (e) => eventHandler(e)
+                  ...attributes.id(),
+                  onChange: (e) => eventHandler(e),
                 })}
               />
             </Container>
             <Container>
               <label>Nro de Serie o DN</label>
               <Input
-                {...OnlyNumberInputProps}
+                {...inputType.number()}
                 _placeholder={{ color: errors.dn ? "red.400" : "gray.500" }}
                 placeholder={errors.dn ? "Olvido su DN!" : ""}
                 {...register("dn", { required: true })}
@@ -110,17 +115,18 @@ export default function Resgister() {
 
           {radio == "revocation" && (
             <>
-
               <Box p="2em 0.7em" w="100%">
                 <Flex justifyContent="space-evenly">
                   <Input
                     m="0 0.7em"
-                    {...TextInputProps}
+                    {...inputType.text()}
                     _placeholder={{
                       color: errors.motive ? "red.400" : "gray.500",
                     }}
                     placeholder={
-                      errors.motive ? "Motivo de Revocación!" : "Escriba Motivo de Revocación"
+                      errors.motive
+                        ? "Motivo de Revocación!"
+                        : "Escriba Motivo de Revocación"
                     }
                     {...register("motive", { required: true })}
                   />
@@ -129,12 +135,11 @@ export default function Resgister() {
             </>
           )}
 
-
           <Box p="0 1em" w="100%">
             <Flex justifyContent="flex-start">
-              <Checkbox 
-                m="0 0.7em" 
-                colorScheme='red'
+              <Checkbox
+                m="0 0.7em"
+                colorScheme="red"
                 {...register("policy", { required: true })}
               >
                 Acepto los terminos y condiciones.

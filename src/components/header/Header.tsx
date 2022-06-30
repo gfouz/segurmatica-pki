@@ -24,6 +24,10 @@ function Header(props: HeaderProps) {
       icon: <Home />,
     },
     {
+      path: "/login",
+      icon: <FormText />,
+    },
+    {
       path: "/servicios",
       icon: <Services />,
     },

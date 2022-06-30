@@ -7,13 +7,13 @@ import Form from './Form';
 function Revocation() {
   return (
     <Layout>
-       <StyledResgister>
+      <StyledResgister>
         <section className="login">
           <div className="login__divider bg-grey">
             <img className="login__image" src="./images/contact.png" />
           </div>
           <div className="login__divider">
-            <Form/>
+            <Form />
           </div>
         </section>
       </StyledResgister>
@@ -58,7 +58,6 @@ const StyledResgister = styled.div`
   .login__image {
     max-width: 100%;
     height: auto;
-  
   }
  .bg-grey  {
   background-color: #3a3839;

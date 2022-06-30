@@ -22,30 +22,29 @@ export const StyledHeader = styled.div`
     display: flex;
     justify-content: space-evenly;
     &__list {
-       padding: 1em 0;
+      padding: 1em 0;
     }
     &__item {
-       display: flex;
-       padding: 0.5em;
+      display: flex;
+      padding: 0.5em;
     }
     &__item:hover {
       color: violet;
     }
-  .nav__icon {
-    position: relative;
-    top: 2px;
-    margin: 0 1.8em 0 0;
-  }
-  .nav__link {
-      color:#999999;
+    .nav__icon {
+      position: relative;
+      top: 2px;
+      margin: 0 1.8em 0 0;
+    }
+    .nav__link {
+      color: #999999;
       font-weight: bolder;
       font-size: 0.8em;
       text-transform: uppercase;
     }
-  .nav__link--bolder {
-      color: #DC143C;
-      
-    }  
+    .nav__link--bolder {
+      color: #dc143c;
+    }
   }
 
   .hidden {
@@ -77,11 +76,11 @@ export const StyledHeader = styled.div`
   ${(props: HeaderProps) =>
     props.column &&
     css`
-      .nav { 
-       height: 100%;
-       flex-direction: column;
-       justify-content: space-evenly;
-       align-items: flex-start;
-     }
-    `}  
+      .nav {
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+      }
+    `}
 `;

@@ -1,5 +1,16 @@
+import { ResponsiveValue } from "@chakra-ui/react";
+import { ValidationRule } from "react-hook-form";
 import * as React from "react";
 
+//____________functions to handle dates and time_____________//
+function turnToInt(value: number | string, start: number, end: number) {
+  return parseInt(value.toString().substring(start, end));
+}
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth() + 1;
+currentYear = turnToInt(currentYear, 2, 4);
+
+/*------------types of data that is sent by the form--------------*/
 export interface IFormInput {
   //these are also! nominals for register props.
   id: string;
@@ -35,91 +46,86 @@ export const EMPRESAS: string[] = [
 
 export const ENTIDADES: string[] = ["BANDEC", "BPA"];
 
-// do not forget to organize this in a better way to avoid repetitions.
-type InputProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-type EmailInputProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-type TextInputProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-type InputLableProps = {
-  size: string;
-  type: string;
-  variant: string;
+/*-----------css styles and Chakra attributes types.--------*/
+export type chakraAttributes = {
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
+  type: React.HTMLInputTypeAttribute | undefined;
+  variant:
+    | ResponsiveValue<
+        (string & {}) | "outline" | "flushed" | "unstyled" | "filled"
+      >
+    | undefined;
 };
 
-export const OnlyNumberInputProps: InputProps = {
-  size: "sm",
-  type: "number",
-  variant: "flushed",
-};
-
-export const EmailInputProps: EmailInputProps = {
-  size: "sm",
-  type: "email",
-  variant: "flushed",
-};
-export const TextInputProps: TextInputProps = {
-  size: "sm",
-  type: "text",
-  variant: "flushed",
-};
-export const InputLabelProps: InputLableProps = {
-  size: "sm",
-  type: "text",
-  variant: "flushed",
-};
-
-type TValidations = {
-  isGrownUp: (id: string) => boolean;
-  monthMin: (id: string) => boolean;
-  monthMax: (id: string) => boolean;
-  dayMin: (id: string) => boolean;
-  dayMax: (id: string) => boolean;
-};
-
-interface IGeneration {
-  required: boolean;
-  maxLength: number;
-  minLength: number;
-  validate: TValidations;
+interface IInputTypes {
+  number: () => chakraAttributes;
+  email: () => chakraAttributes;
+  telephone: () => chakraAttributes;
+  text: () => chakraAttributes;
+  password: () => chakraAttributes;
 }
-
-function turnToInt(value: number | string, start: number, end: number) {
-  return parseInt(value.toString().substring(start, end));
-}
-
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth() + 1;
-currentYear = turnToInt(currentYear, 2, 4);
-
-export const IdGenerationRules: IGeneration = {
-  required: true,
-  maxLength: 11,
-  minLength: 11,
-  validate: {
-    isGrownUp: (id: string) =>
-      (currentYear - turnToInt(id, 0, 2) == 18 &&
-        currentMonth > turnToInt(id, 2, 4)) ||
-      (currentYear > turnToInt(id, 0, 2) &&
-        currentYear - turnToInt(id, 0, 2) > 18) ||
-      (currentYear < turnToInt(id, 0, 2) && turnToInt(id, 0, 2) < 99),
-    monthMin: (id: string) => parseInt(id.substring(2, 4)) >= 1,
-    monthMax: (id: string) => parseInt(id.substring(2, 4)) <= 12,
-    dayMin: (id: string) => parseInt(id.substring(4, 6)) >= 1,
-    dayMax: (id: string) => parseInt(id.substring(4, 6)) <= 31,
+export const inputType: IInputTypes = {
+  number: () => {
+    return {
+      size: "sm",
+      type: "number",
+      variant: "flushed",
+    };
+  },
+  email: () => {
+    return {
+      size: "sm",
+      type: "email",
+      variant: "flushed",
+    };
+  },
+  telephone: () => {
+    return {
+      size: "sm",
+      type: "tel",
+      variant: "flushed",
+    };
+  },
+  password: () => {
+    return {
+      size: "sm",
+      type: "password",
+      variant: "flushed",
+    };
+  },
+  text: () => {
+    return {
+      size: "sm",
+      type: "text",
+      variant: "flushed",
+    };
   },
 };
 
+/*-----------------Dates validations and limits on time.------------*/
+export interface IDates {
+  isgrownup: (id: string) => boolean;
+  monthover: (id: string) => boolean;
+  monthunder: (id: string) => boolean;
+  dayover: (id: string) => boolean;
+  dayunder: (id: string) => boolean;
+}
+
+/*-----------Object of callback functions that receive the input value as args--------*/
+export const dates: IDates = {
+  isgrownup: (id) =>
+    (currentYear - turnToInt(id, 0, 2) == 18 &&
+      currentMonth > turnToInt(id, 2, 4)) ||
+    (currentYear > turnToInt(id, 0, 2) &&
+      currentYear - turnToInt(id, 0, 2) > 18) ||
+    (currentYear < turnToInt(id, 0, 2) && turnToInt(id, 0, 2) < 99),
+  monthover: (id) => parseInt(id.substring(2, 4)) >= 1,
+  monthunder: (id) => parseInt(id.substring(2, 4)) <= 12,
+  dayover: (id) => parseInt(id.substring(4, 6)) >= 1,
+  dayunder: (id) => parseInt(id.substring(4, 6)) <= 31,
+};
+
+/* data that must come from users */
 interface IState {
   id: string;
   tel: string;
@@ -135,7 +141,7 @@ interface IState {
   representante: string;
   condiciones: boolean;
 }
-
+/*----------Full form state-------*/
 export const initialState: IState = {
   id: "",
   tel: "",
@@ -152,18 +158,46 @@ export const initialState: IState = {
   condiciones: false,
 };
 
-export const green = (prev: IState) => {
-  return { ...prev, color: "#00FF00" };
+//__________________Aditional validations.__________________//
+export interface IAttributes {
+  required: ValidationRule<boolean> | string | undefined;
+  maxLength: ValidationRule<number> | undefined;
+  minLength: ValidationRule<number> | undefined;
+}
+interface IInputs {
+  id: () => IAttributes;
+  tel: () => IAttributes;
+  tomo: () => IAttributes;
+  folio: () => IAttributes;
+}
+export const attributes: IInputs = {
+  id: () => {
+    return { required: true, maxLength: 12, minLength: 8 };
+  },
+  tomo: () => {
+    return { required: true, maxLength: 12, minLength: 8 };
+  },
+  folio: () => {
+    return { required: true, maxLength: 12, minLength: 8 };
+  },
+  tel: () => {
+    return { required: true, maxLength: 12, minLength: 8 };
+  },
 };
+/*-----collection of attributes. */
 
-export const red = (prev: IState) => {
-  return { ...prev, color: "#FF0000" };
-};
-
-export const grey = (prev: IState) => {
-  return { ...prev, color: "#CCCCCC" };
-};
-
-export const black = (prev: IState) => {
-  return { ...prev, color: "#666666" };
+/*-----colors states for labels*/
+export const color = {
+  green: (prev: IState) => {
+    return { ...prev, color: "#00FF00" };
+  },
+  red: (prev: IState) => {
+    return { ...prev, color: "#FF0000" };
+  },
+  grey: (prev: IState) => {
+    return { ...prev, color: "#CCCCCC" };
+  },
+  black: (prev: IState) => {
+    return { ...prev, color: "#666666" };
+  },
 };

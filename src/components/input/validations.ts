@@ -1,3 +1,45 @@
+import { CSSObject } from "@emotion/react";
+import { UseFormRegister, ValidationRule } from "react-hook-form";
+import { ResponsiveValue } from "@chakra-ui/react";
+
+/*-----------------Literal types for registering inputs-------------------*/
+export type ILabel =
+  | "id"
+  | "tel"
+  | "tomo"
+  | "terms"
+  | "folio"
+  | "email"
+  | "user"
+  | "usertype"
+  | "password";
+
+export interface IRequirements {
+  required: ValidationRule<boolean> | string | undefined;
+  maxLength: ValidationRule<number> | undefined;
+  minLength: ValidationRule<number> | undefined;
+}
+export type chakraAttributes = {
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
+  type: React.HTMLInputTypeAttribute | undefined;
+  variant:
+    | ResponsiveValue<
+        (string & {}) | "outline" | "flushed" | "unstyled" | "filled"
+      >
+    | undefined;
+};
+
+export interface InputProps {
+  idEvt: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: ILabel;
+  htmlAttributes: chakraAttributes;
+  register: UseFormRegister<any>;
+  placeholder?: string | undefined;
+  _placeholder?: CSSObject | undefined;
+  requirements: IRequirements;
+  validations?: IDates;
+}
+
 //____________functions to handle dates and time_____________//
 function turnToInt(value: number | string, start: number, end: number) {
   return parseInt(value.toString().substring(start, end));
@@ -9,48 +51,26 @@ currentYear = turnToInt(currentYear, 2, 4);
 /*-------------------------------------------------------------------*/
 
 /*-----------css styles and Chakra properties types.--------*/
-export type chakraProps = {
-  size: string;
-  type: string;
-  variant: string;
-};
-export const numberType: chakraProps = {
+export const numberType: chakraAttributes = {
   size: "sm",
   type: "number",
   variant: "flushed",
 };
-export const emailType: chakraProps = {
+export const emailType: chakraAttributes = {
   size: "sm",
   type: "email",
   variant: "flushed",
 };
-export const textType: chakraProps = {
+export const textType: chakraAttributes = {
   size: "sm",
   type: "text",
   variant: "flushed",
 };
-export const telType: chakraProps = {
+export const telType: chakraAttributes = {
   size: "sm",
   type: "tel",
   variant: "flushed",
 };
-
-/*----------Names for react-hook-form registers.---------------------*/
-
-export interface IFormInput {
-  /*_______these are also! nominals for register props________*/
-  id: string;
-  tel: string;
-  tomo: string;
-  cargo: string;
-  folio: string;
-  email: string;
-  empresas: string[];
-  entidades: string[];
-  organismos: string[];
-  representante: string;
-  condiciones: boolean;
-}
 
 /*-----------------Dates validations and limits on time.------------*/
 export interface IDates {
@@ -76,11 +96,7 @@ export const dates: IDates = {
 };
 
 //__________________Aditional validations.__________________//
-export interface IRequirements {
-  required: boolean;
-  maxLength: number;
-  minLength: number;
-}
+
 export const idValidation: IRequirements = {
   required: true,
   maxLength: 11,
@@ -96,6 +112,3 @@ export const telValidation: IRequirements = {
   maxLength: 12,
   minLength: 8,
 };
-/*-----------------------Literal types for registering inputs---------------------------------*/
-
-export type ILabel = "id" | "tel" | "tomo" | "folio" | "email";
