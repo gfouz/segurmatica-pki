@@ -46,6 +46,11 @@ export const EMPRESAS: string[] = [
 
 export const ENTIDADES: string[] = ["BANDEC", "BPA"];
 
+export const REPRESENTANTES: string[] = [
+  "Gilberto Alejandro Acosta",
+  "Giovani Fouz Jiménez",
+];
+
 /*-----------css styles and Chakra attributes types.--------*/
 export type chakraAttributes = {
   size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
