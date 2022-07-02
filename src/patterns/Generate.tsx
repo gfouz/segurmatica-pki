@@ -77,8 +77,8 @@ export default function Generate() {
           </Center>
           <HStack spacing={2} px="1em">
             <Container>
-              <label style={{ color: `${state.color}` }}>
-                <strong>ID</strong>
+              <label className="label" style={{ color: `${state.color}` }}>
+                <strong className= "label__name">ID</strong>
               </label>
               <ChakraInput
                 label="id"
@@ -92,8 +92,8 @@ export default function Generate() {
               />
             </Container>
             <Container>
-              <label>
-                <strong>Tomo</strong>
+              <label className="label">
+                <strong className= "label__name">Tomo</strong>
               </label>
               <ChakraInput
                 label="tomo"
@@ -106,8 +106,8 @@ export default function Generate() {
               />
             </Container>
             <Container>
-              <label>
-                <strong>Folio</strong>
+              <label className="label">
+                <strong className= "label__name">Folio</strong>
               </label>
               <ChakraInput
                 label="folio"
@@ -124,8 +124,8 @@ export default function Generate() {
           </HStack>
           <HStack spacing={2} px="1em">
             <Container p="2em 0.7em" w="100%">
-              <label>
-                <strong className="input-label">Correo Electrónico</strong>
+              <label className="label">
+                <strong className= "label__name">Correo Electrónico</strong>
               </label>
               <Input
                 {...inputType.email}
@@ -142,8 +142,8 @@ export default function Generate() {
               />
             </Container>
             <Container p="2em 0.7em" w="100%">
-              <label>
-                <strong>Teléfono</strong>
+              <label className="label">
+                <strong className= "label__name">Teléfono</strong>
               </label>
               <ChakraInput
                 label="tel"
@@ -183,8 +183,8 @@ export default function Generate() {
             <>
               <HStack spacing={2} px="1em">
                 <Container p="2em 0.7em" w="100%">
-                  <label>
-                    <strong className="input-label">Organismos</strong>
+                  <label className="label">
+                    <strong className= "label__name">Organismos</strong>
                   </label>
                   <Select
                     m="0 0.7em"
@@ -194,8 +194,8 @@ export default function Generate() {
                   </Select>
                 </Container>
                 <Container p="2em 0.7em" w="100%">
-                  <label>
-                    <strong className="input-label">
+                  <label className="label">
+                    <strong className= "label__name">
                       Empresa o Institución
                     </strong>
                   </label>
@@ -209,8 +209,8 @@ export default function Generate() {
               </HStack>
               <HStack spacing={5} px="1em">
                 <Container p="2em 0.7em" w="100%">
-                  <label>
-                    <strong className="input-label">Cargo</strong>
+                  <label className="label">
+                    <strong className= "label__name">Cargo</strong>
                   </label>
                   <Input
                     m="0 0.7em"
@@ -224,9 +224,12 @@ export default function Generate() {
                     {...register("cargo", { required: true })}
                   />
                 </Container>
+              </HStack>
+
+              <HStack spacing={5} px="1em">
                 <Container p="2em 0.7em" w="100%">
-                  <label>
-                    <strong className="input-label">Representante</strong>
+                  <label className="label">
+                    <strong className= "label__name">Representante</strong>
                   </label>
                   <Select
                     m="0 0.7em"
@@ -235,6 +238,7 @@ export default function Generate() {
                     <Option data={REPRESENTANTES} />
                   </Select>
                 </Container>
+             
                 <Container p="2em 0.7em" w="100%">
                   <Tooltip
                     hasArrow
@@ -248,12 +252,13 @@ export default function Generate() {
                       aria-label="Call Sage"
                       fontSize="20px"
                       icon={<InfoIcon />}
-                      mt="1.5rem"
+                      m="1.5rem 0 0 2em"
                       onClick={onOpen}
                     />
                   </Tooltip>
                 </Container>
-              </HStack>
+                </HStack>   
+
               <ModalForm
                 title="Datos del Representante"
                 isOpen={isOpen}
@@ -269,8 +274,8 @@ export default function Generate() {
           {
             radio == "natural" && (
               <Box p="2em 1.7em" w="100%">
-                <label>
-                  <strong className="input-label">Entidad relacionada</strong>
+                <label className="label">
+                  <strong className= "label__name">Entidad relacionada</strong>
                 </label>
                 <Flex justifyContent="space-evenly" px="0.7em">
                   <Select

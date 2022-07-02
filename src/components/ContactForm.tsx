@@ -78,13 +78,6 @@ export default function ContactForm() {
              <Container>
           <Box p="0 1em" w="100%">
             <Flex justifyContent="flex-start">
-              <Checkbox 
-                m="0 0.7em" 
-                colorScheme='red'
-                {...register("policy", { required: true })}
-              >
-                Acepto los terminos y condiciones.
-              </Checkbox>
             </Flex>
           </Box>
           </Container>

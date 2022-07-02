@@ -11,4 +11,8 @@ export const StyledGenerate = styled.div`
   @media (min-width: 800px){
     padding: 0.5em 0;
   }
+  .label__name {
+    color: #777777;
+    white-space: nowrap;
+  }
 `;

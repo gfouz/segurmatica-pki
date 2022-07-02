@@ -28,6 +28,8 @@ import {
 const Form = () => {
   const [color, setColor] = React.useState("");
   const [alert, setAlert] = React.useState("");
+  const [counter, setCounter] = React.useState(0);
+  const [recatcha, setRecatcha] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
@@ -52,7 +54,7 @@ const Form = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Center w="100%" p="1.5em">
           <Heading as="h3" size="lg" color="#B22222">
-            Inicio de sesión.
+            Inicio de sesión.{counter}
           </Heading>
         </Center>
 
@@ -119,7 +121,12 @@ const Form = () => {
         </Box>
         <Box p="2em 0.7em" w="100%">
           <Flex justifyContent="space-evenly">
-            <Button colorScheme="facebook" variant="solid" type="submit">
+            <Button 
+            type="submit"
+            variant="solid" 
+            colorScheme="facebook" 
+            onClick = {()=> {setCounter((prev)=> prev + 1)}}
+            >
               Continuar
             </Button>
             <Button colorScheme="red" variant="solid">
