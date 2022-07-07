@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useQueryClient } from "react-query";
+import { useAuth } from "../hooks/queries";
+import { auth } from '../promises/middleware'
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
@@ -25,11 +29,22 @@ import {
   Container,
 } from "@chakra-ui/react";
 
+
+const url: string = "http://localhost:4000/login";
+
+const initialState = {
+  user: "",
+  password: ""
+}
+
+
 const Form = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [color, setColor] = React.useState("");
   const [alert, setAlert] = React.useState("");
   const [counter, setCounter] = React.useState(0);
-  const [recatcha, setRecatcha] = React.useState(false);
+  const [params, setParams] = React.useState(initialState);
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     register,
@@ -37,8 +52,21 @@ const Form = () => {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = () =>
-    console.log("these are errors");
+  const {
+    data: token,
+    error,
+    isLoading,
+    isFetching,
+    // isIdle,
+    // refetch,
+  } = useAuth(url, params);
+
+  const onSubmit: SubmitHandler<IFormInput> = (data: any) => {
+    setParams((prev) => {
+      return { ...prev, user: data.user, password: data.password }
+    })
+    console.log(token)
+  };
 
   function eventHandler(evt: React.ChangeEvent<HTMLInputElement>) {
     let { value } = evt.target;
@@ -54,7 +82,7 @@ const Form = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Center w="100%" p="1.5em">
           <Heading as="h3" size="lg" color="#B22222">
-            Inicio de sesión.{counter}
+            Inicio de sesión.{ }
           </Heading>
         </Center>
 
@@ -121,11 +149,13 @@ const Form = () => {
         </Box>
         <Box p="2em 0.7em" w="100%">
           <Flex justifyContent="space-evenly">
-            <Button 
-            type="submit"
-            variant="solid" 
-            colorScheme="facebook" 
-            onClick = {()=> {setCounter((prev)=> prev + 1)}}
+            <Button
+              type="submit"
+              variant="solid"
+              colorScheme="facebook"
+              onClick={() => {
+                setCounter((prev) => prev + 1);
+              }}
             >
               Continuar
             </Button>

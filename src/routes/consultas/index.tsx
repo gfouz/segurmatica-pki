@@ -6,14 +6,15 @@ import ErrorMessage from '../../components/ErrorMessage'
 import { Heading } from '@chakra-ui/react'
 
 export default function Request() {
+    const [toggle, setToggle] = React.useState(true);
 
   return (
     <Layout>
       <StyledRequest>
          <div className="container">
          <section>
-            <ErrorMessage msg="errror" />
-         </section>
+            <ErrorMessage msg="anything!"/>
+          </section>
         </div>
       </StyledRequest>
     </Layout>
@@ -34,8 +35,6 @@ const StyledRequest = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
-  border-radius: 5px;
   max-width: 500px;
 }
 }

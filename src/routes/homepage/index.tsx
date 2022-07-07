@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HorizonLine from "../../components/HorizonLine";
 import Layout from "../layout/Layout";
@@ -6,6 +7,16 @@ import { subtitleProps, logoProps } from "./constant";
 import { Heading } from "@chakra-ui/react";
 
 export default function Homepage() {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("auth");
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      !token && navigate("/login");
+    }, 2000);
+  }, [token]);
+
   return (
     <Layout>
       <StyledHome>
@@ -23,6 +34,7 @@ export default function Homepage() {
             </Heading>
             <Heading {...subtitleProps}>Servicio de llave pública.</Heading>
             <Heading {...subtitleProps}>{new Date().getFullYear()}</Heading>
+            <button onClick={()=>{localStorage.clear()}} style={{color: "red"}}>clear localStore</button>
           </article>
           <img src="./images/robot.jpg" alt="robot" />
         </section>

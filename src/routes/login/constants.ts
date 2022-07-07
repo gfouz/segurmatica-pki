@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ValidationRule } from "react-hook-form";
 import { ResponsiveValue } from "@chakra-ui/react";
+import { useQueryClient } from "react-query";
 
 /*------------types of data that is sent by the form--------------*/
 export interface IFormInput {
@@ -20,8 +21,8 @@ export interface IAttributes {
 }
 export const password_terms: IAttributes = {
   required: true,
-  maxLength: 8,
-  minLength: 6,
+  maxLength: 6,
+  minLength: 4,
 };
 export const user_terms: IAttributes = {
   required: true,
@@ -65,3 +66,4 @@ export const text_input: chakraProps = {
   type: "text",
   variant: "outline",
 };
+

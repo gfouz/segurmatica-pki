@@ -10,7 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "author":"Giovani and Gilberto",
+  "author": "Giovani and Gilberto",
   "license": "ISC",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.1",
@@ -24,8 +24,10 @@
     "framer-motion": "^6.3.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-google-recaptcha-v3": "^1.9.8",
     "react-hook-form": "^7.31.3",
     "react-icons": "^4.4.0",
+    "react-query": "^3.39.1",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.0.3",
