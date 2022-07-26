@@ -17,6 +17,7 @@ export default HorizonLine;
 
 const StyledLine = styled.div`
   width: 100%;
+  margin: 0 0 2em 0;
    .line {
    	 position: relative;
    	 left: 5%;

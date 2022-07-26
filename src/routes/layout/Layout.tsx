@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import ChakraDrawer from './Drawer';
 import { Button, useDisclosure } from '@chakra-ui/react'
+//import ToastVariant  from '../../components/Toast'
 
 interface ILayout {
  btncolor?: string;
@@ -30,7 +31,6 @@ export default function Layout(props: ILayout) {
             </strong>
           </Button>
         </header>
-
         <div className="main">{props.children}</div>
 
         <footer>Segurmática {new Date().getFullYear()}</footer>
@@ -74,7 +74,18 @@ footer{
   color: ${(props: ILayout)=>props.footercolor || "#ffffff"};
   background-color: ${(props: ILayout)=>props.footerbg || "#333333"};
 }
-
-
 `;
 
+/*
+
+Toast('Wow so easy!', {
+position: "top-right",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+
+*/

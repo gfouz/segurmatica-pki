@@ -18,6 +18,9 @@ export const StyledForm = styled.div`
     white-space: nowrap;
     font-weight: bolder;
   }
+  .input__label--red {
+    color: red;
+  }
   .checkbox__label {
     font-size: 16px;
     color:#0660b1;

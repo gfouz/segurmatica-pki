@@ -24,37 +24,13 @@ function Header(props: HeaderProps) {
       icon: <Home />,
     },
     {
-      path: "/login",
-      icon: <FormText />,
-    },
-    {
-      path: "/servicios",
-      icon: <Services />,
-    },
-    {
-      path: "/contacto",
-      icon: <Envelope />,
-    },
-    {
-      path: "/consultas",
-      icon: <FileSearch />,
-    },
-    {
-      path: "/descargas",
-      icon: <Download />,
-    },
-    {
       path: "/generacion",
       icon: <FormText />,
     },
     {
-      path: "/renovacion",
+      path: "/admin",
       icon: <FormText />,
-    },
-    {
-      path: "/revocacion",
-      icon: <FormText />,
-    },
+    }
   ];
 
   const router = useLocation();

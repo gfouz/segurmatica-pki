@@ -1,16 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
+import {theme} from './constants'
+import ToastVariant  from '../../components/Toast'
 import Generate from "../../patterns/Generate";
 
 function Generation() {
   return (
     <Layout>
       <StyledResgister>
+        <ToastVariant linear={theme.green} color = "#ffffff"/>
         <section className="login">
-          <div className="login__divider">
-            <img className="login__image" src="./images/contact.png" />
-          </div>
           <div className="login__divider">
             <Generate />
           </div>
@@ -22,7 +22,7 @@ function Generation() {
 export default Generation;
 const StyledResgister = styled.div`
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   .login {
     position: relative;
     display: flex;

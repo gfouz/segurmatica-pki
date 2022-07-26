@@ -1,42 +1,23 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HorizonLine from "../../components/HorizonLine";
 import Layout from "../layout/Layout";
-import { subtitleProps, logoProps } from "./constant";
-import { Heading } from "@chakra-ui/react";
 
 export default function Homepage() {
-  const navigate = useNavigate();
-
-  const token = localStorage.getItem("auth");
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      !token && navigate("/login");
-    }, 2000);
-  }, [token]);
-
   return (
     <Layout>
       <StyledHome>
-        <section>
+        <section className="homepage">
           <article>
-            <img
-              style={{ ...logoProps }}
-              src="./images/segurmatica.jpg"
-              alt="Segurmática"
-            />
-            <p className="article__pki">PKI</p>
+            <p className="article__title">PKI</p>
             <HorizonLine color="#1799ff" />
-            <Heading {...subtitleProps}>
-              25 años de experincia en seguridad.
-            </Heading>
-            <Heading {...subtitleProps}>Servicio de llave pública.</Heading>
-            <Heading {...subtitleProps}>{new Date().getFullYear()}</Heading>
-            <button onClick={()=>{localStorage.clear()}} style={{color: "red"}}>clear localStore</button>
           </article>
-          <img src="./images/robot.jpg" alt="robot" />
+          <img
+             src="./images/homepage.png" 
+             alt="man" 
+             className="homepage__image"
+          />
+          <h2 className="article__subtitle">MÁS DE 25 AÑOS DE EXPERIENCIA.</h2>
         </section>
       </StyledHome>
     </Layout>
@@ -47,16 +28,24 @@ const StyledHome = styled.div`
   width: 100%;
 
   section {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    img {
-      max-width: 100%;
+  }
+  .homepage__logo {
+      width: 120px;
       height: auto;
+      position: absolute;
+      top: -20px;
+      left: 0;
     }
+  .homepage__image {
+    max-width: 100%;
+    height: auto;
+  } 
     article {
       position: relative;
       top: 3em;
@@ -71,7 +60,8 @@ const StyledHome = styled.div`
         animation-direction: normal;
         animation-fill-mode: forwards;
       }
-      .article__pki {
+    }
+      .article__title {
         opacity: 0;
         color: #0099ff;
         font-size: 3.2em;
@@ -82,10 +72,14 @@ const StyledHome = styled.div`
         animation-duration: 1.5s;
         animation-direction: normal;
         animation-fill-mode: forwards;
-      }
-    }
   }
-
+  .article__subtitle {
+    fontsize: 20px;
+    margin: 2em 0 2em 0;
+    color: #000000;
+    whitespace: nowrap;
+    fontfamily: calibri;
+  }
   @keyframes logo {
     from {
       opacity: 0;
@@ -107,3 +101,6 @@ const StyledHome = styled.div`
     }
   }
 `;
+
+
+//npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11

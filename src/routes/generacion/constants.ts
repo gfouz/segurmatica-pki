@@ -23,3 +23,10 @@ export const lateralMenu: DrawerStyleProps = {
 export const toggleButton: ToggleButtonProps = {
   color: "#f8f8f8",
 };
+
+export const theme = {
+  green : "linear-gradient(to right, #222222, #9900FF );",
+  rainbow: "linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);"
+}
+
+//FF1AA3 #FF3333  #9900FF

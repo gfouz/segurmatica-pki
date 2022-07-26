@@ -1,6 +1,8 @@
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 
+const url: string = "http://localhost:4000/login";
+
 interface IParams {
   user?: string;
   password?: string;
@@ -24,11 +26,8 @@ export function login(
     });
 }
 
-export const auth = async (url: string, params: IParams) => {
+export const getToken = async (params: IParams) => {
   const { data } = await axios.post(url, params);
-  localStorage.setItem("auth", data.token);
-  /*setTimeout(()=>{
-    navigate("/");
-  }, 3000);*/
+  //localStorage.setItem("auth", data.token);
   return data;
 };

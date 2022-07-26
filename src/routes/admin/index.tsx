@@ -1,37 +1,35 @@
 //import * as React from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
-import Form from './Form'; 
+import ProvinceAdmin from './province/ProvinceAdmin'; 
 import { theme } from '../constants';
 import ToastVariant  from '../../components/Toast'
 
-function Revocation() {
+function Admin() {
   return (
     <Layout>
-      <StyledResgister>
+      <StyledAdmin>
          <ToastVariant linear={theme.green} color = "#ffffff"/>
         <section className="login">
           <div className="login__divider">
-            <Form />
+            <ProvinceAdmin />
           </div>
         </section>
-      </StyledResgister>
+      </StyledAdmin>
     </Layout>
   );
 }
 
-export default Revocation;
+export default Admin;
 
-const StyledResgister = styled.div`
+const StyledAdmin = styled.div`
   width: 100%;
+  min-height: 100vh;
   background-color: #f1f1f1;
   .login {
-    position: relative;
     display: flex;
-    @media (max-width: 800px) {
-      flex-direction: column;
-      align-items: center;
-    }
+    flex-direction: column;
+    align-items: center;
   }
   .login__divider {
     position: relative;

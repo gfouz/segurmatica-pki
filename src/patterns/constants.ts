@@ -1,5 +1,5 @@
 import { ResponsiveValue } from "@chakra-ui/react";
-import { ValidationRule } from "react-hook-form";
+import { FieldErrors, ValidationRule } from "react-hook-form";
 import * as React from "react";
 
 //____________functions to handle dates and time_____________//
@@ -52,7 +52,7 @@ export const REPRESENTANTES: string[] = [
 ];
 
 /*-----------css styles and Chakra attributes types.--------*/
-export type chakraAttributes = {
+export type chakraProps = {
   size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
   type: React.HTMLInputTypeAttribute | undefined;
   variant:
@@ -60,51 +60,6 @@ export type chakraAttributes = {
         (string & {}) | "outline" | "flushed" | "unstyled" | "filled"
       >
     | undefined;
-};
-
-interface IInputTypes {
-  number: () => chakraAttributes;
-  email: () => chakraAttributes;
-  telephone: () => chakraAttributes;
-  text: () => chakraAttributes;
-  password: () => chakraAttributes;
-}
-export const inputType: IInputTypes = {
-  number: () => {
-    return {
-      size: "sm",
-      type: "number",
-      variant: "flushed",
-    };
-  },
-  email: () => {
-    return {
-      size: "sm",
-      type: "email",
-      variant: "flushed",
-    };
-  },
-  telephone: () => {
-    return {
-      size: "sm",
-      type: "tel",
-      variant: "flushed",
-    };
-  },
-  password: () => {
-    return {
-      size: "sm",
-      type: "password",
-      variant: "flushed",
-    };
-  },
-  text: () => {
-    return {
-      size: "sm",
-      type: "text",
-      variant: "flushed",
-    };
-  },
 };
 
 /*-----------------Dates validations and limits on time.------------*/
@@ -163,46 +118,119 @@ export const initialState: IState = {
   condiciones: false,
 };
 
-//__________________Aditional validations.__________________//
+/*__________________Inputs validations.__________________*/
 export interface IAttributes {
-  required: ValidationRule<boolean> | string | undefined;
-  maxLength: ValidationRule<number> | undefined;
-  minLength: ValidationRule<number> | undefined;
+  required?: ValidationRule<boolean> | undefined | string;
+  maxLength?: ValidationRule<number> | undefined;
+  minLength?: ValidationRule<number> | undefined;
 }
-interface IInputs {
-  id: () => IAttributes;
-  tel: () => IAttributes;
-  tomo: () => IAttributes;
-  folio: () => IAttributes;
-}
-export const attributes: IInputs = {
-  id: () => {
-    return { required: true, maxLength: 12, minLength: 8 };
-  },
-  tomo: () => {
-    return { required: true, maxLength: 12, minLength: 8 };
-  },
-  folio: () => {
-    return { required: true, maxLength: 12, minLength: 8 };
-  },
-  tel: () => {
-    return { required: true, maxLength: 12, minLength: 8 };
-  },
+export const folio_terms: IAttributes = {
+  required: true,
+  maxLength: 4,
+  minLength: 4,
 };
-/*-----collection of attributes. */
+export const tomo_terms: IAttributes = {
+  required: true,
+  maxLength: 4,
+  minLength: 4,
+};
+export const ci_terms: IAttributes = {
+  required: true,
+  maxLength: 11,
+  minLength: 11,
+};
+export const tel_terms: IAttributes = {
+  required: true,
+  maxLength: 12,
+  minLength: 8,
+};
+export const email_terms: IAttributes = {
+  required: true,
+};
+type errors = {
+  id?: FieldErrors | undefined;
+  tel?: FieldErrors | undefined;
+  tomo?: FieldErrors | undefined;
+  folio?: FieldErrors | undefined;
+  email?: FieldErrors | undefined;
+};
 
-/*-----colors states for labels*/
-export const color = {
-  green: (prev: IState) => {
-    return { ...prev, color: "#00FF00" };
-  },
-  red: (prev: IState) => {
-    return { ...prev, color: "#FF0000" };
-  },
-  grey: (prev: IState) => {
-    return { ...prev, color: "#CCCCCC" };
-  },
-  black: (prev: IState) => {
-    return { ...prev, color: "#666666" };
-  },
+// HTML ATTRIBUTES
+
+export const number_type: chakraProps = {
+  size: "sm",
+  type: "number",
+  variant: "flushed",
 };
+export const email_type: chakraProps = {
+  size: "sm",
+  type: "email",
+  variant: "flushed",
+};
+export const telephone_type: chakraProps = {
+  size: "sm",
+  type: "tel",
+  variant: "flushed",
+};
+export const text_type: chakraProps = {
+  size: "sm",
+  type: "text",
+  variant: "flushed",
+};
+export const password_type: chakraProps = {
+  size: "sm",
+  type: "password",
+  variant: "flushed",
+};
+
+interface ITooltip {
+  ci: string;
+  tel: string;
+  tomo: string;
+  folio: string;
+  email: string;
+}
+
+export const tooltips: ITooltip = {
+  ci: "Solo 11 dígitos y ser mayor de 18 años",
+  tomo: "El tomo solo admite 4 dígitos",
+  folio: "El folio solo admite 4 dígitos",
+  email: "Formato de email incorrecto!",
+  tel: "Número de teléfono requrido!",
+};
+
+interface IToastProps {
+  position: string;
+  autoClose: number;
+  hideProgressBar: boolean;
+  closeOnClick: boolean;
+  pauseOnHover: boolean;
+  draggable: boolean;
+  progress: undefined;
+  toastId: number;
+}
+
+export const toastProps: IToastProps = {
+  position: "top-center",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  toastId: 1,
+};
+
+export function infoMessage(err: errors, toast: any) {
+  err.id &&
+    toast.warning(
+      "Nro de carnet de identidad es 11 dígitos y ser mayor de 18 años",
+      {
+        ...toastProps,
+      }
+    );
+  err.tomo && toast.warning("Tomo admite 4 números!", { ...toastProps });
+  err.folio && toast.warning("Folio admite 4 números!", { ...toastProps });
+  err.email && toast.warning("Email formato incorrecto!", { ...toastProps });
+  err.tel && toast.warning("Nro de teléfono requerido!", { ...toastProps });
+}

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-
 export const StyledGenerate = styled.div`
-  background-color: #fefefe;
-  width: 100%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: 2em 0;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
-  @media (min-width: 800px){
+  @media (min-width: 800px) {
     padding: 0.5em 0;
   }
   .label__name {

@@ -7,20 +7,19 @@ import Layout from "../layout/Layout";
 export default function Login() {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("auth");
+ // const token = localStorage.getItem("auth");
 
-  React.useEffect(() => {
+ /*  React.useEffect(() => {
     setTimeout(() => {
       token && navigate("/");
     }, 1000);
-  }, [token]);
+  }, [token]);  */
 
   return (
     <>
       <Layout>
         <StyledLogin>
           <Form />
-          <h1>{token}</h1>
         </StyledLogin>
       </Layout>
     </>

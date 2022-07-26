@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useQueryClient } from "react-query";
-import { useAuth } from "../hooks/queries";
-import { auth } from '../promises/middleware'
+import { useMutation } from "react-query";
+import { toast} from 'react-toastify';
+import { getToken } from '../asyncfunctions/asyncFunctions'
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -12,6 +12,8 @@ import {
   text_input,
   user_terms,
   IFormInput,
+  toastProps,
+  infoMessage
 } from "./constants";
 import ChakraInput from "../../components/input/ChakraInput";
 import Eye from "../../icons/Eye";
@@ -37,12 +39,11 @@ const initialState = {
   password: ""
 }
 
+//personalizar los toast.
 
 const Form = () => {
-  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
-  const [color, setColor] = React.useState("");
-  const [alert, setAlert] = React.useState("");
   const [counter, setCounter] = React.useState(0);
   const [params, setParams] = React.useState(initialState);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -51,48 +52,47 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-
+  
+  const auth = localStorage.getItem("auth");
   const {
-    data: token,
-    error,
-    isLoading,
-    isFetching,
-    // isIdle,
-    // refetch,
-  } = useAuth(url, params);
+    data: token, 
+    mutation , 
+    mutateAsync , 
+    isLoading , 
+    isError,      
+    isSuccess} = useMutation((value)=>getToken(value));
+    /*useMutation receive data from form and calls an acync function
+    that excute axios to send a post request to the server.*/
+  
+  React.useEffect(()=>{
+      auth && toast.success("Login successful!", {...toastProps})
+      
+  }, [auth])
 
+  infoMessage(errors, toast);
+  
   const onSubmit: SubmitHandler<IFormInput> = (data: any) => {
-    setParams((prev) => {
-      return { ...prev, user: data.user, password: data.password }
-    })
-    console.log(token)
+      mutateAsync(data);
+      localStorage.setItem("auth", token);
+      console.log(token)
   };
 
-  function eventHandler(evt: React.ChangeEvent<HTMLInputElement>) {
-    let { value } = evt.target;
-    let items = value.length;
-    items && items === 8 ? setColor("#66CC00") : setAlert("Validos 11 números");
-    items && items > 8 ? setColor("#ff0000") : setAlert("Complete 11 numeros");
-    items && items < 6
-      ? setColor("#CCCCCC")
-      : setAlert("Número excedido de 11");
-  }
   return (
     <StyledForm>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Center w="100%" p="1.5em">
           <Heading as="h3" size="lg" color="#B22222">
-            Inicio de sesión.{ }
+            Inicio de sesión.
           </Heading>
         </Center>
 
         <HStack spacing={2} p="0.7em">
           <Container>
-            <label style={{ color: `${color}` }}>
+            <label >
               <strong>Seleccione tipo de usuario.</strong>
             </label>
             <Select
-              placeholder="Seleccione Adminstrador o cliente"
+              placeholder="Seleccione Administrador o cliente"
               {...register("usertype", { required: true })}
             >
               <Option data={USER} />
@@ -103,13 +103,14 @@ const Form = () => {
         <HStack spacing={2} p="0.7em">
           <Container>
             <label style={{ color: `${color}` }}>
-              <strong>Usuario</strong>
+              <strong style={{color: errors.user && "red"}}>
+                 Usuario
+              </strong>
             </label>
             <ChakraInput
               label="user"
               register={register}
               htmlAttributes={text_input}
-              idEvt={eventHandler}
               requirements={user_terms}
               placeholder={errors.user ? "Escriba su usuario!" : ""}
               _placeholder={{ color: errors.user ? "red.400" : "gray.500" }}
@@ -119,13 +120,14 @@ const Form = () => {
         <HStack>
           <Container>
             <label style={{ color: `${color}` }}>
-              <strong>Contraseña</strong>
+              <strong style={{color: errors.password && "red"}}>
+                Contraseña
+              </strong>
             </label>
             <ChakraInput
               label="password"
               register={register}
               htmlAttributes={showPassword ? text_input : password_input}
-              idEvt={eventHandler}
               requirements={password_terms}
               placeholder={errors.password ? "Olvido su contraseña!" : ""}
               _placeholder={{ color: errors.password ? "red.400" : "gray.500" }}
@@ -159,7 +161,9 @@ const Form = () => {
             >
               Continuar
             </Button>
-            <Button colorScheme="red" variant="solid">
+            <Button 
+              colorScheme="red" 
+              variant="solid" >
               Cancelar
             </Button>
           </Flex>
@@ -174,3 +178,4 @@ const StyledForm = styled.div`
   border: 1px solid #cccccc;
   border-radius: 15px;
 `;
+

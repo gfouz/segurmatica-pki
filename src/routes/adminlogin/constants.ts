@@ -21,13 +21,13 @@ export interface IAttributes {
 }
 export const password_terms: IAttributes = {
   required: true,
-  maxLength: 6,
+  maxLength: 8,
   minLength: 4,
 };
 export const user_terms: IAttributes = {
   required: true,
   maxLength: 8,
-  minLength: 4,
+  minLength: 6,
 };
 
 /*-----------native html and Chakra properties types.--------*/
@@ -66,4 +66,30 @@ export const text_input: chakraProps = {
   type: "text",
   variant: "outline",
 };
+
+interface IToastProps {
+ position:string;
+ autoClose: number;
+ hideProgressBar: boolean;
+ closeOnClick: boolean;
+ pauseOnHover: boolean;
+ draggable: boolean;
+ progress: undefined;
+}
+
+export const toastProps: IToastProps =  {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+toastId: 1
+}
+
+export function infoMessage(err, toast) {
+  err.user && toast.warning("Usuario requerido!", {...toastProps})
+  err.password && toast.warning("Contraseña max 8 min 6!", {...toastProps})
+}
 

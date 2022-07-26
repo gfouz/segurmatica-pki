@@ -1,19 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
-import Form from './Form';
-
+import Form from "./Form";
+import { theme } from '../constants';
+import ToastVariant  from '../../components/Toast'
 
 function Renovation() {
   return (
     <Layout>
       <StyledResgister>
+         <ToastVariant linear={theme.green} color = "#ffffff"/>
         <section className="login">
           <div className="login__divider">
-            <img className="login__image" src="./images/contact.png" />
-          </div>
-          <div className="login__divider">
-            <Form/>
+            <Form />
           </div>
         </section>
       </StyledResgister>
@@ -25,7 +24,7 @@ export default Renovation;
 
 const StyledResgister = styled.div`
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: #CCCCCC;
   .login {
     position: relative;
     display: flex;
@@ -44,7 +43,7 @@ const StyledResgister = styled.div`
   .login__logo {
     width: 300px;
     border-radius: 10px;
-    background-color:#00000099;
+    background-color: #00000099;
     position: absolute;
     top: 50%;
     left: 50%;

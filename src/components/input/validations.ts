@@ -5,19 +5,21 @@ import { ResponsiveValue } from "@chakra-ui/react";
 /*-----------------Literal types for registering inputs-------------------*/
 export type ILabel =
   | "id"
+  | "dn"
   | "tel"
   | "tomo"
   | "terms"
   | "folio"
   | "email"
   | "user"
+  | "motive"
   | "usertype"
   | "password";
 
-export interface IRequirements {
-  required: ValidationRule<boolean> | string | undefined;
-  maxLength: ValidationRule<number> | undefined;
-  minLength: ValidationRule<number> | undefined;
+export interface IAttributes {
+  required?: ValidationRule<boolean> | undefined | string;
+  maxLength?: ValidationRule<number> | undefined;
+  minLength?: ValidationRule<number> | undefined;
 }
 export type chakraAttributes = {
   size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
@@ -30,13 +32,17 @@ export type chakraAttributes = {
 };
 
 export interface InputProps {
-  idEvt: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  //idEvt: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  list?: string;
+  datalist?: string[];
   label: ILabel;
+  pattern?: RegExp;
+  message?: string;
   htmlAttributes: chakraAttributes;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   placeholder?: string | undefined;
   _placeholder?: CSSObject | undefined;
-  requirements: IRequirements;
+  requirements?: IAttributes;
   validations?: IDates;
 }
 
@@ -93,22 +99,4 @@ export const dates: IDates = {
   monthunder: (id) => parseInt(id.substring(2, 4)) <= 12,
   dayover: (id) => parseInt(id.substring(4, 6)) >= 1,
   dayunder: (id) => parseInt(id.substring(4, 6)) <= 31,
-};
-
-//__________________Aditional validations.__________________//
-
-export const idValidation: IRequirements = {
-  required: true,
-  maxLength: 11,
-  minLength: 11,
-};
-export const onlyRequired: IRequirements = {
-  required: true,
-  maxLength: 4,
-  minLength: 4,
-};
-export const telValidation: IRequirements = {
-  required: true,
-  maxLength: 12,
-  minLength: 8,
 };
