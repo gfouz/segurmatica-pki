@@ -15,6 +15,7 @@ function ProvinceAdmin() {
   }
   return (
     <>
+     
       <StyledProvince>
          <ToastVariant linear={theme.green} color = "#ffffff"/>
         <section className="province">

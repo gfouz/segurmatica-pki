@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const StyledForm = styled.div`
   background-color: #ffffff;
+  color: #444444;
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -13,13 +14,13 @@ export const StyledForm = styled.div`
   border-radius: 20px;
 
   .input__label {
-    color: #444444;
+    color: #ffffff;
     font-size: 16px;
     white-space: nowrap;
     font-weight: bolder;
   }
   .input__label--red {
-    color: red;
+    color: #FF9999;
   }
   .checkbox__label {
     font-size: 16px;

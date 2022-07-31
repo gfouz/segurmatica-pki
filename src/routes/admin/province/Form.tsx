@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import ChakraInput from "../../../components/input/ChakraInput";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useQuery, useMutation, useQueryClient } from "react-query";
+
+import  {getProvinces, createProvince, IFormInput } from './types'
+import {useMutate} from './useMutate';
+
 import { 
   dates,
   tooltips, 
@@ -28,71 +33,52 @@ import {
   Container,
 } from "@chakra-ui/react";
 
+
 //----FORM COMPONENT TO HANDLE PROVINCES.----
 export default function Form() {
-  interface IFormInput {
-    getProvince: string;
-    setProvince: string;
-  }
-  const [list, setList] = React.useState([]);
-  const [option, setOption] = React.useState('');
 
-  const {
+   const queryClient = useQueryClient();
+
+   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-
-  alertMessage(errors, toast);
-
-  function set(option: string) {
-
-    setOption(option)
-  }
-
-
   
-  function getProvinces  (data) {
-    console.log(data);
-   axios.get('http://localhost:5000/provincias')
-       .then(function (response) {
-        let {data:[item]} = response;
-        let name = item.name;
-        //setList([...list, {name}]);
-        setList([item]);
-  })
-       .catch(function (error) {
-       console.log(error);
-  });
+  const [param, setParam] = React.useState('provincias');
+  const [option, setOption] = React.useState('showall');
+    
+    const addProvince = useMutate(createProvince, 'provincias');
+     const { data, isError, isLoading } = useQuery('provincias', ()=> getProvinces('provincias'))
+     console.log(data)
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+       
+       option == 'setProvince' && addProvince.mutateAsync(data)
+       console.log(addProvince.variables)
   }
   
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-      option == 'showAll' && getProvinces(data);
-  }
-
-  return (
-    <>
-      <StyledForm>
+    return (
+      <>
+        <StyledForm>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Center w="100%" p="1.5em">
-            <Heading as="h4" size="md" color="#666666">
+            <Heading as="h4" size="md" >
               ADMINISTRAR PROVINCIAS
             </Heading>
           </Center>
           <Center w="100%" p="1.5em">
-            <Heading as="h6" size="sm" color="#666666">
+            <Heading as="h6" size="sm">
                SELECCIONE UNA OPCIÓN
             </Heading>
           </Center>
           <Box  w="100%">
             <Flex justifyContent="space-evenly" >
-              <Button colorScheme='pink' size='sm' onClick={()=> set('setProvince')}>
+              <Button colorScheme='green' size='sm' onClick={()=> setOption('setProvince')}>
                 Áñadir Provincia.
               </Button>
-              <Button colorScheme='pink' size='sm' onClick={()=> set('getProvince')}>
+              <Button colorScheme='green' size='sm' onClick={()=> setOption('getProvince')}>
                 Buscar Provincia.
               </Button>
-              
             </Flex>
           </Box>
 
@@ -106,7 +92,7 @@ export default function Form() {
               <ChakraInput
                 list="provinces"
                 datalist={provinces}
-                label="getProvinces"
+                label="name"
                 message={tooltips.province}
                 register={register}
                 htmlAttributes={text_type}
@@ -133,7 +119,7 @@ export default function Form() {
               <ChakraInput
                 list="provinces"
                 datalist={provinces}
-                label="setProvince"
+                label="name"
                 message={tooltips.province}
                 register={register}
                 htmlAttributes={text_type}
@@ -148,25 +134,31 @@ export default function Form() {
 
          </> 
         )}
-
-
-          <Box p="5em 0 0 0" w="100%" mb="4em">
-            <Flex justifyContent="space-evenly">
-              <Button 
-                colorScheme='twitter' 
-                size='sm'
-                type="submit"
-                onClick={()=> set('showAll')}
-                >
-                MOSTRAR TODAS LAS PROVINCIAS.
-              </Button>
-            </Flex>
-          </Box>
+        <Box  w="100%" p="3em">   
+         <Button colorScheme='telegram' size='sm' type='submit'>
+                Enviar
+         </Button>
+        </Box>  
         </form>
-        {
-          list !== null && list.map((item)=> item.name)
-        }
+        
+        
+         
       </StyledForm>
-    </>
-  );
+    </>  
+    )
 }
+
+
+
+
+/*
+const addProvince = useMutation((data)=> createProvince(data),
+        {
+            onSuccess: (data) => {
+
+                queryClient.invalidateQueries('provincias');
+            },
+        }
+    );
+    
+*/
