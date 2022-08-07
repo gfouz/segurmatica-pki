@@ -15,17 +15,21 @@ const ChakraInput = ({
   _placeholder,
   requirements,
   message,
-  pattern
+  pattern,
+  setId,
+  color
 }: InputProps) => {
   return (
     <>
       <datalist id={list}>
           {datalist && datalist.map((item: string)=>(
-            <option key={React.useId()} value={item}></option>
+            <option key={item.toString()} value={item}></option>
             ))}
       </datalist>
       <Tooltip label={message} hasArrow arrowSize={15}>
       <Input
+        color={color}
+        onChange= {evt => setId(evt.target.value)}
          list={list}
         {...htmlAttributes}
         _placeholder={_placeholder}

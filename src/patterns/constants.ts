@@ -223,8 +223,7 @@ export const toastProps: IToastProps = {
 
 export function infoMessage(err: errors, toast: any) {
   err.id &&
-    toast.warning(
-      "Nro de carnet de identidad es 11 dígitos y ser mayor de 18 años",
+  toast.warning("Nro de identidad es 11 dígitos y ser mayor de 18 años",
       {
         ...toastProps,
       }

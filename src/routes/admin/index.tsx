@@ -1,22 +1,20 @@
-//import * as React from "react";
+import * as React from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
-import ProvinceAdmin from './province/ProvinceAdmin'; 
-import { theme } from '../constants';
-import ToastVariant  from '../../components/Toast'
+import { theme } from "../constants";
+import ProvinceAdmin from "./provincia/index";
+import ToastVariant from "../../components/Toast";
 
 function Admin() {
   return (
-    <Layout>
       <StyledAdmin>
-         <ToastVariant linear={theme.green} color = "#ffffff"/>
+        <ToastVariant linear={theme.green} color="#ffffff" />
         <section className="login">
           <div className="login__divider">
             <ProvinceAdmin />
           </div>
         </section>
       </StyledAdmin>
-    </Layout>
   );
 }
 
@@ -41,7 +39,7 @@ const StyledAdmin = styled.div`
   .login__logo {
     width: 300px;
     border-radius: 10px;
-    background-color:#00000099;
+    background-color: #00000099;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -56,9 +54,9 @@ const StyledAdmin = styled.div`
     max-width: 100%;
     height: auto;
   }
- .bg-grey  {
-  background-color: #3a3839;
- }
+  .bg-grey {
+    background-color: #3a3839;
+  }
 `;
 
 //git clone https://github.com/gfouz/pki-frontend.git

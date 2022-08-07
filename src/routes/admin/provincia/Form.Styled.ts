@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 
 export const StyledForm = styled.div`
-  background-color: #ffffff;
+  background-color: #222222;
   color: #444444;
-  max-width: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,16 +14,19 @@ export const StyledForm = styled.div`
   border-radius: 20px;
 
   .input__label {
-    color: #ffffff;
     font-size: 16px;
     white-space: nowrap;
     font-weight: bolder;
   }
   .input__label--red {
-    color: #FF9999;
+    color: #ffffff;
   }
   .checkbox__label {
     font-size: 16px;
     color:#0660b1;
+  }
+  .btn-text {
+    font-size: 10px;
+    color: #000000;
   }
 `;

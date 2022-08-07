@@ -2,7 +2,7 @@ import React, { lazy } from "react";
 const Homepage = lazy(() => import("./homepage/index"));
 const Generation = lazy(() => import("./generacion/index"));
 const Admin = lazy(() => import("./admin/index"));
-const ProvinceAdmin = lazy(() => import("./admin/province/ProvinceAdmin"));
+const ProvinceAdmin = lazy(() => import("./admin/provincia/index"));
 //const Login = lazy(() => import("./adminlogin/index"));
 
 

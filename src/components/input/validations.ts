@@ -34,6 +34,7 @@ export type chakraAttributes = {
 export interface InputProps {
   //idEvt: (e: React.ChangeEvent<HTMLInputElement>) => void;
   list?: string;
+  color?: string;
   datalist?: string[];
   label: ILabel;
   pattern?: RegExp;

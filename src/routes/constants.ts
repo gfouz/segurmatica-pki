@@ -7,7 +7,7 @@ function turnToInt(value: number | string, start: number, end: number) {
   return parseInt(value.toString().substring(start, end));
 }
 let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth() + 1;
+const currentMonth = new Date().getMonth() + 1;
 currentYear = turnToInt(currentYear, 2, 4);
 
 /*-----------------Dates validations and limits on time.------------*/
@@ -126,9 +126,10 @@ interface ITooltip {
   ci: string;
   dn: string;
   motive: string;
+  province: string;
 }
 export const tooltips: ITooltip = {
-  province: 'Escriba algún nombre de provincia.',
+  province: "Escriba algún nombre de provincia.",
   ci: "Solo 11 dígitos y ser mayor de 18!",
   dn: "Número de serie es requerido!",
   motive: "Motivo de revocación es requerido!",
@@ -188,16 +189,15 @@ export const theme = {
 
 //Data list for input component autocomplete.
 export const provinces = [
-'Pinar del Río',
-'Habana',
-'Matanzas',
-'Ciego de Ávila',
-'Ciefuegos',
-'Camaguey',
-'Las Tunas',
-'Holguin',
-'Granma',
-'Santiago',
-'Guantanamo'
-]
-
+  "Pinar del Río",
+  "Habana",
+  "Matanzas",
+  "Ciego de Ávila",
+  "Ciefuegos",
+  "Camaguey",
+  "Las Tunas",
+  "Holguin",
+  "Granma",
+  "Santiago",
+  "Guantanamo",
+];
