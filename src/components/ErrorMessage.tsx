@@ -4,12 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   msg: string;
-}
-  
-export default function ErrorMessage(props: Props){
-    
-    
-   /* const notify = () => toast(props.msg, {
+};
+
+export default function ErrorMessage(props: Props) {
+  /* const notify = () => toast(props.msg, {
     position: "top-right",
     autoClose: 3000,
     hideProgressBar: false,
@@ -18,20 +16,19 @@ export default function ErrorMessage(props: Props){
     draggable: true,
     progress: undefined,});*/
 
-   
-    return (
-      <div>
-        <ToastContainer
-           position="top-right"
-           autoClose={5000}
-           hideProgressBar={false}
-           newestOnTop={false}
-           closeOnClick
-           rtl={false}
-           pauseOnFocusLoss
-           draggable
-           pauseOnHover
-          />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </div>
+  );
+}

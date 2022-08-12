@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 interface ILogo {
   margin: string;
@@ -6,9 +6,9 @@ interface ILogo {
   height: string;
 }
 export const drawerProps: React.CSSProperties = {
-  height: "150px",
+  height: '150px',
   backgroundImage: `url('./images/aside.jpg')`,
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "70px",
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: '70px',
 };

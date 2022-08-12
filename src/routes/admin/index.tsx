@@ -1,20 +1,20 @@
-import * as React from "react";
-import styled from "styled-components";
-import Layout from "../layout/Layout";
-import { theme } from "../constants";
-import ProvinceAdmin from "./provincia/index";
-import ToastVariant from "../../components/Toast";
+import * as React from 'react';
+import styled from 'styled-components';
+import Layout from '../layout/Layout';
+import { theme } from '../constants';
+import ProvinceAdmin from './provincia/index';
+import ToastVariant from '../../components/Toast';
 
 function Admin() {
   return (
-      <StyledAdmin>
-        <ToastVariant linear={theme.green} color="#ffffff" />
-        <section className="login">
-          <div className="login__divider">
-            <ProvinceAdmin />
-          </div>
-        </section>
-      </StyledAdmin>
+    <StyledAdmin>
+      <ToastVariant linear={theme.green} color='#ffffff' />
+      <section className='login'>
+        <div className='login__divider'>
+          <ProvinceAdmin />
+        </div>
+      </section>
+    </StyledAdmin>
   );
 }
 

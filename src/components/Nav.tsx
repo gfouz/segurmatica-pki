@@ -1,6 +1,6 @@
-import * as React from "react";
-import styled, { css } from "styled-components";
-import { useLocation, Link } from "react-router-dom";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
+import { useLocation, Link } from 'react-router-dom';
 
 interface Props {
   color?: string;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 function Header(props: Props) {
-  const links = ["/contactos", "/consultas", "/servicios", "/"];
+  const links = ['/contactos', '/consultas', '/servicios', '/'];
   const router = useLocation();
   const { pathname } = router;
   const currentlinks = links.filter((link) => link !== pathname);
@@ -23,11 +23,11 @@ function Header(props: Props) {
   return (
     <>
       <StyledHeader {...props}>
-        <div className="links">
+        <div className='links'>
           {currentlinks.map((link, index) => (
             <div key={link + index}>
-              <Link className="links__item" to={`${link}`}>
-                <h4 className="">{link === "/" ? "inicio" : link.slice(1)}</h4>
+              <Link className='links__item' to={`${link}`}>
+                <h4 className=''>{link === '/' ? 'inicio' : link.slice(1)}</h4>
               </Link>
             </div>
           ))}
@@ -43,23 +43,23 @@ const StyledHeader = styled.div`
   width: 100%;
   height: var(--fullheight);
   line-height: var(--fullheight);
-  top: ${(props: Props) => props.top || "0"};
-  left: ${(props: Props) => props.left || "0"};
+  top: ${(props: Props) => props.top || '0'};
+  left: ${(props: Props) => props.left || '0'};
   position: ${(props: Props) => props.position};
   background-color: ${(props: Props) => props.bg};
-  margin: ${(props: Props) => props.margin || "0"};
-  padding: ${(props: Props) => props.padding || "0"};
+  margin: ${(props: Props) => props.margin || '0'};
+  padding: ${(props: Props) => props.padding || '0'};
   .links {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     a {
-      color: ${(props: Props) => props.color || "#ffffff"};
+      color: ${(props: Props) => props.color || '#ffffff'};
       text-decoration: none;
       text-transform: uppercase;
       line-height: var(--fullheight);
       transition: all 0.4s;
-    }  
+    }
     a:hover {
       color: #50a3c0;
     }

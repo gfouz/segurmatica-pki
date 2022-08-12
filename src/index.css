@@ -9,7 +9,6 @@ body {
   min-height: 100vh;
 }
 
-
 *,
 *::before,
 *::after {
@@ -19,17 +18,13 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-   white-space: nowrap; 
-   list-style-type: none;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  white-space: nowrap;
+  list-style-type: none;
 }
 
 @font-face {
- font-family: "orangina";
- src: local("orangina"),
- url("./fonts/orangina.otf") format("opentype");
- font-weight: bolder;
+  font-family: 'orangina';
+  src: local('orangina'), url('./fonts/orangina.otf') format('opentype');
+  font-weight: bolder;
 }
-
-

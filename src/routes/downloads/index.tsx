@@ -1,17 +1,12 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import Layout from '../layout/Layout'
+import * as React from 'react';
+import styled from 'styled-components';
+import Layout from '../layout/Layout';
 
 export default function Download() {
-
-  return(
+  return (
     <Layout>
-      <StyledDownload> 
-
-      </StyledDownload>
+      <StyledDownload></StyledDownload>
     </Layout>
-    );
+  );
 }
-const StyledDownload = styled.div`
-
-`;
+const StyledDownload = styled.div``;

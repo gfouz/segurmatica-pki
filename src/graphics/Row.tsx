@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
 
 interface Props {
   vh?: boolean;
@@ -26,8 +26,8 @@ const Row = (props: Props) => {
 export default Row;
 
 const StyledRow = styled.div`
-   display: flex;
-   align-items: center;
+  display: flex;
+  align-items: center;
   ${(props: Props) =>
     props.center &&
     css`
@@ -37,12 +37,12 @@ const StyledRow = styled.div`
     props.left &&
     css`
       justify-content: flex-start;
-    `}; 
+    `};
   ${(props: Props) =>
     props.right &&
     css`
       justify-content: flex-end;
-    `};  
+    `};
   ${(props: Props) =>
     props.evenly &&
     css`
@@ -57,41 +57,41 @@ const StyledRow = styled.div`
     props.wrap &&
     css`
       flex-wrap: wrap;
-    `};   
+    `};
   ${(props: Props) =>
     props.spread &&
     css`
-       width: 100%;
-       height: 100%;
+      width: 100%;
+      height: 100%;
     `};
   ${(props: Props) =>
     props.widen &&
     css`
-       width: 100%;
+      width: 100%;
     `};
   ${(props: Props) =>
     props.heighten &&
     css`
-       height: 100%;
-    `};      
+      height: 100%;
+    `};
   ${(props: Props) =>
     props.up &&
     css`
-       align-items: flex-start;
-    `};  
+      align-items: flex-start;
+    `};
   ${(props: Props) =>
     props.down &&
     css`
-       align-items: flex-end;
-    `}; 
+      align-items: flex-end;
+    `};
   ${(props: Props) =>
     props.vh &&
     css`
-       width: 100%;
-       min-height: 100vh;
-    `};       
-  @media (max-width: ${(props: Props) => props.rezise}){
-     max-width: 100%;
-  }  
-  ${(props: Props) => props.css};  
+      width: 100%;
+      min-height: 100vh;
+    `};
+  @media (max-width: ${(props: Props) => props.rezise}) {
+    max-width: 100%;
+  }
+  ${(props: Props) => props.css};
 `;

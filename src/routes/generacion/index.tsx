@@ -1,17 +1,17 @@
-import * as React from "react";
-import styled from "styled-components";
-import Layout from "../layout/Layout";
-import {theme} from './constants'
-import ToastVariant  from '../../components/Toast'
-import Generate from "../../patterns/Generate";
+import * as React from 'react';
+import styled from 'styled-components';
+import Layout from '../layout/Layout';
+import { theme } from './constants';
+import ToastVariant from '../../components/Toast';
+import Generate from '../../patterns/Generate';
 
 function Generation() {
   return (
     <Layout>
       <StyledResgister>
-        <ToastVariant linear={theme.green} color = "#ffffff"/>
-        <section className="login">
-          <div className="login__divider">
+        <ToastVariant linear={theme.green} color='#ffffff' />
+        <section className='login'>
+          <div className='login__divider'>
             <Generate />
           </div>
         </section>
@@ -41,7 +41,7 @@ const StyledResgister = styled.div`
   .login__logo {
     width: 300px;
     border-radius: 10px;
-    background-color:#00000099;
+    background-color: #00000099;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -57,8 +57,6 @@ const StyledResgister = styled.div`
     height: auto;
   }
 `;
-
-
 
 /*
 EMAIL: 

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { row, column, breakpoint } from "../mixins";
-import styled from "styled-components";
+import * as React from 'react';
+import { row, column, breakpoint } from '../mixins';
+import styled from 'styled-components';
 
 interface Props {
   bg?: string;
@@ -30,14 +30,14 @@ export default Section;
 const StyledSection = styled.section`
   width: 100%;
   position: relative;
-  height: ${(props: Props) => props.height || "100%"};
-  margin: ${(props: Props) => props.margin || "0"};
-  padding: ${(props: Props) => props.padding || "0"};
+  height: ${(props: Props) => props.height || '100%'};
+  margin: ${(props: Props) => props.margin || '0'};
+  padding: ${(props: Props) => props.padding || '0'};
   ${(props: Props) => row(props.justify, props.align)};
-  flex-wrap: ${(props: Props) => props.wrap || "nowrap"};
-  background-color: ${(props: Props) => props.bg || "transparent"};
+  flex-wrap: ${(props: Props) => props.wrap || 'nowrap'};
+  background-color: ${(props: Props) => props.bg || 'transparent'};
   @media (max-width: ${(props: Props) => props.rezise || breakpoint.xmd}) {
     ${(props: Props) => column(props.justify, props.align)};
   }
-  ${(props: Props)=> props.SectionStyles}; 
+  ${(props: Props) => props.SectionStyles};
 `;

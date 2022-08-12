@@ -1,8 +1,6 @@
-import * as React from "react";
-import { Input, Tooltip } from "@chakra-ui/react";
-import { InputProps } from "./validations";
-
-
+import * as React from 'react';
+import { Input, Tooltip } from '@chakra-ui/react';
+import { InputProps } from './validations';
 
 const ChakraInput = ({
   list,
@@ -17,30 +15,29 @@ const ChakraInput = ({
   message,
   pattern,
   setId,
-  color
+  color,
 }: InputProps) => {
   return (
     <>
       <datalist id={list}>
-          {datalist && datalist.map((item: string)=>(
-            <option key={item.toString()} value={item}></option>
-            ))}
+        {datalist &&
+          datalist.map((item: string) => <option key={item.toString()} value={item}></option>)}
       </datalist>
       <Tooltip label={message} hasArrow arrowSize={15}>
-      <Input
-        color={color}
-        onChange= {evt => setId(evt.target.value)}
-         list={list}
-        {...htmlAttributes}
-        _placeholder={_placeholder}
-        placeholder={placeholder}
-        {...register(label, {
-          ...requirements,
-          validate: { ...validations },
-          pattern: pattern
-        })}
-      />
-     </Tooltip> 
+        <Input
+          color={color}
+          onChange={(evt) => setId(evt.target.value)}
+          list={list}
+          {...htmlAttributes}
+          _placeholder={_placeholder}
+          placeholder={placeholder}
+          {...register(label, {
+            ...requirements,
+            validate: { ...validations },
+            pattern: pattern,
+          })}
+        />
+      </Tooltip>
     </>
   );
 };
@@ -59,4 +56,4 @@ export default ChakraInput;
           <option value="Granma"></option>
           <option value="Santigo"></option>
 
-*/          
+*/

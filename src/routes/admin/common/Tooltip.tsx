@@ -1,20 +1,20 @@
 import React from 'react';
-import { Input, Tooltip } from "@chakra-ui/react";
+import { Input, Tooltip } from '@chakra-ui/react';
 
 function Alert(props) {
-
-	return (
-    <>		
+  return (
+    <>
       <datalist id={props.listname}>
-          {props.datalist && props.datalist.map((item: string)=>(
+        {props.datalist &&
+          props.datalist.map((item: string) => (
             <option key={item.toString()} value={item}></option>
-            ))}
+          ))}
       </datalist>
-      <Tooltip label={props.message} hasArrow arrowSize={15} >
+      <Tooltip label={props.message} hasArrow arrowSize={15}>
         {props.children}
       </Tooltip>
     </>
-		);
+  );
 }
 
 export default Alert;

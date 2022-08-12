@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
 
 interface Props {
   src?: string;
@@ -51,7 +51,7 @@ const StyledImage = styled.img`
     props.centered &&
     css`
       transform: translate(-50%);
-    `};  
+    `};
 
   top: ${(props: Props) => props.top};
   left: ${(props: Props) => props.left};
@@ -61,8 +61,8 @@ const StyledImage = styled.img`
   bottom: ${(props: Props) => props.bottom};
   position: ${(props: Props) => props.position};
   max-width: ${(props: Props) => props.maxwidth};
-  margin: ${(props: Props) => props.margin || "0"};
-  padding: ${(props: Props) => props.padding || "0"};
-  border-radius: ${(props: Props) => props.radius || "0"};
-  box-shadow: ${(props: Props) => props.boxshadow || "0"};
+  margin: ${(props: Props) => props.margin || '0'};
+  padding: ${(props: Props) => props.padding || '0'};
+  border-radius: ${(props: Props) => props.radius || '0'};
+  box-shadow: ${(props: Props) => props.boxshadow || '0'};
 `;

@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
 
 interface Props {
   bg?: string;
@@ -26,7 +26,7 @@ const StyledFooter = styled.footer`
   position: relative;
   width: 100%;
   height: ${(props: Props) => props.h};
-  padding: ${(props: Props)=> props.p};
+  padding: ${(props: Props) => props.p};
   color: ${(props: Props) => props.c};
   background-color: ${(props: Props) => props.bg};
   ${(props: Props) =>
@@ -37,6 +37,6 @@ const StyledFooter = styled.footer`
       position: relative;
       height: var(--full-height);
       line-height: var(--full-height);
-      text-align: ${(props: Props) => props.align || "center"};
+      text-align: ${(props: Props) => props.align || 'center'};
     `};
 `;

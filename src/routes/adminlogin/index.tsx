@@ -1,15 +1,15 @@
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import Form from "./Form";
-import styled from "styled-components";
-import Layout from "../layout/Layout";
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Form from './Form';
+import styled from 'styled-components';
+import Layout from '../layout/Layout';
 
 export default function Login() {
   const navigate = useNavigate();
 
- // const token = localStorage.getItem("auth");
+  // const token = localStorage.getItem("auth");
 
- /*  React.useEffect(() => {
+  /*  React.useEffect(() => {
     setTimeout(() => {
       token && navigate("/");
     }, 1000);

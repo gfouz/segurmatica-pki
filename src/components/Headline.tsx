@@ -1,5 +1,5 @@
-import { createElement } from "react";
-import styled from "styled-components";
+import { createElement } from 'react';
+import styled from 'styled-components';
 
 interface Props {
   top?: string;
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export function Headline(props: Props) {
-  let tag = props.tag || "h1";
+  const tag = props.tag || 'h1';
   const element = createElement(tag, null, `${props.text}`);
   return (
     <>
@@ -42,9 +42,9 @@ const StyledHeadline = styled.div`
   width: ${(props: Props) => props.width};
   max-width: ${(props: Props) => props.maxwidth};
   font-size: ${(props: Props) => props.fontsize};
-  text-align: ${(props: Props)=> props.textalign};
+  text-align: ${(props: Props) => props.textalign};
   font-family: ${(props: Props) => props.family};
-  letter-spacing: ${(props: Props)=> props.space};
-  text-transform: ${(props: Props)=> props.transform};
-  position: ${(props: Props)=> props.position};
+  letter-spacing: ${(props: Props) => props.space};
+  text-transform: ${(props: Props) => props.transform};
+  position: ${(props: Props) => props.position};
 `;

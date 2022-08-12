@@ -1,9 +1,8 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const StyledForm = styled.div`
   background-color: #222222;
-  color: #444444;
+  color: #ab8ffe;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -23,7 +22,7 @@ export const StyledForm = styled.div`
   }
   .checkbox__label {
     font-size: 16px;
-    color:#0660b1;
+    color: #0660b1;
   }
   .btn-text {
     font-size: 10px;

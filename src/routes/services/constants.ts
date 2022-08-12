@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export const titleProps: React.CSSProperties = {
-  color: "#666666",
-  margin: "2em 0",
-  fontSize: "1.3em",
-  whiteSpace: "nowrap",
-  textTransform: "uppercase",
+  color: '#666666',
+  margin: '2em 0',
+  fontSize: '1.3em',
+  whiteSpace: 'nowrap',
+  textTransform: 'uppercase',
 };
 
 export const serviceAbout: () => string = () => {

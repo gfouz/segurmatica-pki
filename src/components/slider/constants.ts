@@ -1,6 +1,4 @@
-
-
-export const sliderText: string = `La empresa Segurmática brinda servicios 
+export const sliderText = `La empresa Segurmática brinda servicios 
   de emisión de certificados digitales para 
   firma digital de mensajería y ficheros 
   electrónicos y para la protección de 

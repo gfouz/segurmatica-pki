@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 
 interface IProps {
@@ -8,19 +8,19 @@ interface IProps {
 
 const Button = ({ open, setOpen }: IProps) => {
   return (
-    <StyledButton open={open} >
-     <button onClick={() => setOpen(!open)}>
-      <div></div>
-      <div></div>
-      <div></div>
-     </button> 
+    <StyledButton open={open}>
+      <button onClick={() => setOpen(!open)}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
     </StyledButton>
   );
 };
 export default Button;
 
 const StyledButton = styled.div`
-  button { 
+  button {
     position: absolute;
     right: 0;
     top: 0;
@@ -38,34 +38,30 @@ const StyledButton = styled.div`
     &:focus {
       outline: none;
     }
- }
-    div {
-      width: 1.5rem;
-      height: 0.2rem;
-      background: ${({open}) => (open ? "orange" : "white")};
-      border-radius: 10px;
-      transition: all 0.3s linear;
-      position: relative;
-      left: -15px;
-      top: 10px;
+  }
+  div {
+    width: 1.5rem;
+    height: 0.2rem;
+    background: ${({ open }) => (open ? 'orange' : 'white')};
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    left: -15px;
+    top: 10px;
 
-      transform-origin: 4.2px;
+    transform-origin: 4.2px;
 
-      :first-child {
-        transform: ${({open}) => (open ? "rotate(45deg)" : "rotate(0)")};
-      }
-
-      :nth-child(2) {
-        opacity: ${({open}) => (open ? "0" : "1")};
-        transform: ${({open}) =>
-        open ? "translateX(20px)" : "translateX(0)"};
-      }
-
-      :nth-child(3) {
-        transform: ${({open}) => (open ? "rotate(-45deg)" : "rotate(0)")};
-      }
+    :first-child {
+      transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
     }
 
+    :nth-child(2) {
+      opacity: ${({ open }) => (open ? '0' : '1')};
+      transform: ${({ open }) => (open ? 'translateX(20px)' : 'translateX(0)')};
+    }
 
-
+    :nth-child(3) {
+      transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
+    }
+  }
 `;

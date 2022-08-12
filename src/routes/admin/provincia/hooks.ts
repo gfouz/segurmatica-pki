@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import * as React from 'react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 //MUTATIONS CUSTOM HOOK
 export function useMutate(fn, key: string) {
@@ -24,19 +24,16 @@ export function useMyQuery(key, fn, id) {
   return useQuery(key, fn);
 }
 
-
 //SIMPLE SWITCHER OF FOUR OPTIONS
 export function useSwitch() {
-  const [option, setOption] = React.useState("null");
-  const setter = () => setOption("set");
+  const [option, setOption] = React.useState('null');
+  const setter = () => setOption('set');
   return [option, { setter }];
 }
 
-export const useBoolean = (initialState: boolean = false): [boolean, any] => {
-
-    const [state, setState] = React.useState<boolean>(initialState);
-    const toggle = React.useCallback((): void => setState(state => !state), []);
-    const close = React.useCallback((): void => setState(false), [] );
-    return [state, toggle, close];
-}
- 
+export const useBoolean = (initialState = false): [boolean, any] => {
+  const [state, setState] = React.useState<boolean>(initialState);
+  const toggle = React.useCallback((): void => setState((state) => !state), []);
+  const close = React.useCallback((): void => setState(false), []);
+  return [state, toggle, close];
+};

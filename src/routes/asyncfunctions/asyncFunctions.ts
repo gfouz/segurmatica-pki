@@ -1,24 +1,20 @@
-import axios from "axios";
-import { NavigateFunction } from "react-router-dom";
+import axios from 'axios';
+import { NavigateFunction } from 'react-router-dom';
 
-const url: string = "http://localhost:4000/login";
+const url = 'http://localhost:4000/login';
 
 interface IParams {
   user?: string;
   password?: string;
 }
 
-export function login(
-  url: string,
-  params: IParams,
-  navigate: NavigateFunction
-) {
+export function login(url: string, params: IParams, navigate: NavigateFunction) {
   axios
     .post(url, params)
     .then(function (response) {
-      localStorage.setItem("auth", response.data.token);
+      localStorage.setItem('auth', response.data.token);
       setTimeout(() => {
-        navigate("/");
+        navigate('/');
       }, 3000);
     })
     .catch(function (error) {

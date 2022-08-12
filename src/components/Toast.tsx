@@ -13,10 +13,8 @@ interface IToast {
 //------in order to personalize the component.-------//
 
 export default function ToastVariant(props: IToast) {
-
-  return <StyledToast {...props} />
+  return <StyledToast {...props} />;
 }
-
 
 const StyledToast = styled(ToastContainer)`
   .Toastify__toast--info {
@@ -24,22 +22,19 @@ const StyledToast = styled(ToastContainer)`
     background: ${(props) => props.bg};
     background-image: ${(props) => props.linear};
   }
-.Toastify__toast--success {
+  .Toastify__toast--success {
     color: ${(props: IToast) => props.color};
     background: ${(props) => props.bg};
     background-image: ${(props) => props.linear};
   }
-.Toastify__toast--warning {
+  .Toastify__toast--warning {
     color: ${(props: IToast) => props.color};
     background-color: ${(props) => props.bg};
     background-image: ${(props) => props.linear};
   }
-.Toastify__toast--error {
+  .Toastify__toast--error {
     color: ${(props: IToast) => props.color};
     background-color: ${(props) => props.bg};
     background-image: ${(props) => props.linear};
   }
-
 `;
-
-

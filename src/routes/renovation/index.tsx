@@ -1,17 +1,17 @@
-import * as React from "react";
-import styled from "styled-components";
-import Layout from "../layout/Layout";
-import Form from "./Form";
+import * as React from 'react';
+import styled from 'styled-components';
+import Layout from '../layout/Layout';
+import Form from './Form';
 import { theme } from '../constants';
-import ToastVariant  from '../../components/Toast'
+import ToastVariant from '../../components/Toast';
 
 function Renovation() {
   return (
     <Layout>
       <StyledResgister>
-         <ToastVariant linear={theme.green} color = "#ffffff"/>
-        <section className="login">
-          <div className="login__divider">
+        <ToastVariant linear={theme.green} color='#ffffff' />
+        <section className='login'>
+          <div className='login__divider'>
             <Form />
           </div>
         </section>
@@ -24,7 +24,7 @@ export default Renovation;
 
 const StyledResgister = styled.div`
   width: 100%;
-  background-color: #CCCCCC;
+  background-color: #cccccc;
   .login {
     position: relative;
     display: flex;

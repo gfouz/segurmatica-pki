@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export interface IOptions {
   option: string;
@@ -25,7 +25,7 @@ export const StyledNavbar = styled.div`
   width: 100%;
   background-color: ${(props: HeaderProps) => props.bg};
   margin: ${(props: HeaderProps) => props.margin};
-  padding: ${(props: HeaderProps) => props.padding || "1em 0"};
+  padding: ${(props: HeaderProps) => props.padding || '1em 0'};
   .nav {
     width: 100%;
     display: flex;

@@ -1,8 +1,8 @@
-import * as React from "react";
-import Sidebar from "./Sidebar";
-import styled from "styled-components";
-import Button from './Button'
-import Form from '../province/Form'
+import * as React from 'react';
+import Sidebar from './Sidebar';
+import styled from 'styled-components';
+import Button from './Button';
+import Form from '../province/Form';
 import { useCardStore, useBooleanStore } from './cardStore';
 
 interface ILayout {
@@ -15,22 +15,20 @@ interface ILayout {
 }
 
 export default function Card(props: ILayout) {
+  const boolean = useBooleanStore((state) => state.bool);
+  const close = useBooleanStore((state)=> state.setFalse);
+  const setBoolean = useBooleanStore((state) => state.setBoolean);
 
-  const boolean = useBooleanStore((state) => state.bool); 
-  const setBoolean = useBooleanStore(state => state.setBoolean);
+  const option = useCardStore((state) => state.option);
 
-  const option = useCardStore(state => state.option);
-
-   return (
+  return (
     <StyledCard {...props}>
       <header>
-        <h2 className="header__title">Administrar {props.name}</h2>
+        <h2 className='header__title'>Administrar {props.name}</h2>
         <Button open={boolean} setOpen={setBoolean} />
       </header>
       <Sidebar open={boolean} setOpen={setBoolean} />
-      <main>
-        {props.children}
-      </main>
+      <main onClick={close}>{props.children}</main>
 
       <footer>{option}</footer>
     </StyledCard>
@@ -47,30 +45,30 @@ const StyledCard = styled.div`
   max-width: 700px;
   min-height: 400px;
   grid-template-areas:
-    "header header"
-    "main  main"
-    "footer  footer";
+    'header header'
+    'main  main'
+    'footer  footer';
   grid-template-rows: 60px 1fr 60px;
   grid-template-columns: 1fr;
 
-header {
+  header {
     grid-area: header;
     line-height: 60px;
     text-align: center;
     color: #fff4a3;
     background-color: #000000;
   }
-.header__title {
-  text-transform: uppercase;
-}
+  .header__title {
+    text-transform: uppercase;
+  }
   main {
     grid-area: main;
   }
-.option {
-  font-size: 2em;
-  font-weight: bolder;
-  color: red;
-}
+  .option {
+    font-size: 2em;
+    font-weight: bolder;
+    color: red;
+  }
 
   footer {
     grid-area: footer;

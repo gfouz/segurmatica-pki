@@ -1,9 +1,9 @@
 //import * as React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 import Layout from '../layout/Layout';
 import { titleProps } from './constants';
 import { Heading } from '@chakra-ui/react';
-import Glider from '../../components/slider/Slider'
+import Glider from '../../components/slider/Slider';
 
 function Services() {
   return (

@@ -1,20 +1,20 @@
-import { CSSObject } from "@emotion/react";
-import { UseFormRegister, ValidationRule } from "react-hook-form";
-import { ResponsiveValue } from "@chakra-ui/react";
+import { CSSObject } from '@emotion/react';
+import { UseFormRegister, ValidationRule } from 'react-hook-form';
+import { ResponsiveValue } from '@chakra-ui/react';
 
 /*-----------------Literal types for registering inputs-------------------*/
 export type ILabel =
-  | "id"
-  | "dn"
-  | "tel"
-  | "tomo"
-  | "terms"
-  | "folio"
-  | "email"
-  | "user"
-  | "motive"
-  | "usertype"
-  | "password";
+  | 'id'
+  | 'dn'
+  | 'tel'
+  | 'tomo'
+  | 'terms'
+  | 'folio'
+  | 'email'
+  | 'user'
+  | 'motive'
+  | 'usertype'
+  | 'password';
 
 export interface IAttributes {
   required?: ValidationRule<boolean> | undefined | string;
@@ -22,12 +22,10 @@ export interface IAttributes {
   minLength?: ValidationRule<number> | undefined;
 }
 export type chakraAttributes = {
-  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
+  size: ResponsiveValue<(string & {}) | 'sm' | 'md' | 'lg' | 'xs'> | undefined;
   type: React.HTMLInputTypeAttribute | undefined;
   variant:
-    | ResponsiveValue<
-        (string & {}) | "outline" | "flushed" | "unstyled" | "filled"
-      >
+    | ResponsiveValue<(string & {}) | 'outline' | 'flushed' | 'unstyled' | 'filled'>
     | undefined;
 };
 
@@ -53,30 +51,30 @@ function turnToInt(value: number | string, start: number, end: number) {
 }
 
 let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth() + 1;
+const currentMonth = new Date().getMonth() + 1;
 currentYear = turnToInt(currentYear, 2, 4);
 /*-------------------------------------------------------------------*/
 
 /*-----------css styles and Chakra properties types.--------*/
 export const numberType: chakraAttributes = {
-  size: "sm",
-  type: "number",
-  variant: "flushed",
+  size: 'sm',
+  type: 'number',
+  variant: 'flushed',
 };
 export const emailType: chakraAttributes = {
-  size: "sm",
-  type: "email",
-  variant: "flushed",
+  size: 'sm',
+  type: 'email',
+  variant: 'flushed',
 };
 export const textType: chakraAttributes = {
-  size: "sm",
-  type: "text",
-  variant: "flushed",
+  size: 'sm',
+  type: 'text',
+  variant: 'flushed',
 };
 export const telType: chakraAttributes = {
-  size: "sm",
-  type: "tel",
-  variant: "flushed",
+  size: 'sm',
+  type: 'tel',
+  variant: 'flushed',
 };
 
 /*-----------------Dates validations and limits on time.------------*/
@@ -91,10 +89,8 @@ export interface IDates {
 /*-----------Object of callback functions that receive the input value as args--------*/
 export const dates: IDates = {
   isgrownup: (id) =>
-    (currentYear - turnToInt(id, 0, 2) == 18 &&
-      currentMonth > turnToInt(id, 2, 4)) ||
-    (currentYear > turnToInt(id, 0, 2) &&
-      currentYear - turnToInt(id, 0, 2) > 18) ||
+    (currentYear - turnToInt(id, 0, 2) == 18 && currentMonth > turnToInt(id, 2, 4)) ||
+    (currentYear > turnToInt(id, 0, 2) && currentYear - turnToInt(id, 0, 2) > 18) ||
     (currentYear < turnToInt(id, 0, 2) && turnToInt(id, 0, 2) < 99),
   monthover: (id) => parseInt(id.substring(2, 4)) >= 1,
   monthunder: (id) => parseInt(id.substring(2, 4)) <= 12,

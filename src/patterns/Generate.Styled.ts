@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledGenerate = styled.div`
   background-color: #ffffff;

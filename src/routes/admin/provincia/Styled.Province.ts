@@ -16,31 +16,29 @@ const StyledProvince = styled.div`
     align-items: center;
     justify-content: center;
   }
-  
- .bg-grey  {
-  background-color: #3a3839;
- }
- .btn-backwards {
-     position: absolute;
-     top: 4rem;
-     left: 2em;
-     display: flex;
-     text-transform: uppercase;
-     font-weight: bolder;
-     color: #0660b1;
-     span {
+
+  .bg-grey {
+    background-color: #3a3839;
+  }
+  .btn-backwards {
+    align-self: flex-start;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #0660b1;
+    margin: 1em;
+    span {
       position: relative;
       top: 0.5rem;
       left: 1rem;
       color: #009fff;
-     }
-   }
+    }
+  }
   .btn-backwards__text {
     font-weight: bolder;
     position: relative;
     top: 8px;
     left: 5px;
-
   }
 `;
 export default StyledProvince;

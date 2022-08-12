@@ -38,6 +38,6 @@ export type InputProps = {
 };
 
 export interface IFormValues {
-  "First Name": string;
+  'First Name': string;
   Age: number;
 }

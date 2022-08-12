@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const StyledForm = styled.div`
   background-color: #ffffff;
@@ -20,6 +19,6 @@ export const StyledForm = styled.div`
   }
   .checkbox__label {
     font-size: 16px;
-    color:#0660b1;
+    color: #0660b1;
   }
 `;
