@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Layout from '../layout/Layout';
 import { theme } from '../constants';
-import ProvinceAdmin from './provincia/index';
+//import ProvinceAdmin from './provincia/index';
+import RolAdmin from './rol/index';
 import ToastVariant from '../../components/Toast';
 
 function Admin() {
@@ -11,7 +12,7 @@ function Admin() {
       <ToastVariant linear={theme.green} color='#ffffff' />
       <section className='login'>
         <div className='login__divider'>
-          <ProvinceAdmin />
+          <RolAdmin />
         </div>
       </section>
     </StyledAdmin>

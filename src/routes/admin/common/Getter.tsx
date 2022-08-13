@@ -87,8 +87,8 @@ export default function Getter(props) {
           {Array.isArray(data) &&
             data.map((item) => (
               <ul className='list' key={item.id}>
-                <li className='list__item'>Número de ID: {item.id}</li>
-                <li className='list__item'>Provincia: {item.name}</li>
+                <li className='list__item'>Nro de ID: {item.id}</li>
+                <li className='list__item'>{props.name}: {item.name}</li>
                 <li className='list__item'>
                   Estado: {item.enabled ? 'habilitado' : 'deshabilitado'}
                 </li>

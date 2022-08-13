@@ -30,7 +30,7 @@ const submitbtn = {
   bg: '#ab8ffe',
   border: '1px solid #ab8ffe',
   size: 'md',
-  type: 'submit',
+  type: 'submit'
 };
 
 const BASE_URL = 'http://localhost:5000/';
@@ -61,11 +61,10 @@ function Update(props: IProps) {
     }
   }
 
-  const uptodate = useMutation((data) => putRequest(data));
+  const updating = useMutation( (data) => putRequest(data), {retry: 2})
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
-    uptodate.mutateAsync(data);
+    data && updating.mutateAsync(data);
   };
 
   return (
@@ -100,8 +99,6 @@ function Update(props: IProps) {
               />
             </Alert>
             {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
-
-            <Button {...submitbtn}>Enviar</Button>
           </Container>
         </HStack>
         <HStack>
@@ -115,6 +112,28 @@ function Update(props: IProps) {
           colorScheme='red'
           />
         </HStack>
+        <Button {...submitbtn}>
+          {updating.isLoading ? (
+            <div>
+              <Spinner size='sm' />
+              <Badge>trying...</Badge>
+            </div>
+          ) : (
+            <span>Enviar</span>
+          )}
+        </Button>
+        <span>
+          {updating.isSuccess ? (
+            <Badge p='5px' colorScheme='green'>
+              Enviado con éxito!
+            </Badge>
+          ): null}
+          {updating.isError && (
+            <Badge p='5px' colorScheme='red'>
+              Error de red!
+            </Badge>
+          )}
+        </span>
       </form>
     </>
   );

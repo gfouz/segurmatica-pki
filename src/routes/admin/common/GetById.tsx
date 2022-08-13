@@ -40,7 +40,7 @@ export type IProvince = {
 interface IProvinceList {
   data: IProvince[];
 }
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = 'http://localhost:5000';
 
 export const axiosApi = axios.create({
   baseURL: BASE_URL,
@@ -65,7 +65,7 @@ export default function GetById(props) {
   async function getRequest() {
     if (id) {
       try {
-        const res = await axiosApi.get(`${props.url}/${id}`);
+        const res = await axiosApi.get(`/${props.url}/${id}`);
         const result = {
           data: res.data,
           status: res.status,

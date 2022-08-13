@@ -18,7 +18,7 @@ export default function Form() {
         <div>
           {option == 'mostrar' && (
             <>
-              <Getter url='provincias' keys='provincias' />
+              <Getter url='provincias' keys='rols' />
             </>
           )}
         </div>
@@ -26,7 +26,7 @@ export default function Form() {
           <>
             <GetById
               url='provincias'
-              label='Buscar provincia por ID.
+              label='Buscar rol por ID.
                  '
             />
           </>
@@ -36,6 +36,8 @@ export default function Form() {
             <GetEnabled
               keys='provincias-enabled'
               url='provincias/enabled'
+              label='Buscar una provincia por ID.
+                 '
             />
           </>
         )}

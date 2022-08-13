@@ -40,16 +40,15 @@ export const axiosApi = axios.create({
 
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-export default function Getter(props) {
+export default function GetEnable(props) {
   const [status, setStatus] = useState(null);
-
   const format = (res) => {
     return JSON.stringify(res, null, 2);
   };
 
-  async function getRequest() {
+  async function getByState() {
     try {
-      const res = await axiosApi.get(props.url);
+      const res = await axiosApi.get(`${props.url}/true`);
       const result = {
         data: res.data,
         status: res.status,
@@ -63,7 +62,7 @@ export default function Getter(props) {
     }
   }
 
-  const { data, isError, isLoading, isSuccess, refetch } = useQuery(props.keys, getRequest);
+  const { data, isError, isLoading, isSuccess, refetch } = useQuery(props.keys, getByState);
 
   return (
     <StyledGetter>
@@ -127,8 +126,8 @@ const StyledGetter = styled.div`
     width: 200px;
     padding: 1em;
     margin: 0.2em;
-    background-color: #672587;
-    box-shadow: 1px 1px 10px #672587;
+    background-color: #446344;
+    box-shadow: 1px 1px 10px #000000;
   }
   .list__item {
     color: #ffffff;

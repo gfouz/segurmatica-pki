@@ -1,11 +1,11 @@
 import * as React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
-import { createProvince } from './restApi';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import ChakraInput from '../../../components/input/ChakraInput';
 import { HStack, Button, Spinner, Input, Container, Badge } from '@chakra-ui/react';
-import { provinces, tooltips, text_type } from '../../constants';
+import { IDS, provinces, tooltip, number_type, text_type } from './cardStore';
+import Alert from './Tooltip';
 
 interface IFormInput {
   name: string;
@@ -19,14 +19,32 @@ const submitbtn = {
   type: 'submit',
 };
 
+const BASE_URL = 'http://localhost:5000/';
+const axiosApi = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: false,
+});
+axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
+
 function Creator(props) {
+  const [status, setStatus] = React.useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const addProvince = useMutation(createProvince, 'provincias');
+  async function postRequest(data: IFormInput) {
+      try {
+        const res = await axiosApi.post(props.url, data);
+        setStatus(res.status.toString());
+        return res.data;
+      } catch (err) {
+        setStatus(err.message.toString());
+      }
+  }
+
+  const addProvince = useMutation(postRequest);
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     data && addProvince.mutateAsync(data);
   };
@@ -37,19 +55,18 @@ function Creator(props) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='input__label input__label--red'>Añadir una provincia.</strong>
+              <strong className='byid-input-label'>{props.labelForName}</strong>
             </label>
-            <ChakraInput
-              color='#ffffff'
-              list='provinces'
-              datalist={provinces}
-              label='name'
-              message={tooltips.province}
-              register={register}
-              htmlAttributes={text_type}
-              placeholder={errors.provinces && 'Escriba Nro de CI!'}
-              _placeholder={{ color: errors.id && 'red.400' }}
-            />
+            <Alert datalist={provinces} listname='provincias' message={tooltip.provincia}>
+              <Input
+                color='#ffffff'
+                list='provincias'
+                {...register('name', { required: true })}
+                {...text_type}
+              />
+            </Alert>
+            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+
           </Container>
         </HStack>
         <Button {...submitbtn}>

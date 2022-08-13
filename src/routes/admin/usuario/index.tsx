@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import StyledProvince from './Styled.Province';
 import CaretLeft from '../../../icons/CaretLeft';
@@ -9,14 +8,14 @@ import Dashboard from '../common/Dashboard';
 import Card from '../common/Card';
 import Form from '../common/Form';
 
-function CouncilAdmin() {
+function UserAdmin() {
   const navigate = useNavigate();
   function handleClick() {
     navigate(-1);
   }
   return (
     <>
-      <StyledCouncil>
+      <StyledUser>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
           <div className='btn-backwards' onClick={handleClick}>
@@ -26,14 +25,14 @@ function CouncilAdmin() {
             <Form />
           </Card>
         </Dashboard>
-      </StyledCouncil>
+      </StyledUser>
     </>
   );
 }
 
-export default CouncilAdmin;
+export default UserAdmin;
 
-const StyledCouncil = styled.div`
+const StyledUser = styled.div`
   width: 100%;
   position: relative;
   background-color: #ffffff;

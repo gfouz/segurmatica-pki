@@ -18,15 +18,15 @@ export default function Form() {
         <div>
           {option == 'mostrar' && (
             <>
-              <Getter url='provincias' keys='provincias' />
+              <Getter url='municipios' keys='municipios' />
             </>
           )}
         </div>
         {option == 'buscar' && (
           <>
             <GetById
-              url='provincias'
-              label='Buscar provincia por ID.
+              url='municipios'
+              label='Buscar una provincia por ID.
                  '
             />
           </>
@@ -35,7 +35,9 @@ export default function Form() {
           <>
             <GetEnabled
               keys='provincias-enabled'
-              url='provincias/enabled'
+              url='municipios/enabled'
+              label='Buscar una provincia por ID.
+                 '
             />
           </>
         )}
@@ -43,7 +45,7 @@ export default function Form() {
         {option == 'crear' && (
           <>
             <Creator 
-              labelForName='Añadir nombre de provincia'
+              labelForName='Añadir nombre de municipio'
             />
           </>
         )}
