@@ -1,18 +1,52 @@
 import * as React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../layout/Layout';
 import { theme } from '../constants';
-//import ProvinceAdmin from './provincia/index';
-import RolAdmin from './rol/index';
 import ToastVariant from '../../components/Toast';
+import {
+  Box,
+  Flex,
+  HStack,
+  Button,
+  Center,
+  Input,
+  Spinner,
+  Badge,
+  Heading,
+  Container,
+} from '@chakra-ui/react';
 
 function Admin() {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem('jwt');
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      !token && navigate('/login');
+    }, 2000);
+  });
   return (
     <StyledAdmin>
       <ToastVariant linear={theme.green} color='#ffffff' />
-      <section className='login'>
-        <div className='login__divider'>
-          <RolAdmin />
+      <section className='admin'>
+        <h1 className='admin__title'>Administración general</h1>
+        <div className='admin__list'>
+          <ul className='list'>
+            <li className='list__item'>
+              <Link to='/'>Inicio</Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/rols'>Administrar rol</Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/users'>Administrar usario</Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/provinces'>Administrar provincias</Link>
+            </li>
+          </ul>
         </div>
       </section>
     </StyledAdmin>
@@ -25,19 +59,43 @@ const StyledAdmin = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f1f1f1;
-  .login {
+  .admin {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
-  .login__divider {
+  .admin__title {
+    margin: 2em 0;
+    color: #a1291f;
+    text-transform: uppercase;
+    font-size: 1.5em;
+  }
+  .admin__list {
     position: relative;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .login__logo {
+  .list {
+  }
+  .list__item {
+    margin: 3em 0;
+    list-style-type: none;
+    min-width: 250px;
+    background-color: #9da6cb;
+    a {
+      color: #222222;
+      padding: 1em;
+      background-color: #c1b6d4;
+      text-transform: uppercase;
+      font-weight: bolder;
+      border-radius: 8px;
+    }
+  }
+
+  .admin__logo {
     width: 300px;
     border-radius: 10px;
     background-color: #00000099;
@@ -51,7 +109,7 @@ const StyledAdmin = styled.div`
     text-align: center;
     transform: translate(-50%, -50%);
   }
-  .login__image {
+  .admin__image {
     max-width: 100%;
     height: auto;
   }

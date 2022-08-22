@@ -50,7 +50,7 @@ export const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 export default function GetById(props) {
-  const { url, label, name, email, password } = props;
+  const { url, labelForId, name, email, password } = props;
   const {
     register,
     handleSubmit,
@@ -66,7 +66,7 @@ export default function GetById(props) {
   async function getRequest() {
     if (id) {
       try {
-        const res = await axios.get(`${BASE_URL}/${url}/${id}`);
+        const res = await axiosApi.get(`/${url}/${id}`);
         const result = {
           data: res.data,
           status: res.status,
@@ -79,7 +79,7 @@ export default function GetById(props) {
     }
   }
 
-  const { data, status, refetch: refetching } = useQuery('provincias__id', getRequest);
+  const { data, status, refetch: refetching } = useQuery('byAnother', getRequest);
 
   function retryData() {
     try {
@@ -100,7 +100,7 @@ export default function GetById(props) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{label}</strong>
+              <strong className='byid-input-label'>{props.labelForId}</strong>
             </label>
             <SuggestedList datalist={IDS} listname='provincias' message={tooltip.provincia}>
               <Input

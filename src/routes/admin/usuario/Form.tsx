@@ -5,11 +5,10 @@ import GetEnabled from '../common/GetEnabled';
 import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Updater from '../common/Updater';
-import Creator from '../common/Creator';
+import Creator from './Creator';
 
 //----FORM COMPONENT TO HANDLE ALL MODELS.----
 export default function Form() {
-
   const option = useCardStore((state) => state.option);
 
   return (
@@ -18,24 +17,31 @@ export default function Form() {
         <div>
           {option == 'mostrar' && (
             <>
-              <Getter url='provincias' keys='provincias' />
+              <Getter
+                url='users'
+                keys='users'
+                rol='Rol_id:'
+                email='Email:'
+                password='Contraseña:'
+              />
             </>
           )}
         </div>
         {option == 'buscar' && (
           <>
             <GetById
-              url='provincias'
-              label='Buscar una provincia por ID.
-                 '
+              url='users'
+              label='Buscar una provincia por ID.'
+              email='Email:'
+              password='Contraseña:'
             />
           </>
         )}
         {option == 'habilitados' && (
           <>
             <GetEnabled
-              keys='provincias-enabled'
-              url='provincias/enabled'
+              keys='users-enabled'
+              url='users/enabled'
               label='Buscar una provincia por ID.
                  '
             />
@@ -44,16 +50,14 @@ export default function Form() {
 
         {option == 'crear' && (
           <>
-            <Creator 
-              labelForName='Añadir nombre de provincia'
-            />
+            <Creator labelForName='Añadir nombre de provincia' />
           </>
         )}
 
         {option == 'actualizar' && (
           <>
             <Updater
-              url='provincias'
+              url='users'
               labelForId='Id de la provincia'
               labelForName='Escriba nombre de provincia'
             />

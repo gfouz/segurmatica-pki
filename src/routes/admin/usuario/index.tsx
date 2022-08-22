@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import StyledProvince from './Styled.Province';
 import CaretLeft from '../../../icons/CaretLeft';
@@ -6,7 +7,7 @@ import { theme } from '../../constants';
 import ToastVariant from '../../../components/Toast';
 import Dashboard from '../common/Dashboard';
 import Card from '../common/Card';
-import Form from '../common/Form';
+import Form from './Form';
 
 function UserAdmin() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function UserAdmin() {
           <div className='btn-backwards' onClick={handleClick}>
             <CaretLeft /> <span>REGRESAR</span>
           </div>
-          <Card name='rol'>
+          <Card name='usuarios'>
             <Form />
           </Card>
         </Dashboard>

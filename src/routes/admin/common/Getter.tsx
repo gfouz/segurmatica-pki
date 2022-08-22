@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import ChakraInput from '../../../components/input/ChakraInput';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { provinces, tooltip } from './cardStore';
-import Alert from './Tooltip';
+import { provinces, tooltip, useLocalStorage } from './cardStore';
 import {
   Box,
   Flex,
@@ -18,47 +17,26 @@ import {
   Container,
 } from '@chakra-ui/react';
 
-interface IFormInput {
-  id?: string;
-  name?: string;
-}
-interface IInitialData {
-  id: string;
-  name: string;
-  enabled: boolean;
-}
-const initialState: IInitialData = {
-  id: 'unknown',
-  name: 'unknown',
-  enabled: false,
-};
-export type IProvince = {
-  id: string;
-  name: string;
-  enabled: boolean;
-};
-interface IProvinceList {
-  data: IProvince[];
-}
+//const payload = localStorage.getItem("jwt")
+
 const BASE_URL = 'http://localhost:5000/';
 
 export const axiosApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: false,
 });
-
-axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
+//axiosApi.defaults.headers.common['jwt'] = payload;
 
 export default function Getter(props) {
-  const [status, setStatus] = useState('');
+  const [token, setToken] = useState(() => localStorage.getItem('jwt'));
+  axiosApi.defaults.headers.common['jwt'] = token;
 
-  const format = (res) => {
-    return JSON.stringify(res, null, 2);
-  };
+  const [status, setStatus] = useState('');
+  const { url, keys, name, email, password, rol } = props;
 
   async function getRequest() {
     try {
-      const res = await axiosApi.get(props.url);
+      const res = await axiosApi.get(url);
       const result = {
         data: res.data,
         status: res.status,
@@ -71,7 +49,12 @@ export default function Getter(props) {
     }
   }
 
-  const { data, isLoading, isError } = useQuery(props.keys, getRequest);
+  const { data, isLoading, isError } = useQuery(keys, getRequest);
+  //console.log(`this is payload: ${payload}`)
+
+  React.useEffect(() => {
+    setToken(localStorage.getItem('jwt'));
+  });
 
   return (
     <StyledGetter>
@@ -88,9 +71,20 @@ export default function Getter(props) {
             data.map((item) => (
               <ul className='list' key={item.id}>
                 <li className='list__item'>Nro de ID: {item.id}</li>
-                <li className='list__item'>{props.name}: {item.name}</li>
+                <li className='list__item'>
+                  {name} {item.name}
+                </li>
+                <li className='list__item'>
+                  {email} {item.email}
+                </li>
+                <li className='list__item'>
+                  {password} {item.password}
+                </li>
                 <li className='list__item'>
                   Estado: {item.enabled ? 'habilitado' : 'deshabilitado'}
+                </li>
+                <li className='list__item'>
+                  {rol} {item.rolId}
                 </li>
               </ul>
             ))}
@@ -123,8 +117,20 @@ const StyledGetter = styled.div`
     box-shadow: 1px 1px 10px #999999;
   }
   .list__item {
-    color: #999999;
     text-align: left;
     list-style-type: none;
   }
+  ul li:nth-child(4) {
+    color: green;
+  }
+  ul li:nth-child(1) {
+    color: brown;
+  }
 `;
+
+/*
+  headers: {
+    'jwt': token
+  }
+
+  */

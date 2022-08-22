@@ -29,7 +29,11 @@ function Header(props: HeaderProps) {
     },
     {
       path: '/admin',
-      icon: <FormText />,
+      icon: <Services />,
+    },
+    {
+      path: '/login',
+      icon: <FileSearch />,
     },
   ];
 

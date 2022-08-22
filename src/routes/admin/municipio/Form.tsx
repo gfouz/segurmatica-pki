@@ -9,7 +9,6 @@ import Creator from '../common/Creator';
 
 //----FORM COMPONENT TO HANDLE ALL MODELS.----
 export default function Form() {
-
   const option = useCardStore((state) => state.option);
 
   return (
@@ -44,9 +43,7 @@ export default function Form() {
 
         {option == 'crear' && (
           <>
-            <Creator 
-              labelForName='Añadir nombre de municipio'
-            />
+            <Creator labelForName='Añadir nombre de municipio' />
           </>
         )}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Tooltip } from '@chakra-ui/react';
 
-function Alert(props) {
+function SuggestedList(props) {
   return (
     <>
       <datalist id={props.listname}>
@@ -17,4 +17,4 @@ function Alert(props) {
   );
 }
 
-export default Alert;
+export default SuggestedList;

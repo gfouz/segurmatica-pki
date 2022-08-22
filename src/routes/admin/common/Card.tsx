@@ -16,7 +16,7 @@ interface ILayout {
 
 export default function Card(props: ILayout) {
   const boolean = useBooleanStore((state) => state.bool);
-  const close = useBooleanStore((state)=> state.setFalse);
+  const close = useBooleanStore((state) => state.setFalse);
   const setBoolean = useBooleanStore((state) => state.setBoolean);
 
   const option = useCardStore((state) => state.option);

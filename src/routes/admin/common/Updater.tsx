@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import Alert from './Tooltip';
+import SuggestedList from './Tooltip';
 import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -30,7 +30,7 @@ const submitbtn = {
   bg: '#ab8ffe',
   border: '1px solid #ab8ffe',
   size: 'md',
-  type: 'submit'
+  type: 'submit',
 };
 
 const BASE_URL = 'http://localhost:5000/';
@@ -41,6 +41,7 @@ const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 function Update(props: IProps) {
+  const { url, labelForId, labelForName } = props;
   const [id, setId] = React.useState('');
   const [status, setStatus] = React.useState('');
   const {
@@ -52,7 +53,7 @@ function Update(props: IProps) {
   async function putRequest(data: IFormInput) {
     if (id) {
       try {
-        const res = await axiosApi.put(`${props.url}/${id}`, data);
+        const res = await axiosApi.put(`${url}/${id}`, data);
         setStatus(res.status.toString());
         return res.data;
       } catch (err) {
@@ -61,7 +62,7 @@ function Update(props: IProps) {
     }
   }
 
-  const updating = useMutation( (data) => putRequest(data), {retry: 2})
+  const updating = useMutation((data) => putRequest(data), { retry: 2 });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     data && updating.mutateAsync(data);
@@ -73,44 +74,39 @@ function Update(props: IProps) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForId}</strong>
+              <strong className='byid-input-label'>{labelForId}</strong>
             </label>
-            <Alert datalist={IDS} listname='ids' message={tooltip.provincia}>
+            <SuggestedList datalist={IDS} listname='ids' message={tooltip.provincia}>
               <Input
                 color='#ffffff'
                 list='ids'
                 onChange={(evt) => setId(evt.target.value)}
-                {...number_type}
+                {...text_type}
               />
-            </Alert>
+            </SuggestedList>
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForName}</strong>
+              <strong className='byid-input-label'>{labelForName}</strong>
             </label>
-            <Alert datalist={provinces} listname='provincias' message={tooltip.provincia}>
+            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
               <Input
                 color='#ffffff'
                 list='provincias'
                 {...register('name', { required: true })}
                 {...text_type}
               />
-            </Alert>
+            </SuggestedList>
             {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack>
           <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
-           Deshabilitar o habilitar
+            Deshabilitar o habilitar
           </FormLabel>
-          <Switch 
-          {...register('enabled')} 
-          id='enabled' 
-          size='sm' 
-          colorScheme='red'
-          />
+          <Switch {...register('enabled')} id='enabled' size='sm' colorScheme='red' />
         </HStack>
         <Button {...submitbtn}>
           {updating.isLoading ? (
@@ -127,7 +123,7 @@ function Update(props: IProps) {
             <Badge p='5px' colorScheme='green'>
               Enviado con éxito!
             </Badge>
-          ): null}
+          ) : null}
           {updating.isError && (
             <Badge p='5px' colorScheme='red'>
               Error de red!

@@ -9,7 +9,6 @@ import Creator from '../common/Creator';
 
 //----FORM COMPONENT TO HANDLE ALL MODELS.----
 export default function Form() {
-
   const option = useCardStore((state) => state.option);
 
   return (
@@ -33,18 +32,13 @@ export default function Form() {
         )}
         {option == 'habilitados' && (
           <>
-            <GetEnabled
-              keys='provincias-enabled'
-              url='provincias/enabled'
-            />
+            <GetEnabled keys='provincias-enabled' url='provincias/enabled' />
           </>
         )}
 
         {option == 'crear' && (
           <>
-            <Creator 
-              labelForName='Añadir nombre de provincia'
-            />
+            <Creator url='provincias' labelForName='Añadir nombre de provincia' />
           </>
         )}
 

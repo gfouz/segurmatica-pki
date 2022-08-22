@@ -24,6 +24,10 @@ function Navbar(props: HeaderProps) {
       icon: <FormText />,
     },
     {
+      option: 'buscar por',
+      icon: <FormText />,
+    },
+    {
       option: 'actualizar',
       icon: <FormText />,
     },

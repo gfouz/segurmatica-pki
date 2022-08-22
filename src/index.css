@@ -28,3 +28,7 @@ code {
   src: local('orangina'), url('./fonts/orangina.otf') format('opentype');
   font-weight: bolder;
 }
+
+.help___me {
+  list-style-type: none;
+}

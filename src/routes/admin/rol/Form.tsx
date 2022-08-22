@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useCardStore } from '../common/cardStore';
 import GetEnabled from '../common/GetEnabled';
 import GetById from '../common/GetById';
+import GetByAnotherId from '../common/GetByAnotherId';
 import Getter from '../common/Getter';
 import Updater from '../common/Updater';
 import Creator from '../common/Creator';
 
 //----FORM COMPONENT TO HANDLE ALL MODELS.----
 export default function Form() {
-
   const option = useCardStore((state) => state.option);
 
   return (
@@ -18,20 +18,20 @@ export default function Form() {
         <div>
           {option == 'mostrar' && (
             <>
-              <Getter 
-              url='rols' 
-              keys='rols' 
-              name='Rol'
-              />
+              <Getter url='rols' keys='rols' name='Rol:' />
             </>
           )}
         </div>
         {option == 'buscar' && (
           <>
-            <GetById
-              url='rols'
-              label='Buscar rol por ID.
-                 '
+            <GetById url='rols' label='Buscar por Id de rol.' />
+          </>
+        )}
+        {option == 'buscar por' && (
+          <>
+            <GetByAnotherId
+              url='funcionalidades/rols'
+              labelForId='Buscar por id de funcionalidad.'
             />
           </>
         )}
@@ -48,20 +48,13 @@ export default function Form() {
 
         {option == 'crear' && (
           <>
-            <Creator 
-              url='rols'
-              labelForName='Crear un rol'
-            />
+            <Creator url='rols' labelForName='Crear un rol' />
           </>
         )}
 
         {option == 'actualizar' && (
           <>
-            <Updater
-              url='rols'
-              labelForId='Id de Rol'
-              labelForName='Escriba nombre de Rol'
-            />
+            <Updater url='rols' labelForId='Id de Rol' labelForName='Escriba nombre de Rol' />
           </>
         )}
       </StyledForm>

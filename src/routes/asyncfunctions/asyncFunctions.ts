@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 
-const url = 'http://localhost:4000/login';
+const url = 'http://localhost:5000/login';
 
 interface IParams {
-  user?: string;
+  email?: string;
   password?: string;
 }
 

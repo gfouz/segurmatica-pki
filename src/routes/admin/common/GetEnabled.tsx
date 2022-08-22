@@ -5,7 +5,6 @@ import ChakraInput from '../../../components/input/ChakraInput';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { provinces, tooltip } from './cardStore';
-import Alert from './Tooltip';
 import {
   Box,
   Flex,

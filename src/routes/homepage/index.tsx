@@ -2,8 +2,19 @@ import * as React from 'react';
 import styled from 'styled-components';
 import HorizonLine from '../../components/HorizonLine';
 import Layout from '../layout/Layout';
+import { useNavigate } from 'react-router-dom';
 
 export default function Homepage() {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem('jwt');
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      !token && navigate('/login');
+    }, 2000);
+  });
+
   return (
     <Layout>
       <StyledHome>
@@ -13,6 +24,13 @@ export default function Homepage() {
             <HorizonLine color='#1799ff' />
           </article>
           <img src='./images/homepage.png' alt='man' className='homepage__image' />
+          <button
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
+            clear localStorage
+          </button>
           <h2 className='article__subtitle'>MÁS DE 25 AÑOS DE EXPERIENCIA.</h2>
         </section>
       </StyledHome>

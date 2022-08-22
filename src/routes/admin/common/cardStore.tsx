@@ -1,15 +1,17 @@
+import React, { useState, useEffect } from 'react';
+import { ResponsiveValue } from '@chakra-ui/react';
 import create from 'zustand';
 
 const useStore = create((set) => ({
   option: 'mostrar',
-  setOption: (option) => set((state) => ({ option })),
+  setOption: (option: string) => set((state) => ({ option })),
 }));
 
 export const useBooleanStore = create((set) => ({
   bool: false,
   setBoolean: (bool) => set((state) => ({ bool: !state.bool })),
-  setFalse: (bool) => set((bool)=>({bool: false})),
-  setTrue: (bool) => set((bool)=>({bool: true}))
+  setFalse: (bool) => set((bool) => ({ bool: false })),
+  setTrue: (bool) => set((bool) => ({ bool: true })),
 }));
 
 export const useCardStore = useStore;
@@ -45,10 +47,10 @@ export const tooltip: ITooltip = {
 
 /*-----------css styles and Chakra attributes types.--------*/
 export type chakraProps = {
-  size: ResponsiveValue<(string & {}) | 'sm' | 'md' | 'lg' | 'xs'> | undefined;
+  size: ResponsiveValue<(string & unknown) | 'sm' | 'md' | 'lg' | 'xs'> | undefined;
   type: React.HTMLInputTypeAttribute | undefined;
   variant:
-    | ResponsiveValue<(string & {}) | 'outline' | 'flushed' | 'unstyled' | 'filled'>
+    | ResponsiveValue<(string & unknown) | 'outline' | 'flushed' | 'unstyled' | 'filled'>
     | undefined;
 };
 // HTML AND CHAKRA ATTRIBUTES
@@ -61,4 +63,35 @@ export const text_type: chakraProps = {
   size: 'sm',
   type: 'text',
   variant: 'flushed',
+};
+export const email_type: chakraProps = {
+  size: 'sm',
+  type: 'email',
+  variant: 'flushed',
+};
+export const password_type: chakraProps = {
+  size: 'sm',
+  type: 'password',
+  variant: 'flushed',
+};
+
+export const useLocalStorage = (key: string, defaultValue = null) => {
+  const [value, setValue] = useState(() => {
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved !== null) {
+        return saved;
+      }
+      return defaultValue;
+    } catch {
+      return defaultValue;
+    }
+  });
+
+  useEffect(() => {
+    const rawValue = JSON.stringify(value);
+    localStorage.setItem(key, rawValue);
+  }, [value]);
+
+  return [value, setValue];
 };

@@ -69,7 +69,7 @@ const Form = () => {
 
   infoMessage(errors, toast);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data: any) => {
+  const onSubmit: SubmitHandler<IFormInput> = (formData: any) => {
     mutateAsync(data);
     localStorage.setItem('auth', token);
     console.log(token);
