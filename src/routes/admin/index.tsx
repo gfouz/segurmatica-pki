@@ -22,11 +22,13 @@ function Admin() {
 
   const token = localStorage.getItem('jwt');
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     setTimeout(() => {
       !token && navigate('/login');
     }, 2000);
-  });
+  });*/
+
+
   return (
     <StyledAdmin>
       <ToastVariant linear={theme.green} color='#ffffff' />
@@ -41,7 +43,7 @@ function Admin() {
               <Link to='/rols'>Administrar rol</Link>
             </li>
             <li className='list__item'>
-              <Link to='/users'>Administrar usario</Link>
+              <Link to='/users'>Administrar usuario</Link>
             </li>
             <li className='list__item'>
               <Link to='/provinces'>Administrar provincias</Link>
@@ -58,7 +60,11 @@ export default Admin;
 const StyledAdmin = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #f1f1f1;
+  background-image: url(./images/admin.jpg);
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;  
   .admin {
     display: flex;
     flex-direction: column;
@@ -67,7 +73,7 @@ const StyledAdmin = styled.div`
   }
   .admin__title {
     margin: 2em 0;
-    color: #a1291f;
+    color: #5da8cf;
     text-transform: uppercase;
     font-size: 1.5em;
   }

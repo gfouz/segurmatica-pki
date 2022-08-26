@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { HStack, Button, Spinner, Input, Container, Badge } from '@chakra-ui/react';
@@ -37,16 +38,18 @@ function Creator(props) {
   async function postRequest(data: IFormInput) {
     try {
       const res = await axiosApi.post(props.url, data);
-      setStatus(res.status.toString());
+      setStatus(res.data.message);
       return res.data;
     } catch (err) {
-      setStatus(err.message.toString());
+      setStatus(err.response?.data.error);
     }
   }
 
   const addProvince = useMutation(postRequest);
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     data && addProvince.mutateAsync(data);
+
   };
 
   return (
@@ -91,6 +94,7 @@ function Creator(props) {
             </Badge>
           )}
         </span>
+        {status && <StatusHandler message={status} />}
       </form>
     </>
   );

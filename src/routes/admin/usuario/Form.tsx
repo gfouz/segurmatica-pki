@@ -4,7 +4,7 @@ import { useCardStore } from '../common/cardStore';
 import GetEnabled from '../common/GetEnabled';
 import GetById from '../common/GetById';
 import Getter from '../common/Getter';
-import Updater from '../common/Updater';
+import Updater from './Updater';
 import Creator from './Creator';
 
 //----FORM COMPONENT TO HANDLE ALL MODELS.----
@@ -31,7 +31,8 @@ export default function Form() {
           <>
             <GetById
               url='users'
-              label='Buscar una provincia por ID.'
+              keys='userbyid'
+              label='Buscar un usuario por ID.'
               email='Email:'
               password='Contraseña:'
             />
@@ -58,8 +59,7 @@ export default function Form() {
           <>
             <Updater
               url='users'
-              labelForId='Id de la provincia'
-              labelForName='Escriba nombre de provincia'
+              
             />
           </>
         )}

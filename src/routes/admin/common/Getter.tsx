@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import StatusHandler from './StatusHandler';
 import styled from 'styled-components';
 import ChakraInput from '../../../components/input/ChakraInput';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -37,15 +38,14 @@ export default function Getter(props) {
   async function getRequest() {
     try {
       const res = await axiosApi.get(url);
-      const result = {
-        data: res.data,
-        status: res.status,
-        statusText: res.statusText,
+      const data = {
+        object: res.data,
       };
-      return result.data;
+      setStatus(data.object.message);
+      return data.object.result;
     } catch (err) {
       setStatus(err.message);
-      return err;
+      //return err;
     }
   }
 
@@ -90,11 +90,7 @@ export default function Getter(props) {
             ))}
         </div>
       }
-      {status === 'Network Error' && (
-        <Heading color='#fff4a3' size='sm'>
-          {status}
-        </Heading>
-      )}
+      {status && <StatusHandler message={status} />}
     </StyledGetter>
   );
 }

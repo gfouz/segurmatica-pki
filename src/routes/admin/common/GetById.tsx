@@ -50,7 +50,7 @@ export const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 export default function GetById(props) {
-  const { url, label, name, email, password } = props;
+  const { url, keys, label, name, email, password } = props;
   const {
     register,
     handleSubmit,
@@ -67,31 +67,25 @@ export default function GetById(props) {
     if (id) {
       try {
         const res = await axios.get(`${BASE_URL}/${url}/${id}`);
-        const result = {
-          data: res.data,
-          status: res.status,
-          statusText: res.statusText,
-        };
-        return result.data;
+        const data = {
+            object: res.data,
+         };
+    
+        console.log(res.data)
+        return data.object.result;
       } catch (err) {
-        //setStatus(format(err.response?.data || err));
+        setStatus(err.response?.data);
       }
     }
   }
 
-  const { data, status, refetch: refetching } = useQuery('provincias__id', getRequest);
-
-  function retryData() {
-    try {
+  const { data, status, refetch: refetching } = useQuery('any', getRequest);
+  console.log(data && data.result)
+  function retry() {
       refetching();
-    } catch (err) {
-      return err;
-    }
   }
   const onSubmit: SubmitHandler<IFormInput> = async (id) => {
-    if (data !== undefined) {
-    }
-    retryData();
+    retry();
   };
 
   return (

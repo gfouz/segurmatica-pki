@@ -3,6 +3,7 @@ import axios from 'axios';
 import SuggestedList from './Tooltip';
 import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import StatusHandler from './StatusHandler';
 import { useMutation } from 'react-query';
 import {
   HStack,
@@ -33,7 +34,7 @@ const submitbtn = {
   type: 'submit',
 };
 
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = 'http://localhost:5000';
 const axiosApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: false,
@@ -51,19 +52,19 @@ function Update(props: IProps) {
   } = useForm<IFormInput>();
 
   async function putRequest(data: IFormInput) {
-    if (id) {
+    
       try {
         const res = await axiosApi.put(`${url}/${id}`, data);
-        setStatus(res.status.toString());
+        setStatus(data.object.message);
         return res.data;
       } catch (err) {
         setStatus(err.message.toString());
       }
-    }
+  
   }
 
   const updating = useMutation((data) => putRequest(data), { retry: 2 });
-
+  console.log(updating.data && updating.data.result)
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     data && updating.mutateAsync(data);
   };
@@ -130,6 +131,7 @@ function Update(props: IProps) {
             </Badge>
           )}
         </span>
+        {status && <StatusHandler message={status} />}
       </form>
     </>
   );

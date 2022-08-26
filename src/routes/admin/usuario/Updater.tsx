@@ -14,7 +14,7 @@ import {
   Switch,
   FormLabel,
 } from '@chakra-ui/react';
-import { IDS, provinces, tooltip, number_type, text_type } from './cardStore';
+import { IDS, provinces, tooltip, number_type, text_type, email_type } from '../common/cardStore';
 
 interface IFormInput {
   name: string;
@@ -33,7 +33,7 @@ const submitbtn = {
   type: 'submit',
 };
 
-const BASE_URL = 'http://localhost:5000/';
+const BASE_URL = 'http://localhost:5000';
 const axiosApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: false,
@@ -52,7 +52,7 @@ function Update(props: IProps) {
   async function putRequest(data: IFormInput) {
     if (id) {
       try {
-        const res = await axiosApi.put(`${props.url}/${id}`, data);
+        const res = await axiosApi.put(`/users/${id}`, data);
         setStatus(res.status.toString());
         return res.data;
       } catch (err) {
@@ -73,7 +73,7 @@ function Update(props: IProps) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForId}</strong>
+              <strong className='byid-input-label'>Escriba Id de usuario.</strong>
             </label>
             <SuggestedList datalist={IDS} listname='ids' message={tooltip.provincia}>
               <Input
@@ -88,14 +88,14 @@ function Update(props: IProps) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForName}</strong>
+              <strong className='byid-input-label'>correo electrónico</strong>
             </label>
             <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
               <Input
                 color='#ffffff'
                 list='provincias'
-                {...register('name', { required: true })}
-                {...text_type}
+                {...register('email', { required: true })}
+                {...email_type}
               />
             </SuggestedList>
             {errors.name && <span style={{ color: 'red' }}>Field is required</span>}

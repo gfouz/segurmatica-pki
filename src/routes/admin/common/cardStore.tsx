@@ -4,14 +4,14 @@ import create from 'zustand';
 
 const useStore = create((set) => ({
   option: 'mostrar',
-  setOption: (option: string) => set((state) => ({ option })),
+  setOption: (option: string) => set(() => ({ option })),
 }));
 
 export const useBooleanStore = create((set) => ({
   bool: false,
-  setBoolean: (bool) => set((state) => ({ bool: !state.bool })),
-  setFalse: (bool) => set((bool) => ({ bool: false })),
-  setTrue: (bool) => set((bool) => ({ bool: true })),
+  setBoolean: () => set((state) => ({ bool: !state.bool })),
+  setFalse: () => set((bool) => ({ bool: false })),
+  setTrue: () => set((bool) => ({ bool: true })),
 }));
 
 export const useCardStore = useStore;

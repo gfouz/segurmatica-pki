@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ValidationRule } from 'react-hook-form';
 import { ResponsiveValue } from '@chakra-ui/react';
 import { useQueryClient } from 'react-query';
@@ -86,6 +87,13 @@ export function infoMessage(err, toast) {
   err.password && toast.warning('Contraseña max 8 min 6!', { ...toastProps });
 }
 
+
+export function setSignature(data, useNavigate) {
+  data && localStorage.setItem('jwt', data.signature);
+  setTimeout(()=> {}, 2000)
+}
+
+
 export const useLocalStorage = (key, defaultValue = null) => {
   const [value, setValue] = React.useState(() => {
     try {
@@ -98,8 +106,7 @@ export const useLocalStorage = (key, defaultValue = null) => {
       return defaultValue;
     }
   });
-
-  React.useEffect(() => {
+React.useEffect(() => {
     const rawValue = JSON.stringify(value);
     localStorage.setItem(key, rawValue);
   }, [value]);

@@ -1,27 +1,15 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import { toast } from 'react-toastify';
-import { text_type, email_type, password_type, useLocalStorage } from './constants';
-import { useNavigate } from 'react-router-dom';
+//import { toast } from 'react-toastify';
+import { email_type } from './constants';
+//import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import PasswordInput from './PasswordInput';
+import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
-  USER,
-  password_input,
-  password_terms,
-  text_input,
-  user_terms,
-  toastProps,
-  infoMessage,
-} from './constants';
-import ChakraInput from '../../components/input/ChakraInput';
-import Eye from '../../icons/Eye';
-import EyeSlash from '../../icons/EyeSlashIcon';
-import Option from '../../components/Option';
-import {
   Box,
-  Flex,
   HStack,
   Button,
   Center,
@@ -30,6 +18,8 @@ import {
   Badge,
   Heading,
   Container,
+  ComponentWithAs,
+  ButtonProps,
 } from '@chakra-ui/react';
 
 const BASE_URL = 'http://localhost:5000/';
@@ -39,7 +29,9 @@ const axiosApi = axios.create({
 });
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-const submitbtn = {
+
+
+const submitbtn: ComponentWithAs<'button', ButtonProps> = {
   m: '2em',
   color: '#222222',
   bg: '#ab8ffe',
@@ -50,16 +42,14 @@ const submitbtn = {
 
 interface IUserCredentials {
   email?: string;
-  password?: string;
+  password: string;
 }
 
 //personalizar los toast.
-
 const Form = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [status, setStatus] = React.useState('');
-  const [token, setToken] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(false);
+  //const [token, setToken] = React.useState('');
   const {
     register,
     handleSubmit,
@@ -69,21 +59,25 @@ const Form = () => {
   async function postRequest(data: IUserCredentials) {
     try {
       const res = await axiosApi.post('login', data);
-      //setStatus(res.status.toString());
+      setStatus(res.data.message);
+      console.log(res.data.message)
       return res.data;
     } catch (err) {
+      console.log(err)
       setStatus(err.response?.data.error);
     }
   }
 
-  const { data, mutation, mutateAsync, isLoading, isError, isSuccess } = useMutation((value) =>
+  const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation((value) =>
     postRequest(value),
   );
-  const onSubmit: SubmitHandler<IFormInput> = (formData: IUserCredentials) => {
+  const onSubmit: SubmitHandler<IUserCredentials> = (formData: IUserCredentials) => {
     mutateAsync(formData);
   };
   data && localStorage.setItem('jwt', data.signature);
 
+  
+  
   return (
     <StyledForm>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,15 +102,7 @@ const Form = () => {
             <label htmlFor='provinces'>
               <strong className='byid-input-label'>Escriba su contraseña.</strong>
             </label>
-            <Input
-              {...register('password', { required: true })}
-              size='sm'
-              type={showPassword ? 'text' : 'password'}
-              variant='flushed'
-            />
-            <button onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <Eye /> : <EyeSlash />}
-            </button>
+            <PasswordInput label='password' register={register} required />
           </Container>
         </HStack>
         {errors.password && <span style={{ color: 'red', margin: '2em' }}>Field is required</span>}
@@ -147,11 +133,7 @@ const Form = () => {
           </span>
         </Box>
       </form>
-      {status === 'not-found' && (
-        <Heading color='#ff0000' size='sm' m='2em'>
-          Datos enviados pero no existen.
-        </Heading>
-      )}
+       {status && <StatusHandler message={status} />}
     </StyledForm>
   );
 };
@@ -161,3 +143,28 @@ const StyledForm = styled.div`
   border: 1px solid #cccccc;
   border-radius: 15px;
 `;
+
+
+/*
+
+200
+OK
+201
+Created
+202
+Accepted
+302
+Found
+400
+Bad Request
+401
+Unauthorized
+404
+Not Found
+511
+Network Authentication Required
+
+*/
+
+
+

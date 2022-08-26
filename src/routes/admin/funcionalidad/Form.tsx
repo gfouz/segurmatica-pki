@@ -17,15 +17,15 @@ export default function Form() {
         <div>
           {option == 'mostrar' && (
             <>
-              <Getter url='provincias' keys='rols' />
+              <Getter url='funcionalidades' keys='functs' />
             </>
           )}
         </div>
         {option == 'buscar' && (
           <>
             <GetById
-              url='provincias'
-              label='Buscar rol por ID.
+              url='funcionalidades'
+              label='Buscar por ID.
                  '
             />
           </>
@@ -33,9 +33,9 @@ export default function Form() {
         {option == 'habilitados' && (
           <>
             <GetEnabled
-              keys='provincias-enabled'
-              url='provincias/enabled'
-              label='Buscar una provincia por ID.
+              keys='funcionalidades-enabled'
+              url='funcionalidades/enabled'
+              label='Buscar habilitados.
                  '
             />
           </>
@@ -43,16 +43,16 @@ export default function Form() {
 
         {option == 'crear' && (
           <>
-            <Creator labelForName='Añadir nombre de provincia' />
+            <Creator labelForName='Añadir una funcionalidad' />
           </>
         )}
 
         {option == 'actualizar' && (
           <>
             <Updater
-              url='provincias'
-              labelForId='Id de la provincia'
-              labelForName='Escriba nombre de provincia'
+              url='funcionalidades'
+              labelForId='funcionalidad por id'
+              labelForName='nombre de funcionalidad'
             />
           </>
         )}
