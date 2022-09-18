@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Input } from '@chakra-ui/react';
 import Eye from '../../icons/Eye';
 import EyeSlash from '../../icons/EyeSlashIcon';
-import { Path, UseFormRegister } from "react-hook-form";
+import { Path, UseFormRegister } from 'react-hook-form';
 
 interface IFormValues {
-  'password': string;
+  password: string;
 }
 
 type InputProps = {
@@ -19,12 +19,13 @@ const PasswordInput = ({ label, register, required }: InputProps) => {
 
   return (
     <>
-      <Input {...register(label, { required })}
+      <Input
+        {...register(label, { required })}
         size='sm'
         type={showPassword ? 'text' : 'password'}
         variant='flushed'
       />
-      <div style={{margin:'1em 0'}} onClick={toggle}>
+      <div style={{ margin: '1em 0' }} onClick={toggle}>
         {showPassword ? <Eye /> : <EyeSlash />}
       </div>
     </>

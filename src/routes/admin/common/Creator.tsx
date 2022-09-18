@@ -1,33 +1,15 @@
 import * as React from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { HStack, Button, Spinner, Input, Container, Badge } from '@chakra-ui/react';
-import { IDS, provinces, tooltip, number_type, text_type } from './cardStore';
+import { HStack, Input, Container } from '@chakra-ui/react';
+import { provinces, tooltip, text_type } from './cardStore';
 import SuggestedList from './Tooltip';
+import { postRequest, IFormInput } from './constants';
+import SubmitButton from '../common/SubmitButton';
 
-interface IFormInput {
-  name: string;
-}
-const submitbtn = {
-  color: '#222222',
-  m: '2em',
-  bg: '#ab8ffe',
-  border: '1px solid #ab8ffe',
-  size: 'md',
-  type: 'submit',
-};
-
-const BASE_URL = 'http://localhost:5000/';
-const axiosApi = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: false,
-});
-axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
-
-function Creator(props) {
+function Creator(props: { url: string; }) {
+  const { url } = props;
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -35,22 +17,15 @@ function Creator(props) {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  async function postRequest(data: IFormInput) {
-    try {
-      const res = await axiosApi.post(props.url, data);
-      setStatus(res.data.message);
-      return res.data;
-    } catch (err) {
-      setStatus(err.response?.data.error);
-    }
-  }
-
-  const addProvince = useMutation(postRequest);
-
+  const response = useMutation((data: IFormInput) => postRequest(url, data));
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    data && addProvince.mutateAsync(data);
-
+    response.mutateAsync(data);
   };
+  const message = response?.data?.message;
+
+  React.useEffect(() => {
+    message && setStatus(message);
+  }, [message]);
 
   return (
     <>
@@ -58,42 +33,15 @@ function Creator(props) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForName}</strong>
+              <strong className='byid-input-label'>Escriba nombre</strong>
             </label>
             <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='provincias'
-                {...register('name', { required: true })}
-                {...text_type}
-              />
+              <Input list='provincias' {...register('name', { required: true })} {...text_type} />
             </SuggestedList>
             {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
-
-        <Button {...submitbtn}>
-          {addProvince.isLoading ? (
-            <div>
-              <Spinner size='sm' />
-              <Badge>trying...</Badge>
-            </div>
-          ) : (
-            <span>Enviar</span>
-          )}
-        </Button>
-        <span>
-          {addProvince.isSuccess && (
-            <Badge p='5px' colorScheme='green'>
-              Enviado con éxito!
-            </Badge>
-          )}
-          {addProvince.isError && (
-            <Badge p='5px' colorScheme='red'>
-              Error de red!
-            </Badge>
-          )}
-        </span>
+        <SubmitButton buttonstate={response?.isLoading} />
         {status && <StatusHandler message={status} />}
       </form>
     </>

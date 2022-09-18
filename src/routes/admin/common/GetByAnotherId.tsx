@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import ChakraInput from '../../../components/input/ChakraInput';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { IDS, provinces, tooltip, text_type } from './cardStore';
+import { IDS, text_type, tooltip } from './cardStore';
 import SuggestedList from './Tooltip';
-import {
-  Box,
-  Flex,
-  HStack,
-  Button,
-  Center,
-  Spinner,
-  Input,
-  Heading,
-  Container,
-} from '@chakra-ui/react';
+import { HStack, Button, Spinner, Input, Container } from '@chakra-ui/react';
 
 const submitbtn = {
   color: '#222222',
@@ -32,13 +21,11 @@ interface IFormInput {
   name?: string;
 }
 
-export type IProvince = {
-  id: string;
+interface IProps {
+  url: string;
   name: string;
-  enabled: boolean;
-};
-interface IProvinceList {
-  data: IProvince[];
+  email: string;
+  password: string;
 }
 const BASE_URL = 'http://localhost:5000';
 
@@ -49,8 +36,8 @@ export const axiosApi = axios.create({
 
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-export default function GetById(props) {
-  const { url, labelForId, name, email, password } = props;
+export default function GetById(props: IProps) {
+  const { url, name, email, password } = props;
   const {
     register,
     handleSubmit,
@@ -58,10 +45,6 @@ export default function GetById(props) {
   } = useForm<IFormInput>();
 
   const [id, setId] = useState('');
-
-  const format = (res) => {
-    return JSON.stringify(res, null, 2);
-  };
 
   async function getRequest() {
     if (id) {
@@ -100,19 +83,18 @@ export default function GetById(props) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForId}</strong>
+              <strong className='byid-input-label'>Escriba nombre</strong>
             </label>
             <SuggestedList datalist={IDS} listname='provincias' message={tooltip.provincia}>
               <Input
                 color='#ffffff'
                 list='provincias'
-                message={tooltip.province}
                 {...register('id', { required: true })}
                 onChange={(evt) => setId(evt.target.value)}
                 {...text_type}
               />
             </SuggestedList>
-            <Button {...submitbtn}>Enviar</Button>
+            <Button>Enviar</Button>
           </Container>
         </HStack>
         {errors.id && <span style={{ color: 'red' }}>Field is required</span>}

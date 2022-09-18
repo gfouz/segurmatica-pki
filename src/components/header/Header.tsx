@@ -2,15 +2,8 @@ import * as React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { StyledHeader, HeaderProps } from './Header.styles';
 import Home from '../../icons/Home';
-import SpyGlass from '../../icons/SpyGlass';
-import Telegram from '../../icons/Telegram';
-import Whatsapp from '../../icons/Whatsapp';
-import Envelope from '../../icons/Envelope';
-import GitAlt from '../../icons/GitAlt';
 import FileSearch from '../../icons/FileSearch';
 import Services from '../../icons/Services';
-import Download from '../../icons/Download';
-import FormText from '../../icons/FormText';
 
 function Header(props: HeaderProps) {
   interface IRouterPath {
@@ -23,10 +16,10 @@ function Header(props: HeaderProps) {
       path: '/',
       icon: <Home />,
     },
-    {
-      path: '/generacion',
-      icon: <FormText />,
-    },
+    // {
+    //   path: '/generacion',
+    //   icon: <FormText />,
+    // },
     {
       path: '/admin',
       icon: <Services />,

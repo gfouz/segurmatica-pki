@@ -31,4 +31,6 @@ code {
 
 .help___me {
   list-style-type: none;
+  pointer-events: none;
+  white-space: nowrap;
 }

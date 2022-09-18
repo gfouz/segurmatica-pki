@@ -1,18 +1,21 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import Services from './icons/Services';
 import Download from './icons/Download';
 import FormText from './icons/FormText';
-import { useCardStore, useBooleanStore } from './cardStore';
 import { StyledNavbar, HeaderProps, IOptions } from './Navbar.styles';
+import { useSnapshot } from 'valtio';
+import { state, switcher } from './store';
 
 function Navbar(props: HeaderProps) {
-  const setBoolean = useBooleanStore((state) => state.setBoolean);
-
-  const toggle = useCardStore((state) => state.setOption);
+  const snap = useSnapshot(state);
+  const snap2 = useSnapshot(switcher);
+  const { setOption } = snap;
+  const { reverse } = snap2;
 
   const options: IOptions[] = [
     {
-      option: 'crear',
+      option: 'añadir',
       icon: <Services />,
     },
     {
@@ -24,11 +27,11 @@ function Navbar(props: HeaderProps) {
       icon: <FormText />,
     },
     {
-      option: 'buscar por',
+      option: 'asociado',
       icon: <FormText />,
     },
     {
-      option: 'actualizar',
+      option: 'asociado habilitado',
       icon: <FormText />,
     },
     {
@@ -41,18 +44,18 @@ function Navbar(props: HeaderProps) {
     <>
       <StyledNavbar {...props}>
         <div className='nav'>
-          {options.map((item) => (
-            <div className='nav__item' key={item.option}>
+          {options.map((item, index) => (
+            <div className='nav__item' key={index}>
               <div className='nav__icon'>{item.icon}</div>
-              <div className='nav__link'>
+              <div>
                 <button
                   className='nav__button'
                   onClick={() => {
-                    toggle(item.option);
-                    setBoolean();
+                    setOption(item.option);
+                    reverse();
                   }}
                 >
-                  {item.option}
+                  <a className='nav__link'>{item.option}</a>
                 </button>
               </div>
             </div>

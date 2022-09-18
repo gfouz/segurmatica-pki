@@ -1,21 +1,32 @@
 import React, { lazy } from 'react';
 const Homepage = lazy(() => import('./homepage/index'));
-const Generation = lazy(() => import('./generacion/index'));
+//const Generation = lazy(() => import('./generacion/index'));
 const Admin = lazy(() => import('./admin/index'));
 const Login = lazy(() => import('./userlogin/index'));
 const RolAdmin = lazy(() => import('./admin/rol/index'));
 const UserAdmin = lazy(() => import('./admin/usuario/index'));
+const TarifaAdmin = lazy(() => import('./admin/tarifa/index'));
+const FinalidadAdmin = lazy(() => import('./admin/finalidad/index'));
 const ProvinceAdmin = lazy(() => import('./admin/provincia/index'));
+const CouncilAdmin = lazy(() => import('./admin/municipio/index'));
+const EstadosAdmin = lazy(() => import('./admin/estados/index'));
+const OrganismAdmin = lazy(() => import('./admin/organismos/index'));
+const PropositosAdmin = lazy(() => import('./admin/propositos/index'));
+const FunctionalityAdmin = lazy(() => import('./admin/funcionalidad/index'));
+const EmpresaInstAdmin = lazy(() => import('./admin/empresasInstituciones/index'));
+const LoggerAdmin = lazy(() => import('./admin/funcionarioRegistro/index'));
+const TermsAdmin = lazy(() => import('./admin/condiciones/index'));
+const AgentAdmin = lazy(() => import('./admin/representante/index'));
 
 export default [
   {
     path: '/',
     element: <Homepage />,
   },
-  {
-    path: '/generacion',
-    element: <Generation />,
-  },
+  // {
+  //   path: '/generacion',
+  //   element: <Generation />,
+  // },
   {
     path: '/admin',
     element: <Admin />,
@@ -35,5 +46,49 @@ export default [
   {
     path: '/users',
     element: <UserAdmin />,
+  },
+  {
+    path: '/municipios',
+    element: <CouncilAdmin />,
+  },
+  {
+    path: '/funcionalidades',
+    element: <FunctionalityAdmin />,
+  },
+  {
+    path: '/organismos',
+    element: <OrganismAdmin />,
+  },
+  {
+    path: '/finalidades',
+    element: <FinalidadAdmin />,
+  },
+  {
+    path: '/tarifas',
+    element: <TarifaAdmin />,
+  },
+  {
+    path: '/estados',
+    element: <EstadosAdmin />,
+  },
+  {
+    path: '/propositos',
+    element: <PropositosAdmin />,
+  },
+  {
+    path: '/empresasInstituciones',
+    element: <EmpresaInstAdmin />,
+  },
+  {
+    path: '/funcionarioregistro',
+    element: <LoggerAdmin />,
+  },
+  {
+    path: '/condiciones',
+    element: <TermsAdmin />,
+  },
+  {
+    path: '/representante',
+    element: <AgentAdmin />,
   },
 ];

@@ -1,13 +1,25 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import CaretLeft from '../../../icons/CaretLeft';
 
-function Dashboard(props) {
+interface IProps {
+  children: React.ReactNode;
+}
+
+function Dashboard({ children }: IProps) {
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate(-1);
+  }
   return (
     <StyledDashboard>
       <header>
-        <h1 className='dashboard__title'>Panel General de Administración.</h1>
+        <div className='backwards' onClick={handleClick}>
+          <CaretLeft /> <span>REGRESAR</span>
+        </div>
       </header>
-      <main>{props.children}</main>
+      <main>{children}</main>
       <footer>Segurmática</footer>
     </StyledDashboard>
   );
@@ -33,7 +45,6 @@ const StyledDashboard = styled.div`
     color: #372381;
     font-weight: bolder;
     line-height: 60px;
-    background-color: #ab8ffe;
   }
   main {
     grid-area: main;
@@ -48,4 +59,21 @@ const StyledDashboard = styled.div`
     line-height: 60px;
     font-weight: bolder;
   }
+
+  .backwards {
+    position: fixed;
+    top: -1em;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #000000;
+    margin: 1em;
+    span {
+      position: relative;
+      left: 1rem;
+      color: #000000;
+    }
+  }
 `;
+
+//#ab8ffe violet

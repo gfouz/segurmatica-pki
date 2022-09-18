@@ -1,7 +1,14 @@
 import React from 'react';
-import { Input, Tooltip } from '@chakra-ui/react';
+import { Tooltip } from '@chakra-ui/react';
 
-function SuggestedList(props) {
+interface IProps {
+  listname: string;
+  datalist: string[];
+  message: string;
+  children: React.ReactNode;
+}
+
+function SuggestedList(props: IProps) {
   return (
     <>
       <datalist id={props.listname}>

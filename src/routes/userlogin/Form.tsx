@@ -8,18 +8,14 @@ import styled from 'styled-components';
 import PasswordInput from './PasswordInput';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import SubmitButton from './SubmitButton';
+
 import {
-  Box,
   HStack,
-  Button,
   Center,
   Input,
-  Spinner,
-  Badge,
   Heading,
-  Container,
-  ComponentWithAs,
-  ButtonProps,
+  Container
 } from '@chakra-ui/react';
 
 const BASE_URL = 'http://localhost:5000/';
@@ -30,15 +26,6 @@ const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 
-
-const submitbtn: ComponentWithAs<'button', ButtonProps> = {
-  m: '2em',
-  color: '#222222',
-  bg: '#ab8ffe',
-  border: '1px solid #ab8ffe',
-  size: 'md',
-  type: 'submit',
-};
 
 interface IUserCredentials {
   email?: string;
@@ -56,28 +43,35 @@ const Form = () => {
     formState: { errors },
   } = useForm<IUserCredentials>();
 
-  async function postRequest(data: IUserCredentials) {
+  async function postRequest(formdata: IUserCredentials): Promise<IUserCredentials | any> {
     try {
-      const res = await axiosApi.post('login', data);
-      setStatus(res.data.message);
-      console.log(res.data.message)
+      const res = await axiosApi.post('login', formdata);
+      setStatus(res.data?.message);
+      //console.log(res.data?.message);
       return res.data;
-    } catch (err) {
-      console.log(err)
-      setStatus(err.response?.data.error);
+    } catch (error: any) {
+      //console.log(error);
+      return error?.message
     }
   }
 
-  const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation((value) =>
+  const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation((value: IUserCredentials) =>
     postRequest(value),
   );
   const onSubmit: SubmitHandler<IUserCredentials> = (formData: IUserCredentials) => {
     mutateAsync(formData);
   };
-  data && localStorage.setItem('jwt', data.signature);
 
+  React.useEffect(()=>{
+    setStatus(data)
+  }, [data])
   
+  React.useEffect(()=>{
+    data?.jwt && localStorage.setItem('jwt', data?.jwt);
+  }, [data?.jwt])
   
+  //data?.jwt && localStorage.setItem('jwt', data?.jwt);
+
   return (
     <StyledForm>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -106,34 +100,9 @@ const Form = () => {
           </Container>
         </HStack>
         {errors.password && <span style={{ color: 'red', margin: '2em' }}>Field is required</span>}
-        <Box p='2em 0.7em' w='100%'>
-          <Button {...submitbtn}>
-            {isLoading ? (
-              <div>
-                <Spinner size='sm' />
-                <Badge>trying...</Badge>
-              </div>
-            ) : (
-              <span>Enviar</span>
-            )}
-          </Button>
-          <span>
-            {isSuccess ? (
-              <Badge p='5px' colorScheme='green'>
-                Enviado!
-              </Badge>
-            ) : (
-              <span>no enviado</span>
-            )}
-            {isError && (
-              <Badge p='5px' colorScheme='red'>
-                Error de red!
-              </Badge>
-            )}
-          </span>
-        </Box>
+        <SubmitButton buttonstate={isLoading} />
       </form>
-       {status && <StatusHandler message={status} />}
+      {status && <StatusHandler message={status} />}
     </StyledForm>
   );
 };
@@ -143,28 +112,4 @@ const StyledForm = styled.div`
   border: 1px solid #cccccc;
   border-radius: 15px;
 `;
-
-
-/*
-
-200
-OK
-201
-Created
-202
-Accepted
-302
-Found
-400
-Bad Request
-401
-Unauthorized
-404
-Not Found
-511
-Network Authentication Required
-
-*/
-
-
 

@@ -1,29 +1,29 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router';
-import StyledProvince from './Styled.Province';
 import CaretLeft from '../../../icons/CaretLeft';
 import { theme } from '../../constants';
 import ToastVariant from '../../../components/Toast';
 import Dashboard from '../common/Dashboard';
 import Card from '../common/Card';
-import Form from '../common/Form';
+import FormsIterator from '../common/FormsIterator';
+import { FormsList } from './FormList';
+import { axiosApi } from '../common/constants';
 
 function CouncilAdmin() {
-  const navigate = useNavigate();
-  function handleClick() {
-    navigate(-1);
-  }
+  const token = localStorage.getItem('jwt');
+  React.useEffect(() => {
+    if (token) {
+      axiosApi.defaults.headers.common['jwt'] = token;
+    }
+  }, []);
+
   return (
     <>
       <StyledCouncil>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <div className='btn-backwards' onClick={handleClick}>
-            <CaretLeft /> <span>REGRESAR</span>
-          </div>
-          <Card name='rol'>
-            <Form />
+          <Card name='Municipios'>
+            <FormsIterator form={FormsList} />
           </Card>
         </Dashboard>
       </StyledCouncil>

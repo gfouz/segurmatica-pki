@@ -1,49 +1,27 @@
 import * as React from 'react';
-import axios from 'axios';
+import { useSnapshot } from 'valtio';
+import store from './store';
+import { state } from './store';
 import SuggestedList from './Tooltip';
-import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import StatusHandler from './StatusHandler';
 import { useMutation } from 'react-query';
-import {
-  HStack,
-  Button,
-  Spinner,
-  Input,
-  Container,
-  Badge,
-  Switch,
-  FormLabel,
-} from '@chakra-ui/react';
-import { IDS, provinces, tooltip, number_type, text_type } from './cardStore';
+import { putRequestById, text_type, IFormInput } from './constants';
+import { HStack, Input, Heading } from '@chakra-ui/react';
+import { Container, Switch, FormLabel } from '@chakra-ui/react';
+import { provinces, tooltip } from './cardStore';
+import SubmitButton from '../common/SubmitButton';
 
-interface IFormInput {
-  name: string;
-  enabled: boolean;
-}
 interface IProps {
-  labelForId: string;
-  labelForName: string;
+  url: string;
 }
-const submitbtn = {
-  m: '2em',
-  color: '#222222',
-  bg: '#ab8ffe',
-  border: '1px solid #ab8ffe',
-  size: 'md',
-  type: 'submit',
-};
-
-const BASE_URL = 'http://localhost:5000';
-const axiosApi = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: false,
-});
-axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 function Update(props: IProps) {
-  const { url, labelForId, labelForName } = props;
-  const [id, setId] = React.useState('');
+  const snap = useSnapshot(store);
+  const snap2 = useSnapshot(state);
+
+  const { stack } = snap;
+  const { url } = props;
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -51,50 +29,34 @@ function Update(props: IProps) {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  async function putRequest(data: IFormInput) {
-    
-      try {
-        const res = await axiosApi.put(`${url}/${id}`, data);
-        setStatus(data.object.message);
-        return res.data;
-      } catch (err) {
-        setStatus(err.message.toString());
-      }
-  
-  }
+  const response = useMutation((data: any) => putRequestById(data, url, stack.id));
 
-  const updating = useMutation((data) => putRequest(data), { retry: 2 });
-  console.log(updating.data && updating.data.result)
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    data && updating.mutateAsync(data);
+    response.mutateAsync(data);
   };
+  const message = response?.data?.message;
+
+  React.useEffect(() => {
+    message && setStatus(message);
+    message === 'updated' && snap2.setOption('mostrar');
+  }, [message]);
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{labelForId}</strong>
-            </label>
-            <SuggestedList datalist={IDS} listname='ids' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='ids'
-                onChange={(evt) => setId(evt.target.value)}
-                {...text_type}
-              />
-            </SuggestedList>
-          </Container>
+        <HStack p='2em'>
+          <Heading size='md' color='#009966'>
+            {stack.name}
+          </Heading>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{labelForName}</strong>
+              <strong className='byid-input-label'>Actualice nombre</strong>
             </label>
             <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
               <Input
-                color='#ffffff'
+                defaultValue={stack.name}
                 list='provincias'
                 {...register('name', { required: true })}
                 {...text_type}
@@ -104,33 +66,20 @@ function Update(props: IProps) {
           </Container>
         </HStack>
         <HStack>
-          <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
+          <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#333333'>
             Deshabilitar o habilitar
           </FormLabel>
-          <Switch {...register('enabled')} id='enabled' size='sm' colorScheme='red' />
+          <Switch
+            {...register('enabled')}
+            id='enabled'
+            size='sm'
+            colorScheme='red'
+            defaultChecked={stack.enabled}
+          />
         </HStack>
-        <Button {...submitbtn}>
-          {updating.isLoading ? (
-            <div>
-              <Spinner size='sm' />
-              <Badge>trying...</Badge>
-            </div>
-          ) : (
-            <span>Enviar</span>
-          )}
-        </Button>
-        <span>
-          {updating.isSuccess ? (
-            <Badge p='5px' colorScheme='green'>
-              Enviado con éxito!
-            </Badge>
-          ) : null}
-          {updating.isError && (
-            <Badge p='5px' colorScheme='red'>
-              Error de red!
-            </Badge>
-          )}
-        </span>
+
+        <SubmitButton buttonstate={response?.isLoading} />
+
         {status && <StatusHandler message={status} />}
       </form>
     </>

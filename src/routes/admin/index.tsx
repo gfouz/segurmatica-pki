@@ -1,25 +1,19 @@
 import * as React from 'react';
+import { useCardStore } from './common/cardStore';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../layout/Layout';
 import { theme } from '../constants';
 import ToastVariant from '../../components/Toast';
-import {
-  Box,
-  Flex,
-  HStack,
-  Button,
-  Center,
-  Input,
-  Spinner,
-  Badge,
-  Heading,
-  Container,
-} from '@chakra-ui/react';
+import { Input, Spinner, Badge, Heading, Box } from '@chakra-ui/react';
+import { Flex, HStack, Button, Center, Container } from '@chakra-ui/react';
+import { useSnapshot } from 'valtio';
+import { state } from './common/store';
 
 function Admin() {
+  const snap = useSnapshot(state);
+  //const toggle = useCardStore((state) => state.setOption);
   const navigate = useNavigate();
-
   const token = localStorage.getItem('jwt');
 
   /*React.useEffect(() => {
@@ -27,7 +21,6 @@ function Admin() {
       !token && navigate('/login');
     }, 2000);
   });*/
-
 
   return (
     <StyledAdmin>
@@ -40,13 +33,64 @@ function Admin() {
               <Link to='/'>Inicio</Link>
             </li>
             <li className='list__item'>
-              <Link to='/rols'>Administrar rol</Link>
+              <Link to='/rols' onClick={() => snap.setOption('mostrar')}>
+                Administrar rol
+              </Link>
             </li>
             <li className='list__item'>
-              <Link to='/users'>Administrar usuario</Link>
+              <Link to='/users' onClick={() => snap.setOption('mostrar')}>
+                Administrar usuario
+              </Link>
             </li>
             <li className='list__item'>
-              <Link to='/provinces'>Administrar provincias</Link>
+              <Link to='/provinces' onClick={() => snap.setOption('mostrar')}>
+                Administrar provincias
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/tarifas' onClick={() => snap.setOption('mostrar')}>
+                Administrar tarifas
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/organismos' onClick={() => snap.setOption('mostrar')}>
+                Administrar Organismos
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/funcionalidades' onClick={() => snap.setOption('mostrar')}>
+                Administrar Funcionalidad
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/municipios' onClick={() => snap.setOption('mostrar')}>
+                Administrar Municipios
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/estados' onClick={() => snap.setOption('mostrar')}>
+                Administrar Estados
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/empresasInstituciones' onClick={() => snap.setOption('mostrar')}>
+                Admin..Empresas-inst
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/funcionarioregistro' onClick={() => snap.setOption('mostrar')}>
+                Admin..Funcionario de Reg...
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/condiciones' onClick={() => snap.setOption('mostrar')}>
+                Admin...Condiciones
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/representante' onClick={() => snap.setOption('mostrar')}>
+                Admin...representante
+              </Link>
             </li>
           </ul>
         </div>
@@ -60,11 +104,12 @@ export default Admin;
 const StyledAdmin = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-image: url(./images/admin.jpg);
+  background-image: url(./images/planet.jpg);
   background-position: center center;
-  background-repeat:  no-repeat;
+  background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size:  cover;  
+  background-size: cover;
+
   .admin {
     display: flex;
     flex-direction: column;
@@ -73,9 +118,10 @@ const StyledAdmin = styled.div`
   }
   .admin__title {
     margin: 2em 0;
-    color: #5da8cf;
+    color: #ffffff;
     text-transform: uppercase;
     font-size: 1.5em;
+    text-shadow: 5px 5px 10px black;
   }
   .admin__list {
     position: relative;
@@ -84,17 +130,16 @@ const StyledAdmin = styled.div`
     align-items: center;
     justify-content: center;
   }
-  .list {
-  }
+
   .list__item {
     margin: 3em 0;
     list-style-type: none;
     min-width: 250px;
-    background-color: #9da6cb;
+
     a {
-      color: #222222;
+      color: #f1f1f1;
       padding: 1em;
-      background-color: #c1b6d4;
+      background-color: #00000090;
       text-transform: uppercase;
       font-weight: bolder;
       border-radius: 8px;

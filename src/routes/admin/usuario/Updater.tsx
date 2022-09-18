@@ -1,134 +1,115 @@
 import * as React from 'react';
-import axios from 'axios';
+import store from '../common/store';
+import { state } from '../common/store';
+import { useSnapshot } from 'valtio';
+import SelectList from './Select';
 import SuggestedList from './Tooltip';
-import styled from 'styled-components';
+import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import {
-  HStack,
-  Button,
-  Spinner,
-  Input,
-  Container,
-  Badge,
-  Switch,
-  FormLabel,
-} from '@chakra-ui/react';
-import { IDS, provinces, tooltip, number_type, text_type, email_type } from '../common/cardStore';
+import { useMutation, useQuery } from 'react-query';
+import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
+import { Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
+import { HStack, Input } from '@chakra-ui/react';
+import { email_type, password_type } from '../common/cardStore';
+import { IDS, emailtips, tooltip } from '../common/cardStore';
+import SubmitButton from '../common/SubmitButton';
 
-interface IFormInput {
-  name: string;
-  enabled: boolean;
-}
-interface IProps {
-  labelForId: string;
-  labelForName: string;
-}
-const submitbtn = {
-  m: '2em',
-  color: '#222222',
-  bg: '#ab8ffe',
-  border: '1px solid #ab8ffe',
-  size: 'md',
-  type: 'submit',
-};
 
-const BASE_URL = 'http://localhost:5000';
-const axiosApi = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: false,
-});
-axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
-
-function Update(props: IProps) {
+function Update(props: { url: string; queryKey: string; }) {
+  const snap = useSnapshot(store);
+  const snap2 = useSnapshot(state);
+  const { stack } = snap;
+  const { setOption } = snap2;
   const [id, setId] = React.useState('');
   const [status, setStatus] = React.useState('');
+  const [name, setName] = React.useState<string | undefined>('');
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
-  async function putRequest(data: IFormInput) {
-    if (id) {
-      try {
-        const res = await axiosApi.put(`/users/${id}`, data);
-        setStatus(res.status.toString());
-        return res.data;
-      } catch (err) {
-        setStatus(err.message.toString());
-      }
-    }
-  }
+  const path = '/rols/enabled/true';
+  const { data } = useQuery('enabled-rolls', () => getRequestAll(path));
+  const response = useMutation((data: IFormInput) => putRequestById(data, props.url, stack.id), { retry: 2 });
+  const message = response?.data?.message;
 
-  const updating = useMutation((data) => putRequest(data), { retry: 2 });
+  React.useEffect(() => {
+    message && setStatus(message);
+    message === 'updated' && setOption('mostrar');
+    setName(stack.name);
+  }, [message, stack]);
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    data && updating.mutateAsync(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
+    response.mutateAsync(formdata);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba Id de usuario.</strong>
-            </label>
-            <SuggestedList datalist={IDS} listname='ids' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='ids'
-                onChange={(evt) => setId(evt.target.value)}
-                {...number_type}
-              />
-            </SuggestedList>
-          </Container>
+        <HStack>
+          <Heading size='sm' color='#009966' m='1em'>
+            {stack.email}
+          </Heading>
         </HStack>
-        <HStack p='1em'>
+        <HStack>
           <Container>
             <label htmlFor='provinces'>
               <strong className='byid-input-label'>correo electrónico</strong>
             </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
+            <SuggestedList datalist={emailtips} listname='email' message={tooltip.provincia}>
               <Input
-                color='#ffffff'
-                list='provincias'
+                defaultValue={stack.email}
+                list='email'
                 {...register('email', { required: true })}
                 {...email_type}
               />
             </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            {errors.email && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack>
-          <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
-            Deshabilitar o habilitar
-          </FormLabel>
-          <Switch {...register('enabled')} id='enabled' size='sm' colorScheme='red' />
+          <Container>
+            <label htmlFor='password'>
+              <strong className='byid-input-label'>Escriba una contraseña</strong>
+            </label>
+            <SuggestedList datalist={IDS} listname='password' message={tooltip.provincia}>
+              <Input
+                list='password'
+                {...register('password', { required: true })}
+                {...password_type}
+              />
+            </SuggestedList>
+            {errors.password && <span style={{ color: 'red' }}>Field is required</span>}
+          </Container>
         </HStack>
-        <Button {...submitbtn}>
-          {updating.isLoading ? (
-            <div>
-              <Spinner size='sm' />
-              <Badge>trying...</Badge>
-            </div>
-          ) : (
-            <span>Enviar</span>
-          )}
-        </Button>
-        <span>
-          {updating.isSuccess ? (
-            <Badge p='5px' colorScheme='green'>
-              Enviado con éxito!
-            </Badge>
-          ) : null}
-          {updating.isError && (
-            <Badge p='5px' colorScheme='red'>
-              Error de red!
-            </Badge>
-          )}
-        </span>
+        <HStack p='1em'>
+          <Container>
+            <label htmlFor='provinces'>
+              <strong className='byid-input-label'>Seleccione un rol</strong>
+            </label>
+
+            <SelectList list={data?.result} label='rolid' register={register} required />
+
+            {errors.rolid && <span style={{ color: 'red' }}>Field is required</span>}
+          </Container>
+        </HStack>
+        <HStack>
+          <HStack m='2em 0'>
+            <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
+              Deshabilitar o habilitar
+            </FormLabel>
+            <Switch
+              defaultChecked={stack.enabled}
+              {...register('enabled')}
+              id='enabled'
+              size='sm'
+              colorScheme='red'
+            />
+          </HStack>
+        </HStack>
+        <SubmitButton buttonstate={response?.isLoading} />
+        {status && <StatusHandler message={status} />}
       </form>
     </>
   );

@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface IProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
+interface IButton {
+  st: boolean;
+  reverse: () => boolean;
 }
 
-const Button = ({ open, setOpen }: IProps) => {
+const Button = ({ st, reverse }: IButton) => {
   return (
-    <StyledButton open={open}>
-      <button onClick={() => setOpen(!open)}>
-        <div></div>
-        <div></div>
-        <div></div>
+    <StyledButton>
+      <button onClick={() => reverse()}>
+        <div className={st ? 'opened' : 'closed'}></div>
+        <div className={st ? 'opened' : 'closed'}></div>
+        <div className={st ? 'opened' : 'closed'}></div>
       </button>
     </StyledButton>
   );
@@ -24,44 +24,70 @@ const StyledButton = styled.div`
     position: absolute;
     right: 0;
     top: 0;
-    padding: 0;
+    padding: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    width: 1rem;
-    height: 1rem;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    width: 200px;
+    height: 40px;
     background-color: transparent;
-    border: none;
     cursor: pointer;
     z-index: 10;
-    margin: 1em;
+
     &:focus {
       outline: none;
     }
   }
-  div {
+  .opened {
     width: 1.5rem;
     height: 0.2rem;
-    background: ${({ open }) => (open ? 'orange' : 'white')};
+    background: #009966;
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
     left: -15px;
     top: 10px;
 
-    transform-origin: 4.2px;
+    transform-origin: 0;
 
     :first-child {
-      transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
+      transform: rotate(45deg);
     }
 
     :nth-child(2) {
-      opacity: ${({ open }) => (open ? '0' : '1')};
-      transform: ${({ open }) => (open ? 'translateX(20px)' : 'translateX(0)')};
+      opacity: 0;
+      transform: translateX(20px);
     }
 
     :nth-child(3) {
-      transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
+      transform: rotate(-45deg);
+    }
+  }
+
+  .closed {
+    width: 1.5rem;
+    height: 0.2rem;
+    background: #ffffff;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    left: -15px;
+    top: 10px;
+
+    transform-origin: 0;
+
+    :first-child {
+      transform: rotate(0);
+    }
+
+    :nth-child(2) {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    :nth-child(3) {
+      transform: rotate(0);
     }
   }
 `;

@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export interface IOptions {
   option: string;
-  action: () => void;
   icon: React.ReactNode;
 }
 
@@ -16,9 +15,9 @@ export interface HeaderProps {
   margin?: string;
   padding?: string;
   column?: boolean;
-  set: () => void;
-  get: () => void;
-  getById: () => void;
+  set?: () => void;
+  get?: () => void;
+  getById?: () => void;
 }
 
 export const StyledNavbar = styled.div`
@@ -26,6 +25,7 @@ export const StyledNavbar = styled.div`
   background-color: ${(props: HeaderProps) => props.bg};
   margin: ${(props: HeaderProps) => props.margin};
   padding: ${(props: HeaderProps) => props.padding || '1em 0'};
+
   .nav {
     width: 100%;
     display: flex;
@@ -45,16 +45,18 @@ export const StyledNavbar = styled.div`
       top: 2px;
       margin: 0 0.5em 0 0;
     }
+
     .nav__link {
       color: #222222;
       font-weight: bolder;
       font-size: 0.8em;
       text-transform: uppercase;
     }
-    .nav__link--bolder {
-      color: #dc143c;
+    .nav__link:hover {
+      color: green;
     }
   }
+
   .nav__button {
     color: #555555;
     text-transform: uppercase;
@@ -70,6 +72,7 @@ export const StyledNavbar = styled.div`
   .visible {
     font-family: inherit;
   }
+
   ${(props: HeaderProps) =>
     props.mixed &&
     css`

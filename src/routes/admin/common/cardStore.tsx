@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveValue } from '@chakra-ui/react';
+
 import create from 'zustand';
 
 const useStore = create((set) => ({
@@ -7,17 +8,10 @@ const useStore = create((set) => ({
   setOption: (option: string) => set(() => ({ option })),
 }));
 
-export const useBooleanStore = create((set) => ({
-  bool: false,
-  setBoolean: () => set((state) => ({ bool: !state.bool })),
-  setFalse: () => set((bool) => ({ bool: false })),
-  setTrue: () => set((bool) => ({ bool: true })),
-}));
-
 export const useCardStore = useStore;
 
 //Data list for input component autocomplete.
-export const provinces = [
+export const provinces: string[] = [
   'Pinar del Río',
   'Habana',
   'Matanzas',
@@ -30,7 +24,14 @@ export const provinces = [
   'Santiago',
   'Guantanamo',
 ];
-export const IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '123456789'];
+export const IDS: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '123456789'];
+export const emailtips: string[] = [
+  'a@gmail.com',
+  'b@gmail.com',
+  'c@gmail.com',
+  'd@gmail.com',
+  'e@gmail.com',
+];
 
 interface ITooltip {
   ci: string;
@@ -87,7 +88,6 @@ export const useLocalStorage = (key: string, defaultValue = null) => {
       return defaultValue;
     }
   });
-
   useEffect(() => {
     const rawValue = JSON.stringify(value);
     localStorage.setItem(key, rawValue);

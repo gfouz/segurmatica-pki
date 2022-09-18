@@ -69,6 +69,7 @@ interface IToastProps {
   pauseOnHover: boolean;
   draggable: boolean;
   progress: undefined;
+  toastId: number;
 }
 
 export const toastProps: IToastProps = {
@@ -82,34 +83,13 @@ export const toastProps: IToastProps = {
   toastId: 1,
 };
 
-export function infoMessage(err, toast) {
+/*export function infoMessage(err, toast) {
   err.user && toast.warning('Usuario requerido!', { ...toastProps });
   err.password && toast.warning('Contraseña max 8 min 6!', { ...toastProps });
 }
 
-
 export function setSignature(data, useNavigate) {
   data && localStorage.setItem('jwt', data.signature);
-  setTimeout(()=> {}, 2000)
-}
+  setTimeout(() => {}, 2000);
+}*/
 
-
-export const useLocalStorage = (key, defaultValue = null) => {
-  const [value, setValue] = React.useState(() => {
-    try {
-      const saved = localStorage.getItem(key);
-      if (saved !== null) {
-        return JSON.parse(saved);
-      }
-      return defaultValue;
-    } catch {
-      return defaultValue;
-    }
-  });
-React.useEffect(() => {
-    const rawValue = JSON.stringify(value);
-    localStorage.setItem(key, rawValue);
-  }, [value]);
-
-  return [value, setValue];
-};
