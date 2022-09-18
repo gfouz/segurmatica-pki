@@ -2,7 +2,7 @@
   "name": "segurmatica-pki",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://gfouz.github.io/segurmatica-frontend-client",
+  "homepage": "https://gfouz.github.io/segurmatica-pki",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
