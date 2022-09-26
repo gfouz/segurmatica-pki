@@ -36,4 +36,8 @@ export const FormsList: IFormList[] = [
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO ESTA DISPONIBLE!</Heading>,
   },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO ESTA DISPONIBLE!</Heading>,
+  },
 ];

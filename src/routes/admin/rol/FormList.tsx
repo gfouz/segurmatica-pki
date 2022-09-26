@@ -25,12 +25,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'habilitados',
-    comp: (
-      <GetEnabled
-        queryKey='rolsenabled'
-        url='rols/enabled/true'
-      />
-    ),
+    comp: <GetEnabled queryKey='rolsenabled' url='rols/enabled/true' />,
   },
   {
     option: 'actualizar',
@@ -43,5 +38,9 @@ export const FormsList: IOptions[] = [
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
+  },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
   },
 ];

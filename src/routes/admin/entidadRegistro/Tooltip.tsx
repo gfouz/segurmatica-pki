@@ -1,7 +1,28 @@
 import React from 'react';
 import { Tooltip } from '@chakra-ui/react';
 
-function SuggestedList(props: { listname: string | undefined; datalist: string[]; message: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; children: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) {
+function SuggestedList(props: {
+  listname: string | undefined;
+  datalist: string[];
+  message:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactFragment
+    | React.ReactPortal
+    | null
+    | undefined;
+  children:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactFragment
+    | React.ReactPortal
+    | null
+    | undefined;
+}) {
   return (
     <>
       <datalist id={props.listname}>

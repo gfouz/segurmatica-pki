@@ -22,12 +22,12 @@ function SelectList(props: InputProps) {
         color='#000000'
         onChange={onChange}
       >
-        {list &&
+        {Array.isArray(list) &&
           list.map((item, key) => {
             const keys = Object.keys(item);
             return (
               <option key={key} value={item.id}>
-                {item.email || item.name}
+                {(item.email && item.email) || (item.name && item.name)}
               </option>
             );
           })}

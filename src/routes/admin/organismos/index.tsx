@@ -8,7 +8,6 @@ import FormsIterator from '../common/FormsIterator';
 import { FormsList } from './FormList';
 import { axiosApi } from '../common/constants';
 
-
 function OrganismAdmin() {
   const token = localStorage.getItem('jwt');
   React.useEffect(() => {

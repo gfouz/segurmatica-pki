@@ -1,15 +1,20 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { empresas, tip } from './constants';
+import { info } from './constants';
 import { getRequestEnabled, postRequest, text_type, IFormInput } from '../common/constants';
-import SuggestedWords from './SuggestedWords';
+import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
+import TextInput from '../common/TextInput';
 import SelectList from './Select';
+import ErrorWarning from '../common/ErrorWarning';
 
 function Creator(props: { url: string }) {
+
+
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -34,31 +39,26 @@ function Creator(props: { url: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Nombre de empresa o instit..</strong>
-            </label>
-            <SuggestedWords datalist={empresas} listname='empresas' message={tip.name}>
-              <Input list='provincias' {...register('name', { required: true })} {...text_type} />
-            </SuggestedWords>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            <StyledLabel>Nombre de empresa o instit...</StyledLabel>
+            <TextInput label='name' register={register} errors={errors} required info={info.name}/>
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong>seleccione organismo</strong>
-            </label>
+
+              <StyledLabel>seleccione organismo</StyledLabel>
+            
             <SelectList list={org?.result} label='organismoId' register={register} required />
-            {errors.erId && <span style={{ color: 'red' }}>Field is required</span>}
+            <ErrorWarning label='organismoId' errors={errors}  info={info.select}/>
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong>seleccione municipio</strong>
-            </label>
+            
+             <StyledLabel>seleccione municipio</StyledLabel>
+            
             <SelectList list={mun?.result} label='municipioId' register={register} required />
-            {errors.erId && <span style={{ color: 'red' }}>Field is required</span>}
+            <ErrorWarning label='municipioId' errors={errors}  info={info.select}/>
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />
@@ -69,3 +69,9 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
+
+const StyledLabel = styled.h4`
+  color: #888888;
+  font-weight: bolder;
+`;
+

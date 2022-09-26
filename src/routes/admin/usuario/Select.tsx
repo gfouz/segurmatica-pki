@@ -11,7 +11,6 @@ type IProps = {
   onChange?: React.ReactEventHandler;
 };
 
-
 function SelectList({ list, register, label, required }: IProps) {
   return (
     <>

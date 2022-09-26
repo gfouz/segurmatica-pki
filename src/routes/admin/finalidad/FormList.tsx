@@ -35,4 +35,8 @@ export const FormsList: IOptions[] = [
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
   },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
+  },
 ];

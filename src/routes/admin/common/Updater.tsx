@@ -1,8 +1,8 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { useSnapshot } from 'valtio';
 import store from './store';
 import { state } from './store';
-import SuggestedList from './Tooltip';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import StatusHandler from './StatusHandler';
 import { useMutation } from 'react-query';
@@ -10,18 +10,22 @@ import { putRequestById, text_type, IFormInput } from './constants';
 import { HStack, Input, Heading } from '@chakra-ui/react';
 import { Container, Switch, FormLabel } from '@chakra-ui/react';
 import { provinces, tooltip } from './cardStore';
+import TextInput from './TextInput';
 import SubmitButton from '../common/SubmitButton';
 
 interface IProps {
   url: string;
+  msg?: string;
 }
 
 function Update(props: IProps) {
+
+  const info = 'se permiten nombres compuestos sin números';
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
 
   const { stack } = snap;
-  const { url } = props;
+  const { url, msg } = props;
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -51,18 +55,16 @@ function Update(props: IProps) {
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Actualice nombre</strong>
-            </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
+            <StyledLabel>Actualice nombre</StyledLabel>
+              <TextInput
+                info={info}
+                required
+                label='name'
+                errors={errors}
+                register={register}
                 defaultValue={stack.name}
-                list='provincias'
-                {...register('name', { required: true })}
-                {...text_type}
               />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+          
           </Container>
         </HStack>
         <HStack>
@@ -87,3 +89,8 @@ function Update(props: IProps) {
 }
 
 export default Update;
+
+const StyledLabel = styled.h4`
+  color: #888888;
+  font-weight: bolder;
+`;

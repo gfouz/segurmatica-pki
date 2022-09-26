@@ -4,12 +4,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useSnapshot } from 'valtio';
 import store from '../common/store';
-import SuggestedList from './Tooltip';
 import StatusHandler from '../common/StatusHandler';
 import SelectList from './Select';
 import { getRequestAll, putRequestById, councils } from './constants';
 import { tip } from './constants';
-import { text_type } from '../common/constants';
+import TextInput from '../common/TextInput';
 import { HStack, Flex, Input } from '@chakra-ui/react';
 import { VStack, Switch, Heading, FormLabel } from '@chakra-ui/react';
 import SubmitButton from '../common/SubmitButton';
@@ -39,7 +38,7 @@ function Update(props: { url: string }) {
   }, [message]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
-    formdata && response.mutateAsync(formdata);
+    response.mutateAsync(formdata);
   };
 
   return (
@@ -52,18 +51,11 @@ function Update(props: { url: string }) {
         </VStack>
         <VStack align='left'>
           <FormLabel size='sm' color='#333333'>
-            Actulice nombre
+            Nombre de municipio
           </FormLabel>
-
-          <SuggestedList datalist={councils} listname='rolid' message={tip.name}>
-            <Input
-              list='rolid'
-              {...register('name', { required: true })}
-              {...text_type}
-              defaultValue={stack.name}
-            />
-          </SuggestedList>
-          {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+          
+            <TextInput label='name' register={register} errors={errors} required />
+          
         </VStack>
 
         <VStack align='left'>

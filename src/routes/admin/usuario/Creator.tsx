@@ -4,12 +4,12 @@ import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { provinces, tooltip } from '../common/cardStore';
-import { password_type, email_type } from '../common/cardStore';
-import SuggestedList from '../common/Tooltip';
+import { tip } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SelectList from './Select';
 import SubmitButton from '../common/SubmitButton';
+import PasswordInput from '../common/PasswordInput';
+import EmailInput from './EmailInput';
 
 
 const BASE_URL = 'http://localhost:5000';
@@ -19,7 +19,7 @@ const axiosApi = axios.create({
 });
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-function Creator(props: { path: string; }) {
+function Creator(props: { path: string }) {
   const { path } = props;
   const [status, setStatus] = React.useState('');
   const [list, setList] = React.useState([]);
@@ -35,7 +35,6 @@ function Creator(props: { path: string; }) {
   const response = useMutation((user: IFormInput) => postRequest(path, user));
   const message = response?.data?.message;
 
-
   React.useEffect(() => {
     setStatus(message);
   }, [message]);
@@ -50,46 +49,32 @@ function Creator(props: { path: string; }) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba Email</strong>
+              <strong className='byid-input-label'>Su email</strong>
             </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
-                color='#666666'
-                fontWeight='bolder'
-                list='provincias'
-                {...register('email', { required: true })}
-                {...email_type}
-              />
-            </SuggestedList>
-            {errors.email && <span style={{ color: 'red' }}>Field is required</span>}
+          
+              <EmailInput  register={register} errors={errors}  />
+            
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba contraseña</strong>
+              <strong className='input-label'>Su contraseña</strong>
             </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
-                color='#666666'
-                fontWeight='bolder'
-                list='provincias'
-                {...register('password', { required: true })}
-                {...password_type}
-              />
-            </SuggestedList>
-            {errors.password && <span style={{ color: 'red' }}>Field is required</span>}
+            
+              <PasswordInput label='password' register={register} errors={errors} required />
+        
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Seleccione un rol</strong>
+              <strong className='input-label'>Seleccione rol de usuario</strong>
             </label>
 
-            <SelectList list={data?.result} label='rolid' register={register} required />
+            <SelectList list={data?.result} label='rolId' register={register} required />
 
-            {errors.rolid && <span style={{ color: 'red' }}>Field is required</span>}
+            {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />

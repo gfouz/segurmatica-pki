@@ -5,9 +5,11 @@ import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
 import { provinces, tooltip } from '../common/cardStore';
 import { text_type } from '../common/constants';
-import SuggestedList from '../common/Tooltip';
+import { info } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
+import TextInput from '../common/TextInput';
+import AlphaNumericInput from '../common/AlphaNumericInput';
 import SelectList from './Select';
 
 function Creator(props: { path: string }) {
@@ -41,51 +43,35 @@ function Creator(props: { path: string }) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
+              <strong className='input-label'>
                 Escriba el nombre de la Entidad de registro
               </strong>
             </label>
-            <SuggestedList
-              datalist={provinces}
-              listname='entidades-registro'
-              message={tooltip.provincia}
-            >
-              <Input
-                color='#ffffff'
-                list='entidades-registro'
-                {...register('name', { required: true })}
-                {...text_type}
-              />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            
+              <TextInput label='name' register={register} errors={errors} required />
+          
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
-                Escriba la dirección de la entidad de registro
-              </strong>
+              <strong className='input-label'>Dirección de la entidad de registro</strong>
             </label>
-            <SuggestedList
-              datalist={provinces}
-              listname='entidades-registro'
-              message={tooltip.provincia}
-            >
-              <Input
-                color='#ffffff'
-                list='entidades-registro'
-                {...register('address', { required: true })}
-                {...text_type}
+
+        
+              <AlphaNumericInput
+                required
+                label='address'
+                errors={errors}
+                register={register}
               />
-            </SuggestedList>
-            {errors.address && <span style={{ color: 'red' }}>Field is required</span>}
+          
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
+              <strong className='input-label'>
                 Seleccione el municipio de la entidad de registro
               </strong>
             </label>

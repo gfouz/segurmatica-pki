@@ -10,18 +10,20 @@ type InputProps = {
   required: boolean;
   onChange?: React.ReactEventHandler;
 };
+
 function SelectList(props: InputProps) {
-  const { list, register, label, required } = props;
+  const { label, list, register, required } = props;
   return (
     <>
       <Select
-        {...register(label, { required })}
-        placeholder='Select option'
+        m='2em 0'
         size='xm'
         bg='#999999'
         color='#000000'
+        placeholder='Select option'
+        {...register(label, { required })}
       >
-        {list &&
+        {Array.isArray(list) &&
           list.map((item, index) => {
             return (
               <option key={index} value={item.id}>

@@ -1,33 +1,41 @@
 import * as React from 'react';
-import { IFormInput } from './constants';
+import { IFormInput } from '../common/constants';
 import styled from 'styled-components';
 
 interface IData {
   data: IFormInput;
 }
 function ObjectIterator({ data }: IData) {
-  const item = Object.assign({}, data);
-
-  return (
-    <>
-      <StyledIterator>
-        <div className='list-container'>
-          <ul className='list'>
-            <li className='list__item'>{item?.name && item.name}</li>
-            <li className='list__item'>{item?.email && item.email}</li>
-            <li className='list__item'>
-              {item?.enabled === true ? 'habilitado' : 'deshabilitado'}
-            </li>
-          </ul>
-        </div>
-      </StyledIterator>
-    </>
-  );
+  if (data?.hasOwnProperty('name') || data?.hasOwnProperty('email')) {
+    const item = Object.assign({}, data);
+    return (
+      <>
+        <StyledIterator>
+          <div className='list-container'>
+            <ul className='list'>
+              {item.name && <li className='list__item'>{item?.name}</li>}
+              {item.ci && <li className='list__item'>DNI: {item?.ci}</li>}
+              {item.tome && <li className='list__item'>TOMO: {item?.tome}</li>}
+              {item.folio && <li className='list__item'>FOLIO: {item?.folio}</li>}
+              {item.email && <li className='list__item'>EMAIL: {item?.email}</li>}
+              {item.phone && <li className='list__item'>{`TEL: ${item?.phone}`}</li>}
+              <li className='list__item'>
+                {item?.enabled === true ? 'habilitado' : 'deshabilitado'}
+              </li>
+            </ul>
+          </div>
+        </StyledIterator>
+      </>
+    );
+  } else {
+    return <StyledMessage>No data available</StyledMessage>;
+  }
 }
 
 export default ObjectIterator;
 
 const StyledIterator = styled.div`
+  margin: 2em 0;
   .list-container {
     display: flex;
     flex-wrap: wrap;
@@ -37,7 +45,7 @@ const StyledIterator = styled.div`
     padding: 0;
     margin: 0;
     border-radius: 10px;
-    width: 200px;
+    min-width: 250px;
     padding: 1em;
     margin: 0.2em;
     background-color: #000000;
@@ -48,4 +56,11 @@ const StyledIterator = styled.div`
     text-align: left;
     list-style-type: none;
   }
+`;
+const StyledMessage = styled.p`
+  color: red;
+  margin: 1em 0;
+  text-align: center;
+  font-weight: bolder;
+  text-transform: uppercase;
 `;

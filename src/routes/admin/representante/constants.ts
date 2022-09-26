@@ -10,31 +10,20 @@ const axiosApi = axios.create({
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 export type IFormInput = {
-  id?: number;
-  ci?: number;
-  erId?: number;
-  eiId?: number;
-  name?: string;
-  tome?: number;
-  time?: number;
-  price?: number;
-  range?: string;
-  folio?: number;
-  rolid?: number;
-  email?: string;
-  phone?: string;
-  namer?: string;
-  userId?: number;
-  name_pattern?: string;
-  address?: string;
-  enabled?: boolean;
-  password?: string;
-  namerCharge?: string;
-  provinciaId?: number;
-  organismoId?: number;
-  municipioId?: number;
-  finalidadId?: number;
+  id: string;
+  ci: string;
+  eiId: string;
+  userId: string;
+  name: string;
+  tome: string;
+  folio: string;
+  phone: string;
+  namer: string;
+  enabled: string;
+  namerCharge: string;
+  nominationTemplate: string;
 };
+
 
 export type IStoreProps = IFormInput;
 export type IList = IFormInput;
@@ -62,18 +51,24 @@ export interface IProps {
 }
 
 interface Itip {
-  ci: string;
-  dn: string;
-  motive: string;
-  numbers: string;
-  text: string;
+  ci: string; 
+  tome: string;
+  folio: string;
+  name: string;
+  phone: string;
+  tutor: string;
+  occupancy: string;
+  file: string;
 }
 export const tip: Itip = {
-  ci: 'Solo 11 dígitos y ser mayor de 18!',
-  dn: 'Número de serie es requerido!',
-  motive: 'Motivo de revocación es requerido!',
-  numbers: 'numeros validos requeridos.',
-  text: 'Es requerido escribir en este campo. ',
+  ci: 'requerido 11 dígitos y ser mayor de 18 años!',
+  tome: 'requeridos 4 dígitos para el tomo!',
+  folio: 'requeridos 4 dígitos para el folio!',
+  name: 'el nombre solo admite letras',
+  phone: '8 dígitos requeridos para nro de teléfono',
+  tutor: 'el nombre solo admite letras.',
+  occupancy: 'este dato solo admite letras',
+  file: 'adjunte documento del nombramiento',
 };
 
 /*-----------css styles and Chakra attributes types.--------*/
@@ -86,43 +81,30 @@ export type chakraProps = {
 };
 
 // HTML AND CHAKRA ATTRIBUTES
-export const number_type: chakraProps = {
-  size: 'sm',
-  type: 'number',
-  variant: 'flushed',
-};
-export const text_type: chakraProps = {
-  size: 'sm',
-  type: 'text',
-  variant: 'flushed',
-};
-export const email_type: chakraProps = {
-  size: 'sm',
-  type: 'email',
-  variant: 'flushed',
-};
-export const password_type: chakraProps = {
-  size: 'sm',
-  type: 'password',
-  variant: 'flushed',
-};
 export const file_type: chakraProps = {
   size: 'sm',
   type: 'file',
   variant: 'flushed',
 };
 
-export async function postRequest(path: string, data: IFormInput) {
+
+export async function postRequest(path: string, data: IFormInput): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.post<IFormInput>(path, data);
-    const result = res.data;
+    const { data: result } = res;
     return result;
   } catch (error: any) {
     return error?.message;
   }
 }
 
-export async function putRequestById(data: IFormInput, path: string, id: string) {
+
+
+export async function putRequestById(
+  data: IFormInput,
+  path: string,
+  id: string | any,
+): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.put<IFormInput>(`/${path}/${id}`, data);
     const result = res.data;
@@ -131,6 +113,7 @@ export async function putRequestById(data: IFormInput, path: string, id: string)
     return error.message;
   }
 }
+
 export async function getRequestById(path: string, id: string) {
   try {
     const res = await axiosApi.get<IFormInput>(`/${path}/${id}`);
@@ -141,18 +124,17 @@ export async function getRequestById(path: string, id: string) {
   }
 }
 
-/* Do not repeat yourself, but here is a kind of
-     convention. */
-export async function getRequestEnabled(path: string) {
+
+
+export async function getRequestEnabled(path: string): Promise<IFormInput[] | any> {
   try {
-    const res = await axiosApi.get<IAxiosData>(path);
+    const res = await axiosApi.get<IFormInput[]>(path);
     const result = res.data;
     return result;
   } catch (error: any) {
     return error.message;
   }
 }
-
 export async function getRequestAll(path: string) {
   try {
     const res = await axiosApi.get<IAxiosData>(path);

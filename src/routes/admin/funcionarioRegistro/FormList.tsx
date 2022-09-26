@@ -4,6 +4,7 @@ import Getter from '../common/Getter';
 import Updater from './Updater';
 import Creator from './Creator';
 import GetByParams from '../common/GetByParams';
+import GetByName from '../common/GetByName';
 
 export interface IOptions {
   option: string;
@@ -33,10 +34,22 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'asociado',
-    comp: <GetByParams path='funcionarios-registro/entidad-registro' queryKey='func-reg' />,
+    comp: (
+      <GetByParams
+        path='funcionarios-registro/entidad-registro'
+        attached='entidades-registro'
+        queryKey='func-reg'
+      />
+    ),
   },
   {
-    option: 'asociado habilitado',
-    comp: <p>AUN NO EXISTEN ASOCIACIONES !</p>,
+    option: 'por nombre',
+    comp: (
+      <GetByName
+        path='funcionarios-registro/name'
+        allnames='funcionarios-registro'
+        queryKey='func_by_name'
+      />
+    ),
   },
 ];

@@ -51,7 +51,6 @@ function GetByAssociation() {
               <Select
                 list={list?.result}
                 label='provinciaId'
-                //register={register}
                 required
                 onChange={(evt) => setId(evt.target.value)}
               />

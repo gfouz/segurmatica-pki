@@ -1,20 +1,25 @@
 import * as React from 'react';
 import axios from 'axios';
-import SuggestedList from './Tooltip';
+import { useSnapshot } from 'valtio';
+import store from '../common/store';
+import { state } from '../common/store';
+import SuggestedWords from '../common/SuggestedWords';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import SubmitButton from '../common/SubmitButton';
-
+import TextInput from '../common/TextInput';
+import AlphaNumericInput from '../common/AlphaNumericInput';
 import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
-import { HStack, Input, Container, Switch, FormLabel } from '@chakra-ui/react';
+import { HStack, Input, Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
 import { IDS, emailtips, tooltip, number_type, text_type } from '../common/cardStore';
 import SelectList from './Select';
 
 function Update(props: { url: string }) {
-  const [id, setId] = React.useState('');
   const [status, setStatus] = React.useState('');
-  const [list, setList] = React.useState([]);
+  const snap = useSnapshot(store);
+  const snap2 = useSnapshot(state);
+  const { stack } = snap;
   const {
     register,
     handleSubmit,
@@ -24,13 +29,14 @@ function Update(props: { url: string }) {
   const url = '/municipios/enabled/true';
   const { data } = useQuery('all-enabled-rolls', () => getRequestAll(url));
 
-  const response = useMutation((data: IFormInput) => putRequestById(data, props.url, id), {
+  const response = useMutation((data: IFormInput) => putRequestById(data, props.url, stack.id), {
     retry: 2,
   });
   const message = response?.data?.message;
 
   React.useEffect(() => {
     message && setStatus(message);
+    message === 'updated' && snap2.setOption('mostrar');
   }, [message]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -40,62 +46,50 @@ function Update(props: { url: string }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <HStack>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba el Id de la Entidad de Registro.</strong>
-            </label>
-            <SuggestedList datalist={IDS} listname='ids' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='ids'
-                onChange={(evt) => setId(evt.target.value)}
-                {...number_type}
-              />
-            </SuggestedList>
-          </Container>
+        <HStack p='2em'>
+          <Heading size='md' color='#009966'>
+            {stack.name}
+          </Heading>
         </HStack>
+
         <HStack>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
-                Escriba el nombre de la Entidad de registro
-              </strong>
+              <strong className='byid-input-label'>Nombre de la Entidad de registro</strong>
             </label>
-            <SuggestedList datalist={emailtips} listname='name' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='name'
-                {...register('name', { required: true })}
-                {...text_type}
+            
+              <TextInput
+                required
+                label='name'
+                errors={errors}
+                register={register}
+                defaultValue={stack.name}
               />
-            </SuggestedList>
+            
             {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack>
           <Container>
             <label htmlFor='address'>
-              <strong className='byid-input-label'>
-                Escriba la dirección de la entidad de registro
-              </strong>
+              <strong className='byid-input-label'>Dirección de la entidad de registro</strong>
             </label>
-            <SuggestedList datalist={IDS} listname='address' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='address'
-                {...register('address', { required: true })}
-                {...text_type}
+            
+              <AlphaNumericInput
+                required
+                label='address'
+                errors={errors}
+                register={register}
+                defaultValue={stack.address}
               />
-            </SuggestedList>
-            {errors.address && <span style={{ color: 'red' }}>Field is required</span>}
+          
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
               <strong className='byid-input-label'>
-                Seleccione el municipio de la entidad de registro
+                Seleccione municipio de entidad de registro
               </strong>
             </label>
 

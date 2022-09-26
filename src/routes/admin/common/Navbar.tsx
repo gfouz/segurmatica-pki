@@ -38,6 +38,10 @@ function Navbar(props: HeaderProps) {
       option: 'habilitados',
       icon: <FormText />,
     },
+    {
+      option: 'por nombre',
+      icon: <FormText />,
+    },
   ];
 
   return (

@@ -16,11 +16,11 @@ function Dashboard({ children }: IProps) {
     <StyledDashboard>
       <header>
         <div className='backwards' onClick={handleClick}>
-          <CaretLeft /> <span>REGRESAR</span>
+          <CaretLeft fontSize='10px' color='blue' /> <span>REGRESAR</span>
         </div>
       </header>
       <main>{children}</main>
-      <footer>Segurmática</footer>
+      <footer></footer>
     </StyledDashboard>
   );
 }
@@ -66,12 +66,11 @@ const StyledDashboard = styled.div`
     display: flex;
     text-transform: uppercase;
     font-weight: bolder;
-    color: #000000;
     margin: 1em;
     span {
       position: relative;
       left: 1rem;
-      color: #000000;
+      color: #999999;
     }
   }
 `;

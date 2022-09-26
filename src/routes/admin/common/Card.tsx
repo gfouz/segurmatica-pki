@@ -29,7 +29,6 @@ export default function Card(props: ILayout) {
       </header>
       <Sidebar />
       <main onClick={setFalse}>{props.children}</main>
-
       <footer>{opt}</footer>
     </StyledCard>
   );
@@ -77,6 +76,6 @@ const StyledCard = styled.div`
     align-items: center;
     font-weight: bolder;
     text-transform: uppercase;
-    color: #009966;
+    color: #999999;
   }
 `;

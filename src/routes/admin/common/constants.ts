@@ -8,11 +8,11 @@ export const axiosApi = axios.create({
   baseURL: BASE_URL,
   withCredentials: false,
 });
-//axiosApi.defaults.headers.common['jwt'] = 'LauraLeticia';
 
 export type IFormInput = {
   id?: string | number;
-  ci?: number;
+  id2?: string;
+  ci?: string | undefined;
   erId?: string | number;
   eiId?: number;
   name?: string;
@@ -21,15 +21,16 @@ export type IFormInput = {
   price?: number;
   range?: string;
   folio?: number;
-  rolid?: number;
+  rolId?: number;
   email?: string;
   phone?: string;
   namer?: string;
+  namerCharger?: string;
   userId?: number;
   address?: string;
   enabled?: boolean;
   password?: string;
-  patternName?: string;
+  nominationTemplate?: string;
   namerCharge?: string;
   provinciaId?: number;
   organismoId?: number;
@@ -162,6 +163,18 @@ export async function getRequestAll(path: string): Promise<IFormInput[] | any> {
     return result;
   } catch (error) {
     return error;
+  }
+}
+
+export async function getByDoubleAssociation(id1: string, id2: string): Promise<IFormInput | any> {
+  try {
+    const res = await axiosApi.get<IFormInput>(
+      `/empresas-instituciones/municipio/${id1}/organismo/${id2}`,
+    );
+    const result = res.data;
+    return result;
+  } catch (error: any) {
+    return error.message;
   }
 }
 

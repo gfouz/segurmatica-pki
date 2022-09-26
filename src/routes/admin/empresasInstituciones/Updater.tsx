@@ -5,16 +5,18 @@ import { useMutation, useQuery } from 'react-query';
 import { useSnapshot } from 'valtio';
 import store from '../common/store';
 import { state } from '../common/store';
-import SuggestedWords from '../common/SuggestedWords';
 import StatusHandler from '../common/StatusHandler';
 import SelectList from './Select';
-import { empresas, tip } from './constants';
+import { info } from './constants';
 import { IFormInput, text_type, getRequestAll, putRequestById } from '../common/constants';
 import { HStack, Input, Heading } from '@chakra-ui/react';
 import { Container, Switch, FormLabel } from '@chakra-ui/react';
+import TextInput from '../common/TextInput';
 import SubmitButton from '../common/SubmitButton';
+import ErrorWarning from '../common/ErrorWarning';
 
-function Update(props: { url: string; }) {
+
+function Update(props: { url: string }) {
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
   const { stack } = snap;
@@ -30,9 +32,12 @@ function Update(props: { url: string; }) {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const response = useMutation((formdata: IFormInput) => putRequestById(formdata, props.url, stack.id), {
-    retry: 2,
-  });
+  const response = useMutation(
+    (formdata: IFormInput) => putRequestById(formdata, props.url, stack.id),
+    {
+      retry: 2,
+    },
+  );
   const message = response?.data?.message;
 
   React.useEffect(() => {
@@ -51,36 +56,34 @@ function Update(props: { url: string; }) {
           <Heading size='md' color='#009966'>
             {stack.name}
           </Heading>
+          <StyledLabel>{stack.name}</StyledLabel>
         </HStack>
 
         <HStack m='2em 0'>
           <Container>
-            <label htmlFor='name'>
-              <strong className='byid-input-label'>Actulice nombre</strong>
-            </label>
-            <SuggestedWords datalist={empresas} listname='rolid' message={tip.name}>
-              <Input list='rolid' {...register('name', { required: true })} {...text_type} />
-            </SuggestedWords>
-            {errors.name && <StyledWarning>Field is required</StyledWarning>}
+            <StyledLabel>Actualice Nombre</StyledLabel>
+
+            <TextInput
+              info={info.name}
+              required
+              label='name'
+              errors={errors}
+              register={register}
+              defaultValue={stack.name}
+            />
           </Container>
         </HStack>
-
         <HStack p='1em'>
-          <label htmlFor='municipio'>
-            <strong className='byid-input-label'>Actualice municipio</strong>
-          </label>
-          <SelectList list={mun?.data?.result} label='municipioId' register={register} required />
-          {errors.municipioId && <StyledWarning>Field is required</StyledWarning>}
-        </HStack>
+          <StyledLabel>seleccione organismo</StyledLabel>
 
-        <HStack p='1em'>
-          <label htmlFor='organismos'>
-            <strong className='input-label'>Actulice Organismo</strong>
-          </label>
           <SelectList list={org?.data?.result} label='organismoId' register={register} required />
-          {errors.organismoId && <StyledWarning>Field is required</StyledWarning>}
+          <ErrorWarning label='organismoId' errors={errors} info={info.select} />
         </HStack>
-
+        <HStack p='1em'>
+          <StyledLabel>seleccione municipio</StyledLabel>
+          <SelectList list={mun?.data?.result} label='municipioId' register={register} required />
+          <ErrorWarning label='municipioId' errors={errors} info={info.select} />
+        </HStack>
         <HStack m='2em 0'>
           <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
             Deshabilitar o habilitar
@@ -101,7 +104,7 @@ function Update(props: { url: string; }) {
 
 export default Update;
 
-const StyledWarning = styled.span`
-  color: red;
+const StyledLabel = styled.h4`
+  color: ${props => props.color || '#888888'};
   font-weight: bolder;
 `;

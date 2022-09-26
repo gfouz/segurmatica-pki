@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -7,9 +8,12 @@ import { provinces, tooltip, text_type } from './cardStore';
 import SuggestedList from './Tooltip';
 import { postRequest, IFormInput } from './constants';
 import SubmitButton from '../common/SubmitButton';
+import TextInput from './TextInput';
 
-function Creator(props: { url: string; }) {
-  const { url } = props;
+function Creator(props: { url: string; msg?: string }) {
+
+  const info = 'se permiten nombres compuestos sin números';
+  const { url, msg } = props;
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -26,19 +30,14 @@ function Creator(props: { url: string; }) {
   React.useEffect(() => {
     message && setStatus(message);
   }, [message]);
-
+  console.log(errors);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba nombre</strong>
-            </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input list='provincias' {...register('name', { required: true })} {...text_type} />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+           <StyledLabel>Nombre</StyledLabel>
+           <TextInput label='name' register={register} errors={errors} required  info={info} />
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />
@@ -49,3 +48,8 @@ function Creator(props: { url: string; }) {
 }
 
 export default Creator;
+
+const StyledLabel = styled.h4`
+  color: #888888;
+  font-weight: bolder;
+`;

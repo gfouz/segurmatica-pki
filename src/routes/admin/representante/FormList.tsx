@@ -3,7 +3,9 @@ import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Updater from './Updater';
 import Creator from './Creator';
+import GetByParams from '../common/GetByParams';
 import { Heading } from '@chakra-ui/react';
+import GetByName from '../common/GetByName';
 
 export interface IOptions {
   option: string;
@@ -33,10 +35,22 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'asociado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
+    comp: (
+      <GetByParams
+        path='representantes/empresa-institucion'
+        attached='empresas-instituciones'
+        queryKey='func-reg'
+      />
+    ),
   },
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
+  },
+  {
+    option: 'por nombre',
+    comp: (
+      <GetByName path='representantes/name' allnames='representantes' queryKey='func_by_name' />
+    ),
   },
 ];

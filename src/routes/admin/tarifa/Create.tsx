@@ -4,15 +4,16 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input } from '@chakra-ui/react';
 import { Heading, Flex } from '@chakra-ui/react';
-import { provinces, tooltip } from '../common/cardStore';
-import SuggestedList from './Tooltip';
+import { tip } from './constants';
 import SelectList from './Select';
 import { text_type } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
+import NumericInput from '../common/NumericInput';
+import AlphaNumericInput from '../common/AlphaNumericInput';
 
 
-function Creator(props: { url: string; }) {
+function Creator(props: { url: string }) {
   const { url } = props;
 
   const [status, setStatus] = React.useState('');
@@ -42,25 +43,25 @@ function Creator(props: { url: string; }) {
             Tiempo
           </Heading>
           <HStack>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input list='provincias' {...register('time', { required: true })} {...text_type} />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            
+              <NumericInput label='time' register={register} errors={errors} required />
+            
           </HStack>
           <Heading size='sm' p='1em'>
             Precio de Tarifa
           </Heading>
           <HStack>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input list='provincias' {...register('price', { required: true })} {...text_type} />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+        
+              <NumericInput label='price' register={register} errors={errors} required />
+        
           </HStack>
           <Heading size='sm' p='1em'>
             Seleccione rango
           </Heading>
           <HStack p='1em'>
-            <input {...register('range', { required: true })} type='range' min='100' max='600' />
+            
+              <AlphaNumericInput label='range' register={register} errors={errors} required />
+        
           </HStack>
           <Heading size='sm' p='1em'>
             Seleccione finalidad

@@ -85,7 +85,7 @@ export default function GetById(props: IProps) {
             <label htmlFor='provinces'>
               <strong className='byid-input-label'>Escriba nombre</strong>
             </label>
-            <SuggestedList datalist={IDS} listname='provincias' message={tooltip.provincia}>
+            <SuggestedList message={tooltip.provincia}>
               <Input
                 color='#ffffff'
                 list='provincias'

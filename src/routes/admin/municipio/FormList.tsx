@@ -1,3 +1,4 @@
+import { Heading } from '@chakra-ui/react';
 import GetEnabled from '../common/GetEnabled';
 import GetById from '../common/GetById';
 import Getter from '../common/Getter';
@@ -39,5 +40,9 @@ export const FormsList: IOptions[] = [
   {
     option: 'asociado habilitado',
     comp: <GetByAssociationEnabled />,
+  },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO DISPONIBLE!</Heading>,
   },
 ];

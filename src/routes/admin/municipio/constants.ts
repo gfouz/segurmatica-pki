@@ -9,15 +9,6 @@ const axiosApi = axios.create({
 });
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-export const submitbtn = {
-  m: '2em',
-  color: '#222222',
-  bg: '#ab8ffe',
-  border: '1px solid #ab8ffe',
-  size: 'md',
-  type: 'submit',
-};
-
 export async function getRequestAll(path: string) {
   try {
     const res = await axiosApi.get(path);
@@ -70,7 +61,7 @@ export const tip: ISuggestedWords = {
   name: 'nombre valido requerido.',
   id: 'solo numeros requeridos',
 };
-export const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '123456789'];
+
 export const councils = [
   'Chaparra',
   'Amancio',

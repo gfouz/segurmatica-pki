@@ -6,15 +6,15 @@ import { HStack, Container, Heading, Select, Spinner } from '@chakra-ui/react';
 import StatusHandler from './StatusHandler';
 import ArrayIterator from './ArrayIterator';
 
-function GetByParams(props: { path: string; queryKey: string; }) {
-  const { path, queryKey } = props;
-  const url = 'entidades-registro'
+function GetByParams(props: { path: string; attached: string; queryKey: string }) {
+  const { path, attached, queryKey } = props;
+
   const [status, setStatus] = React.useState('');
   const [params, setParams] = React.useState('');
-  const { data: ent } = useQuery('entidades-registro', () => getRequestAll(url));
+  const { data: attached_to } = useQuery('entidades-registro', () => getRequestAll(attached));
   const { data, isLoading, isError, refetch } = useQuery(queryKey, () => getByParams(path, params));
   const response = data?.result;
-  const entidades = ent?.result;
+  const related = attached_to?.result;
   const message = data?.response?.data?.message || data?.message;
 
   React.useEffect(() => {
@@ -23,10 +23,10 @@ function GetByParams(props: { path: string; queryKey: string; }) {
 
   const handleSelect = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     setParams(evt?.target?.value);
-  }
+  };
   React.useEffect(() => {
-    refetch()
-  }, [params])
+    refetch();
+  }, [params]);
   return (
     <>
       <HStack p='1em'>
@@ -42,14 +42,15 @@ function GetByParams(props: { path: string; queryKey: string; }) {
             color='#000000'
             onChange={(evt) => handleSelect(evt)}
           >
-            {entidades?.map((item: { id?: any; email?: any; name?: any; }, key: React.Key | null | undefined) => {
-
-              return (
-                <option key={key} value={item.id}>
-                  {item.email || item.name}
-                </option>
-              );
-            })}
+            {related?.map(
+              (item: { id?: any; email?: any; name?: any }, key: React.Key | null | undefined) => {
+                return (
+                  <option key={key} value={item.id}>
+                    {item.email || item.name}
+                  </option>
+                );
+              },
+            )}
           </Select>
           <StyledGetter>
             {isError && <div>An error ocurred...</div>}
@@ -73,4 +74,3 @@ export default GetByParams;
 const StyledGetter = styled.div`
   width: 100%;
 `;
-

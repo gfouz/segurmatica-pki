@@ -3,7 +3,7 @@ import store from '../common/store';
 import { state } from '../common/store';
 import { useSnapshot } from 'valtio';
 import SelectList from './Select';
-import SuggestedList from './Tooltip';
+import SuggestedList from '../common/Tooltip';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -11,11 +11,13 @@ import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
 import { Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
 import { HStack, Input } from '@chakra-ui/react';
 import { email_type, password_type } from '../common/cardStore';
-import { IDS, emailtips, tooltip } from '../common/cardStore';
+import { tip } from './constants';
 import SubmitButton from '../common/SubmitButton';
+import PasswordInput from '../common/PasswordInput';
+import EmailInput from './EmailInput';
 
 
-function Update(props: { url: string; queryKey: string; }) {
+function Update(props: { url: string; queryKey: string }) {
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
   const { stack } = snap;
@@ -31,7 +33,9 @@ function Update(props: { url: string; queryKey: string; }) {
 
   const path = '/rols/enabled/true';
   const { data } = useQuery('enabled-rolls', () => getRequestAll(path));
-  const response = useMutation((data: IFormInput) => putRequestById(data, props.url, stack.id), { retry: 2 });
+  const response = useMutation((data: IFormInput) => putRequestById(data, props.url, stack.id), {
+    retry: 2,
+  });
   const message = response?.data?.message;
 
   React.useEffect(() => {
@@ -55,17 +59,11 @@ function Update(props: { url: string; queryKey: string; }) {
         <HStack>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>correo electrónico</strong>
+              <strong className='input-label'>correo electrónico</strong>
             </label>
-            <SuggestedList datalist={emailtips} listname='email' message={tooltip.provincia}>
-              <Input
-                defaultValue={stack.email}
-                list='email'
-                {...register('email', { required: true })}
-                {...email_type}
-              />
-            </SuggestedList>
-            {errors.email && <span style={{ color: 'red' }}>Field is required</span>}
+          
+              <EmailInput  register={register} errors={errors} />
+  
           </Container>
         </HStack>
         <HStack>
@@ -73,25 +71,20 @@ function Update(props: { url: string; queryKey: string; }) {
             <label htmlFor='password'>
               <strong className='byid-input-label'>Escriba una contraseña</strong>
             </label>
-            <SuggestedList datalist={IDS} listname='password' message={tooltip.provincia}>
-              <Input
-                list='password'
-                {...register('password', { required: true })}
-                {...password_type}
-              />
-            </SuggestedList>
-            {errors.password && <span style={{ color: 'red' }}>Field is required</span>}
+          
+              <PasswordInput label='password' register={register} errors={errors} required />
+    
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Seleccione un rol</strong>
+              <strong className='input-label'>Seleccione un rol</strong>
             </label>
 
-            <SelectList list={data?.result} label='rolid' register={register} required />
+            <SelectList list={data?.result} label='rolId' register={register} required />
 
-            {errors.rolid && <span style={{ color: 'red' }}>Field is required</span>}
+            {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack>

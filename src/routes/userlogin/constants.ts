@@ -92,4 +92,3 @@ export function setSignature(data, useNavigate) {
   data && localStorage.setItem('jwt', data.signature);
   setTimeout(() => {}, 2000);
 }*/
-

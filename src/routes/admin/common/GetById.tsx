@@ -12,8 +12,8 @@ import SubmitButton from '../common/SubmitButton';
 
 import { HStack, Input, Container } from '@chakra-ui/react';
 
-export default function GetById(props: { url: string; queryKey: string; }) {
-  const { url, queryKey } = props;
+export default function GetById(props: { url: string; queryKey: string; msg?: string }) {
+  const { url, msg, queryKey } = props;
   const {
     register,
     handleSubmit,
@@ -46,12 +46,14 @@ export default function GetById(props: { url: string; queryKey: string; }) {
               <label htmlFor='provinces'>
                 <strong className='byid-input-label'>Buscar por ID</strong>
               </label>
-              <SuggestedList datalist={IDS} listname='provincias' message={tooltip.provincia}>
+              <SuggestedList message={msg}>
                 <Input
                   list='provincias'
                   {...register('id', { required: true })}
                   onChange={(evt) => setId(evt.target.value)}
-                  {...text_type}
+                  size='sm'
+                  type='number'
+                  variant='flushed'
                 />
               </SuggestedList>
               <SubmitButton buttonstate={response?.isLoading} />

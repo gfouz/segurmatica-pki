@@ -1,16 +1,20 @@
 import * as React from 'react';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import { HStack, Input, Container, Badge } from '@chakra-ui/react';
-import { provinces, tooltip, text_type } from '../common/cardStore';
-import SuggestedList from './Tooltip';
+import { useMutation, useQuery } from 'react-query';
+import { HStack, Input, Container, Badge, VStack, Heading } from '@chakra-ui/react';
+import { tip } from './constants';
+import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
-import { postRequest, IFormInput } from '../common/constants';
+import TextInput from '../common/TextInput';
+import SelectList from './Select';
+import { getRequestAll, postRequest, IFormInput } from '../common/constants';
 
-function Creator(props: { labelForName: string; url: string }) {
+function Creator(props: { url: string }) {
   const { url } = props;
   const [status, setStatus] = React.useState('');
+  const path = '/provincias';
+  const { data } = useQuery('council', () => getRequestAll(path));
   const {
     register,
     handleSubmit,
@@ -33,33 +37,22 @@ function Creator(props: { labelForName: string; url: string }) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForName}</strong>
+              <strong className='input-label'>Nombre de Municipio</strong>
             </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='provincias'
-                {...register('name', { required: true })}
-                {...text_type}
-              />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+          
+              <TextInput label='name' register={register} errors={errors} required />
+      
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>{props.labelForName}</strong>
-            </label>
-            <SuggestedList datalist={provinces} listname='provincias' message={tooltip.provincia}>
-              <Input
-                color='#ffffff'
-                list='provincias'
-                {...register('name', { required: true })}
-                {...text_type}
-              />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            <VStack align='left'>
+              <Heading size='sm' m='2em 0 0.5em 0'>
+                Provincia a que pertenece
+              </Heading>
+              <SelectList list={data?.result} label='provinciaId' register={register} required />
+              {errors.provinciaId && <span style={{ color: 'red' }}>Field is required</span>}
+            </VStack>
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />

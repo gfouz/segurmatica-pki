@@ -76,3 +76,12 @@ export const range_type: chakraProps = {
   type: 'text',
   variant: 'flushed',
 };
+
+interface ISuggestedWords {
+  id: string;
+  name: string;
+}
+export const tip: ISuggestedWords = {
+  name: 'nombre valido requerido.',
+  id: 'solo numeros requeridos',
+};

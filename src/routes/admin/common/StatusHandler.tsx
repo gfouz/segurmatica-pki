@@ -34,7 +34,7 @@ function StatusHandler({ message }: IStatusProps | any) {
           setStatus(item);
           break;
         default: {
-            setStatus(message)
+          setStatus(message);
           break;
         }
       }

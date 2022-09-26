@@ -14,16 +14,14 @@ function FormsIterator({ form }: IFormList) {
     setOption(selected);
   }, [selected]);
   return (
-  <>
-   {  form &&
-    form.map(
-      (item, idx) =>
-        option == item.option && <StyledContainer key={idx}>{item.comp}</StyledContainer>,
-    )
-     
-   }
-  </>
-  )
+    <>
+      {form &&
+        form.map(
+          (item, idx) =>
+            option == item.option && <StyledContainer key={idx}>{item.comp}</StyledContainer>,
+        )}
+    </>
+  );
 }
 export default FormsIterator;
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Select } from '@chakra-ui/react';
 import { Path, UseFormRegister } from 'react-hook-form';
-import { IList, IFormInput } from '../common/constants';
-
+import { IFormInput } from './constants';
+import { IList } from '../common/constants';
 
 type InputProps = {
   list: IList[];
@@ -26,7 +26,7 @@ function SelectList(props: InputProps) {
             const keys = Object.keys(item);
             return (
               <option key={key} value={item.id}>
-                {item.email || item.name}
+                {(item.email && item.email) || (item.name && item.name)}
               </option>
             );
           })}

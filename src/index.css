@@ -33,4 +33,5 @@ code {
   list-style-type: none;
   pointer-events: none;
   white-space: nowrap;
+  cursor: pointer;
 }

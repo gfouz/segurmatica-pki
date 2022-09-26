@@ -7,7 +7,6 @@ import { getRequestAll } from '../common/constants';
 import { HStack, Container } from '@chakra-ui/react';
 
 function GetByAssociationEnabled() {
-
   const [status, setStatus] = React.useState('');
   const url = 'municipios/provincia/enabled/true';
   const { data } = useQuery('munByProvEnabled', () => getRequestAll(url));
@@ -16,7 +15,6 @@ function GetByAssociationEnabled() {
   React.useEffect(() => {
     message && setStatus(message);
   }, [message]);
-
 
   return (
     <>

@@ -2,20 +2,26 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { useSnapshot } from 'valtio';
 import store from '../common/store';
+import { state } from '../common/store';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import StatusHandler from '../common/StatusHandler';
 import { useMutation, useQuery } from 'react-query';
-import { HStack, Input, Container } from '@chakra-ui/react';
-import { getRequestEnabled, putRequestById, file_type } from '../common/constants';
-import { IFormInput, number_type, text_type } from '../common/constants';
-import { numbersList, tip } from './constants';
-import SuggestedWords from './SuggestedWords';
+import { HStack, Input, Container, Switch } from '@chakra-ui/react';
+import { getRequestEnabled, putRequestById, file_type } from './constants';
+import { IFormInput } from './constants';
+import { tip } from './constants';
+import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
 import SelectList from './Select';
+import IntegerInput from './IntegerInput';
+import TextInput from './TextInput';
+import TelInput from './TelInput';
+import IdentityNumberInput from './IdentityNumberInput';
 
 function Updater() {
   const snap = useSnapshot(store);
   const { stack } = snap;
+  const snap2 = useSnapshot(state);
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -29,7 +35,17 @@ function Updater() {
   const { data: users } = useQuery('users-enabled', () => getRequestEnabled(users_enabled));
   const { data: company } = useQuery('companies', () => getRequestEnabled(enterprises));
 
-  const response = useMutation((formdata: IFormInput) => putRequestById(formdata, user_agent, stack.id));
+  const response = useMutation((formdata: IFormInput) =>
+    putRequestById(formdata, user_agent, stack.id),
+  );
+
+  const message = response?.data?.message;
+
+  React.useEffect(() => {
+    message && setStatus(message);
+    message === 'updated' && snap2.setOption('mostrar');
+  }, [message]);
+
   const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
     response.mutateAsync(formdata);
     console.log(formdata);
@@ -42,136 +58,115 @@ function Updater() {
           <HStack p='1em'>
             <Container>
               <HStack>
-                <label htmlFor='representatives'>
-                  <p className='form-title'>Actulizar representante:</p>
+                <label htmlFor='title'>
+                  <p className='form-title'>Actualizar representante:</p>
                 </label>
               </HStack>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el CI del representante</strong>
-              </label>
-              <SuggestedWords listname='representantes' message={tip.ci} datalist={numbersList}>
-                <Input
-                  list='representantes'
-                  {...register('ci', { required: true })}
-                  {...number_type}
-                />
-              </SuggestedWords>
-              {errors.ci && <span style={{ color: 'red' }}>Field is required</span>}
-            </Container>
-          </HStack>
-          <HStack p='1em'>
-            <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el tomo del representante</strong>
-              </label>
-              <SuggestedWords
-                listname='representantes'
-                message={tip.numbers}
-                datalist={numbersList}
-              >
-                <Input
-                  list='representantes'
-                  {...register('tome', { required: true })}
-                  {...number_type}
-                />
-              </SuggestedWords>
-              {errors.tome && <span style={{ color: 'red' }}>Field is required</span>}
-            </Container>
-          </HStack>
-          <HStack p='1em'>
-            <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el folio del representante</strong>
-              </label>
-              <SuggestedWords
-                listname='representantes'
-                message={tip.numbers}
-                datalist={numbersList}
-              >
-                <Input
-                  list='representantes'
-                  {...register('folio', { required: true })}
-                  {...number_type}
-                />
-              </SuggestedWords>
-              {errors.folio && <span style={{ color: 'red' }}>Field is required</span>}
-            </Container>
-          </HStack>
-          <HStack p='1em'>
-            <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el nombre del representante</strong>
-              </label>
-              <Input
-                list='representantes'
-                {...register('name', { required: true })}
-                {...text_type}
+                <StyledLabel>Nro de Carnet del representante</StyledLabel>
+
+              <IdentityNumberInput
+                required
+                info={tip.ci}
+                errors={errors}
+                register={register}
+                defaultValue={stack.ci}
               />
-              {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
             </Container>
           </HStack>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el teléfono del representante</strong>
-              </label>
-              <SuggestedWords listname='representantes' message={tip.text} datalist={numbersList}>
-                <Input
-                  list='representantes'
-                  {...register('phone', { required: true })}
-                  {...text_type}
-                />
-              </SuggestedWords>
-              {errors.phone && <span style={{ color: 'red' }}>Field is required</span>}
+              <StyledLabel>Tomo del representante</StyledLabel>
+
+              <IntegerInput
+                info={tip.tome}
+                required
+                label='tome'
+                errors={errors}
+                register={register}
+                defaultValue={stack.tome}
+              />
             </Container>
           </HStack>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el nombre del que lo nombra</strong>
-              </label>
-              <SuggestedWords listname='representantes' message={tip.text} datalist={numbersList}>
-                <Input
-                  list='representantes'
-                  {...register('namer', { required: true })}
-                  {...text_type}
-                />
-              </SuggestedWords>
-              {errors.namer && <span style={{ color: 'red' }}>Field is required</span>}
+              <StyledLabel>Folio del representante</StyledLabel>
+
+              <IntegerInput
+                info={tip.folio}
+                required
+                label='folio'
+                register={register}
+                errors={errors}
+                defaultValue={stack.folio}
+              />
             </Container>
           </HStack>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Escriba el cargo del que lo nombra</strong>
-              </label>
-              <SuggestedWords listname='representantes' message={tip.text} datalist={numbersList}>
-                <Input
-                  list='representantes'
-                  {...register('namerCharge', { required: true })}
-                  {...text_type}
-                />
-              </SuggestedWords>
-              {errors.namerCharge && <span style={{ color: 'red' }}>Field is required</span>}
+              <StyledLabel>Nombre y apellidos de representante</StyledLabel>
+
+              <TextInput
+                label='name'
+                register={register}
+                errors={errors}
+                required
+                defaultValue={stack.name}
+              />
             </Container>
           </HStack>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='representatives'>
-                <strong className='input-label'>Añada el documento del nombramiento</strong>
-              </label>
-              <SuggestedWords listname='representantes' message={tip.text} datalist={numbersList}>
-                <Input list='representantes' {...register('patternName')} {...file_type} />
+              <StyledLabel>Teléfono del representante</StyledLabel>
+
+              <TelInput
+                label='phone'
+                register={register}
+                errors={errors}
+                required
+                defaultValue={stack.phone}
+              />
+            </Container>
+          </HStack>
+          <HStack p='1em'>
+            <Container>
+              <StyledLabel>Nombre y apellidos de quien lo nombra</StyledLabel>
+
+              <TextInput
+                label='namer'
+                register={register}
+                errors={errors}
+                required
+                defaultValue={stack.namer}
+              />
+            </Container>
+          </HStack>
+          <HStack p='1em'>
+            <Container>
+              <StyledLabel>Cargo del que lo nombra</StyledLabel>
+
+              <TextInput
+                label='namerCharge'
+                register={register}
+                errors={errors}
+                required
+                defaultValue={stack.namerCharger}
+              />
+            </Container>
+          </HStack>
+          <HStack p='1em'>
+            <Container>
+              <StyledLabel>Adjunte el documento del nombramiento</StyledLabel>
+
+              <SuggestedWords message={tip.file}>
+                <Input list='representantes' {...register('nominationTemplate')} {...file_type} />
               </SuggestedWords>
-              {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+              {errors.nominationTemplate && <span style={{ color: 'red' }}>Field is required</span>}
             </Container>
           </HStack>
 
           <HStack p='1em'>
             <Container>
-              <label htmlFor='provinces'>
-                <strong>Seleccione empresa o institución</strong>
-              </label>
+              <StyledLabel>Seleccione empresa o institución</StyledLabel>
               <SelectList list={company?.result} label='eiId' register={register} required />
               {errors.eiId && <span style={{ color: 'red' }}>Field is required</span>}
             </Container>
@@ -179,15 +174,21 @@ function Updater() {
 
           <HStack p='1em'>
             <Container>
-              <label htmlFor='representatives'>
-                <strong>Selecciona al usuario al cual se vincula</strong>
-              </label>
+              <StyledLabel>Seleccione usuario al que se vincula</StyledLabel>
               <SelectList list={users?.result} label='userId' register={register} required />
               {errors.userId && <span style={{ color: 'red' }}>Field is required</span>}
             </Container>
           </HStack>
+          <HStack p='1em'>
+            <StyledLabel>Deshabilitar o habilitar</StyledLabel>
+            <Switch
+              size='sm'
+              colorScheme='red'
+              {...register('enabled')}
+              defaultChecked={stack.enabled}
+            />
+          </HStack>
           <SubmitButton buttonstate={response?.isLoading} />
-
           {status && <StatusHandler message={status} />}
         </form>
       </StyledUpdater>
@@ -198,12 +199,13 @@ function Updater() {
 export default Updater;
 
 const StyledUpdater = styled.div`
-  .input-label {
-    color: #555555;
-  }
   .form-title {
     color: #009966;
     margin: 2em 0;
     font-weight: bolder;
   }
+`;
+const StyledLabel = styled.h4`
+  color: #888888;
+  font-weight: bolder;
 `;

@@ -30,3 +30,14 @@ type IUser = {
 interface IData {
   data: IUser[];
 }
+
+interface ISuggestedWords {
+  id: string;
+  name: string;
+  select: string;
+}
+export const info: ISuggestedWords = {
+  name: 'se permiten nombres compuestos sin números',
+  id: 'solo numeros requeridos',
+  select: 'esta selección es requerida'
+};

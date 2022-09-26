@@ -104,7 +104,7 @@ export default Admin;
 const StyledAdmin = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-image: url(./images/planet.jpg);
+  background-image: url(./images/grey.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;

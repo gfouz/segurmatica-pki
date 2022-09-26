@@ -21,7 +21,7 @@ const messages = [
   'gotten-by-id',
   'Unprocessable Entity',
   'Request failed with status code 401',
-  'Request failed with status code 422'
+  'Request failed with status code 422',
 ];
 
 interface IStatusProps {
@@ -56,7 +56,6 @@ function StatusHandler({ message }: IStatusProps) {
 export default StatusHandler;
 
 const StatusStyled = styled.div`
-
   margin: 2em;
   font-weight: bolder;
   font-size: 0.7em;

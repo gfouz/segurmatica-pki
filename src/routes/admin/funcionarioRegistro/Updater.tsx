@@ -5,14 +5,15 @@ import { useSnapshot } from 'valtio';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { tooltip } from '../common/cardStore';
+import { tip } from './constants';
 import { text_type } from '../common/cardStore';
-import SuggestedList from '../common/Tooltip';
 import { getRequestEnabled, putRequestById, empresas } from './constants';
 import { IFormInput } from '../common/constants';
 import SelectList from '../entidadRegistro/Select';
 import StatusHandler from '../common/StatusHandler';
 import SubmitButton from '../common/SubmitButton';
+import TextInput from '../common/TextInput';
+import TelInput from '../common/TelInput';
 
 function Updater(props: { url: string }) {
   const { url } = props;
@@ -54,22 +55,11 @@ function Updater(props: { url: string }) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='name'>
-              <strong className='byid-input-label'>
-                Escriba el nombre del funcionario de registro
-              </strong>
+              <strong className='byid-input-label'>Nombre del funcionario de registro</strong>
             </label>
-            <SuggestedList
-              datalist={empresas}
-              listname='funcionarios-registro'
-              message={tooltip.provincia}
-            >
-              <Input
-                list='funcionarios-registro'
-                {...register('name', { required: true })}
-                {...text_type}
-              />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            
+              <TextInput label='name' register={register} errors={errors} required />
+      
           </Container>
         </HStack>
         <HStack p='1em'>
@@ -79,25 +69,16 @@ function Updater(props: { url: string }) {
                 Escriba el teléfono del funcionario de registro
               </strong>
             </label>
-            <SuggestedList
-              datalist={empresas}
-              listname='funcionarios-registro'
-              message={tooltip.provincia}
-            >
-              <Input
-                list='funcionarios-registro'
-                {...register('phone', { required: true })}
-                {...text_type}
-              />
-            </SuggestedList>
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            
+              <TelInput label='phone' register={register} errors={errors} required />
+        
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
-                Seleccione la entidad de registro a la que pertenece
+              <strong className='input-label'>
+                Seleccione entidad de registro a la que pertenece
               </strong>
             </label>
             <SelectList list={entidad?.result} label='erId' register={register} required />
@@ -107,7 +88,7 @@ function Updater(props: { url: string }) {
         <HStack p='1em'>
           <Container>
             <label htmlFor='provinces'>
-              <strong>Seleccione el usuario al que se vincula</strong>
+              <strong>Seleccione usuario al que se vincula</strong>
             </label>
             <SelectList list={users?.result} label='userId' register={register} required />
             {errors.userId && <span style={{ color: 'red' }}>Field is required</span>}

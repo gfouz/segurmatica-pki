@@ -21,7 +21,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='users' queryKey='userid' />,
+    comp: <GetById url='users' queryKey='user-id' />,
   },
   {
     option: 'habilitados',
@@ -38,5 +38,9 @@ export const FormsList: IOptions[] = [
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
+  },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
   },
 ];

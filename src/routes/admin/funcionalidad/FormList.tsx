@@ -21,15 +21,11 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: (
-      <GetById url='funcionalidades' queryKey='funcionalidades-id' />
-    ),
+    comp: <GetById url='funcionalidades' queryKey='funcionalidades-id' />,
   },
   {
     option: 'habilitados',
-    comp: (
-      <GetEnabled queryKey='funcionalidades-enabled' url='funcionalidades/enabled/true' />
-    ),
+    comp: <GetEnabled queryKey='funcionalidades-enabled' url='funcionalidades/enabled/true' />,
   },
   {
     option: 'actualizar',
@@ -42,5 +38,9 @@ export const FormsList: IOptions[] = [
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
+  },
+  {
+    option: 'por nombre',
+    comp: <Heading size='md'>NO DISPONIBLE!</Heading>,
   },
 ];

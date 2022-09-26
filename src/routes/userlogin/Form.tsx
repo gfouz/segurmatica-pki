@@ -9,14 +9,9 @@ import PasswordInput from './PasswordInput';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import SubmitButton from './SubmitButton';
+import ErrorWarning from '../admin/common/ErrorWarning';
 
-import {
-  HStack,
-  Center,
-  Input,
-  Heading,
-  Container
-} from '@chakra-ui/react';
+import { HStack, Center, Input, Heading, Container } from '@chakra-ui/react';
 
 const BASE_URL = 'http://localhost:5000/';
 const axiosApi = axios.create({
@@ -24,8 +19,6 @@ const axiosApi = axios.create({
   withCredentials: false,
 });
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
-
-
 
 interface IUserCredentials {
   email?: string;
@@ -51,25 +44,25 @@ const Form = () => {
       return res.data;
     } catch (error: any) {
       //console.log(error);
-      return error?.message
+      return error?.message;
     }
   }
 
-  const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation((value: IUserCredentials) =>
-    postRequest(value),
+  const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation(
+    (value: IUserCredentials) => postRequest(value),
   );
   const onSubmit: SubmitHandler<IUserCredentials> = (formData: IUserCredentials) => {
     mutateAsync(formData);
   };
 
-  React.useEffect(()=>{
-    setStatus(data)
-  }, [data])
-  
-  React.useEffect(()=>{
+  React.useEffect(() => {
+    setStatus(data);
+  }, [data]);
+
+  React.useEffect(() => {
     data?.jwt && localStorage.setItem('jwt', data?.jwt);
-  }, [data?.jwt])
-  
+  }, [data?.jwt]);
+
   //data?.jwt && localStorage.setItem('jwt', data?.jwt);
 
   return (
@@ -83,23 +76,22 @@ const Form = () => {
 
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
+            <label htmlFor='email'>
               <strong className='byid-input-label'>Escriba su email.</strong>
             </label>
             <Input {...register('email', { required: true })} {...email_type} />
           </Container>
         </HStack>
-        {errors.email && <span style={{ color: 'red', margin: '2em' }}>Field is required</span>}
-
+        <ErrorWarning label='email' errors={errors} m='0 2em' />
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Escriba su contraseña.</strong>
+            <label htmlFor='password'>
+              <strong className='input-label'>Escriba su contraseña.</strong>
             </label>
             <PasswordInput label='password' register={register} required />
           </Container>
         </HStack>
-        {errors.password && <span style={{ color: 'red', margin: '2em' }}>Field is required</span>}
+        <ErrorWarning label='password' errors={errors} m='0 2em' />
         <SubmitButton buttonstate={isLoading} />
       </form>
       {status && <StatusHandler message={status} />}
@@ -112,4 +104,3 @@ const StyledForm = styled.div`
   border: 1px solid #cccccc;
   border-radius: 15px;
 `;
-
