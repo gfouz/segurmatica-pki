@@ -18,7 +18,6 @@ import StyledLabel from '../common/StyledLabel';
 import EmailInput from './EmailInput';
 import ErrorWarnig from '../common/ErrorWarning';
 
-
 function Update(props: { url: string; queryKey: string }) {
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
@@ -58,24 +57,20 @@ function Update(props: { url: string; queryKey: string }) {
             Actualizar usuario
           </StyledLabel>
           <StyledLabel capit>Correo electrónico.</StyledLabel>
-          <EmailInput 
-            info={info.email}
-            register={register} 
-            errors={errors} 
-            />
+          <EmailInput info={info.email} register={register} errors={errors} />
           <StyledLabel capit>Escriba una contraseña.</StyledLabel>
           <PasswordInput label='password' register={register} errors={errors} required />
           <StyledLabel color='#009966' capit>
             Seleccione un rol
           </StyledLabel>
           <SelectList list={data?.result} label='rolId' register={register} required />
-          <ErrorWarnig label='rolId' errors={errors} info={info.select}/>
+          <ErrorWarnig label='rolId' errors={errors} info={info.select} />
           <HStack m='2em 0'>
             <StyledLabel capit color='#444444'>
               Deshabilitar o habilitar.
             </StyledLabel>
             <Switch
-              defaultChecked={stack.enabled}
+              defaultChecked={Boolean(stack.enabled)}
               {...register('enabled')}
               id='enabled'
               size='sm'

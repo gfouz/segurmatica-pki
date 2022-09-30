@@ -91,7 +91,7 @@ function Update(props: { url: string }) {
             {...register('enabled')}
             size='sm'
             colorScheme='red'
-            defaultChecked={stack.enabled}
+            defaultChecked={Boolean(stack.enabled)}
           />
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />

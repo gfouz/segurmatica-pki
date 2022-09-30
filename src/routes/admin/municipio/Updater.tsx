@@ -67,7 +67,7 @@ function Update(props: { url: string }) {
             {...register('enabled')}
             size='sm'
             colorScheme='red'
-            defaultChecked={stack.enabled}
+            defaultChecked={Boolean(stack.enabled)}
           />
         </VStack>
         <SubmitButton buttonstate={response?.isLoading} />
@@ -78,4 +78,3 @@ function Update(props: { url: string }) {
 }
 
 export default Update;
-

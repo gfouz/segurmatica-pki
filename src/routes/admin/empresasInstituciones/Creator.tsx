@@ -23,7 +23,7 @@ function Creator(props: { url: string }) {
   const companies = '/empresas-instituciones';
   const organismos = '/organismos/enabled/true';
   const municipios = '/municipios/enabled/true';
-  const { data: org } = useQuery('users-act', () => getRequestEnabled(organismos));
+  const { data: org } = useQuery('org-all', () => getRequestEnabled(organismos));
   const { data: mun } = useQuery('users-act', () => getRequestEnabled(municipios));
 
   const response = useMutation((formdata: IFormInput) => postRequest(companies, formdata));

@@ -47,7 +47,7 @@ function Updater(props: { url: string }) {
 
   const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
     response.mutateAsync(formdata);
-    console.log(formdata)
+    console.log(formdata);
   };
 
   return (
@@ -56,49 +56,40 @@ function Updater(props: { url: string }) {
         <HStack p='1em'>
           <Container>
             <StyledLabel capit>Actualice nombre</StyledLabel>
-            <TextInput 
-             info={info.name} 
-             required label='name' 
-             register={register} 
-             errors={errors} 
-             defaultValue={stack.name}
-             />
+            <TextInput
+              info={info.name}
+              required
+              label='name'
+              register={register}
+              errors={errors}
+              defaultValue={stack.name}
+            />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel capit>Teléfono del funcionario de registro.</StyledLabel>
-            <TelInput 
-              required 
-              info={info.tel} 
-              label='phone' 
-              errors={errors} 
+            <TelInput
+              required
+              info={info.tel}
+              label='phone'
+              errors={errors}
               register={register}
-              defaultValue={stack.phone} 
-              />
+              defaultValue={stack.phone}
+            />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel capit>Seleccione entidad de registro a la que pertenece</StyledLabel>
-            <SelectList 
-             list={entidad?.result} 
-             label='erId' 
-             register={register} 
-             required 
-             />
+            <SelectList list={entidad?.result} label='erId' register={register} required />
             {errors.erId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel capit>Seleccione usuario al que se vincula</StyledLabel>
-            <SelectList 
-              list={users?.result} 
-              label='userId' 
-              register={register} 
-              required 
-              />
+            <SelectList list={users?.result} label='userId' register={register} required />
             {errors.userId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
@@ -109,7 +100,7 @@ function Updater(props: { url: string }) {
             id='enabled'
             size='sm'
             colorScheme='red'
-            defaultChecked={stack.enabled}
+            defaultChecked={Boolean(stack.enabled)}
           />
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />
@@ -120,4 +111,3 @@ function Updater(props: { url: string }) {
 }
 
 export default Updater;
-

@@ -30,4 +30,3 @@ type IUser = {
 interface IData {
   data: IUser[];
 }
-

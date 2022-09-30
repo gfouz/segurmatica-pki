@@ -4,8 +4,6 @@ import { IFormInput } from './constants';
 import { Input, Tooltip } from '@chakra-ui/react';
 import { Path, UseFormRegister } from 'react-hook-form';
 
-
-
 type InputProps = {
   info?: string;
   errors: object;

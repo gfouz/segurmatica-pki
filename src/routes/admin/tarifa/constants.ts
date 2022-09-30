@@ -50,10 +50,8 @@ export async function postRequest(path: string, data: IFormInput) {
   }
 }
 
-
 export const range_type: chakraProps = {
   size: 'sm',
   type: 'text',
   variant: 'flushed',
 };
-

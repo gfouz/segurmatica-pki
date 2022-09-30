@@ -1,11 +1,9 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container, Badge, VStack, Heading } from '@chakra-ui/react';
 import { info } from '../common/constants';
-import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
 import TextInput from '../common/TextInput';
 import SelectList from './Select';
@@ -59,4 +57,3 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
-

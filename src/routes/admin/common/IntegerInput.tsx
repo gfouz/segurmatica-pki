@@ -18,11 +18,10 @@ const IntegerInput = ({ label, register, required, errors, defaultValue, info }:
       <Tooltip label={info} hasArrow arrowSize={15}>
         <Input
           size='sm'
-          type='number'
           cursor='pointer'
           variant='flushed'
           defaultValue={defaultValue}
-          {...register(label, { pattern: /^\d+$/, required })}
+          {...register(label, { pattern: /^\d+$/, required, maxLength: 4, minLength: 4 })}
         />
       </Tooltip>
       <ErrorWarning label={label} errors={errors} info={info} />

@@ -51,11 +51,7 @@ function Creator(props: { path: string }) {
             Añadir usuario
           </StyledLabel>
           <StyledLabel capit>Correo electrónico.</StyledLabel>
-          <EmailInput 
-            register={register} 
-            errors={errors} 
-            info={info.email}
-            />
+          <EmailInput register={register} errors={errors} info={info.email} />
           <StyledLabel capit>Escriba contraseña.</StyledLabel>
           <PasswordInput label='password' register={register} errors={errors} required />
 

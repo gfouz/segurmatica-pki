@@ -37,7 +37,7 @@ function Creator(props: { url: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-             <StyledLabel capit>Nombre del funcionario</StyledLabel>
+            <StyledLabel capit>Nombre del funcionario</StyledLabel>
             <TextInput info={info.name} required label='name' register={register} errors={errors} />
           </Container>
         </HStack>
@@ -69,4 +69,3 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
-

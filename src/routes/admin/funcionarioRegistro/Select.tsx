@@ -30,14 +30,13 @@ function SelectList(props: InputProps) {
         onChange={onChange}
       >
         {Array.isArray(list) &&
-          list.map( (item, key) => {
-          
+          list.map((item, key) => {
             return (
               <option value={item.id} key={key}>
-               <Span>{(item.email && item.email) || (item.name && item.name)}</Span>
+                <Span>{(item.email && item.email) || (item.name && item.name)}</Span>
               </option>
             );
-          } )}
+          })}
       </Select>
     </>
   );
@@ -46,7 +45,7 @@ function SelectList(props: InputProps) {
 export default SelectList;
 
 const Span = styled.p`
- color: green;
- text-transform: uppercase;
- font-weight: bolder;
+  color: green;
+  text-transform: uppercase;
+  font-weight: bolder;
 `;

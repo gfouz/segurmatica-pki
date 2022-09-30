@@ -35,7 +35,7 @@ function ArrayIterator({ data }: IProps) {
                 <p> {item?.price && `precio: ${item?.price}`}</p>
                 <p> {item?.range && `rango: ${item?.range}`}</p>
                 <p> {item?.phone && `tel: ${item?.phone}`}</p>
-                <p> {item?.enabled === true ? 'Habilitado' : 'Deshabilitado'}</p>
+                <p> {Boolean(item?.enabled) === true ? 'Habilitado' : 'Deshabilitado'}</p>
               </li>
             </ul>
           ))

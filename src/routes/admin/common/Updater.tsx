@@ -74,7 +74,7 @@ function Update(props: IProps) {
             id='enabled'
             size='sm'
             colorScheme='red'
-            defaultChecked={stack.enabled}
+            defaultChecked={Boolean(stack.enabled)}
           />
         </HStack>
 

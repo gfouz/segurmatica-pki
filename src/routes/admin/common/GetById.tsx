@@ -14,14 +14,12 @@ import NumericInput from './NumericInput';
 import { HStack, Input, Container } from '@chakra-ui/react';
 
 export default function GetById(props: { url: string; queryKey: string; msg?: string }) {
-  
   const { url, msg, queryKey } = props;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-
 
   const [id, setId] = useState<string | undefined>('');
   const [status, setStatus] = useState('');

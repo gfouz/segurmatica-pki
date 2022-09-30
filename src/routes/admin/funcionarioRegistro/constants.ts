@@ -60,5 +60,3 @@ export async function getRequestAll(path: string): Promise<IFormInput[] | any> {
     return err;
   }
 }
-
- 

@@ -1,5 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { useSnapshot } from 'valtio';
+import store from './store';
+import { state } from './store';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
@@ -14,6 +17,10 @@ function Creator(props: { url: string; msg?: string }) {
   const info = 'se permiten nombres compuestos sin números';
   const { url, msg } = props;
   const [status, setStatus] = React.useState('');
+  const snap = useSnapshot(store);
+  const snap2 = useSnapshot(state);
+  const { stack } = snap;
+
   const {
     register,
     handleSubmit,
@@ -28,8 +35,9 @@ function Creator(props: { url: string; msg?: string }) {
 
   React.useEffect(() => {
     message && setStatus(message);
+    message === 'created' && snap2.setOption('mostrar');
   }, [message]);
-  console.log(errors);
+  
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

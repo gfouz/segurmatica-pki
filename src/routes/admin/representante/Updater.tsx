@@ -184,7 +184,7 @@ function Updater() {
               size='sm'
               colorScheme='red'
               {...register('enabled')}
-              defaultChecked={stack.enabled}
+              defaultChecked={Boolean(stack.enabled)}
             />
           </HStack>
           <SubmitButton buttonstate={response?.isLoading} />

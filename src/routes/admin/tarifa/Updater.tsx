@@ -88,22 +88,17 @@ function Update(props: { url: string }) {
             Seleccione finalidad
           </StyledLabel>
           <Flex p='1em' direction='column'>
-            <SelectList 
-             list={data?.result} 
-             label='finalidadId' 
-             register={register} 
-             required 
-             />
+            <SelectList list={data?.result} label='finalidadId' register={register} required />
             {errors.finalidadId && <span style={{ color: 'red' }}>Field is required</span>}
           </Flex>
           <HStack>
             <StyledLabel m='0 1em'>Deshabilitar o habilitar</StyledLabel>
-            <Switch 
-            {...register('enabled')} 
-            id='enabled' 
-            size='sm' 
-            colorScheme='red'
-            defaultChecked={stack?.enabled} 
+            <Switch
+              {...register('enabled')}
+              id='enabled'
+              size='sm'
+              colorScheme='red'
+              defaultChecked={Boolean(stack?.enabled)}
             />
           </HStack>
           <SubmitButton buttonstate={response?.isLoading} />

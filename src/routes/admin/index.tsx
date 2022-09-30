@@ -139,7 +139,7 @@ const StyledAdmin = styled.div`
     box-shadow: 1px 1px 10px black;
     background-color: #e8e1db;
     a {
-      color: #000000;
+      color: #444444;
       padding: 1em;
       text-transform: uppercase;
       font-weight: bolder;

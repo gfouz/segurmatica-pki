@@ -13,8 +13,8 @@ export type IFormInput = {
   id?: string;
   id2?: string;
   ci?: string | undefined;
-  erId?: string | number;
-  eiId?: number;
+  erId?: string;
+  eiId?: string;
   name?: string;
   tome?: string;
   time?: string;
@@ -26,16 +26,16 @@ export type IFormInput = {
   phone?: string;
   namer?: string;
   namerCharger?: string;
-  userId?: number;
+  userId?: string;
   address?: string;
-  enabled?: boolean;
+  enabled?: string;
   password?: string;
   nominationTemplate?: string;
   namerCharge?: string;
-  provinciaId?: number;
-  organismoId?: number;
-  municipioId?: number;
-  finalidadId?: number;
+  provinciaId?: string;
+  organismoId?: string;
+  municipioId?: string;
+  finalidadId?: string;
 };
 
 export type IStoreProps = IFormInput;
@@ -61,6 +61,9 @@ export interface IProps {
 }
 
 interface ISuggestedWords {
+  ci: string;
+  tome: string;
+  folio: string;
   name: string;
   tel: string;
   alpha: string;
@@ -70,6 +73,9 @@ interface ISuggestedWords {
   password: string;
 }
 export const info: ISuggestedWords = {
+  ci: 'requerido 11 dígitos y ser mayor de 18 años!',
+  tome: 'requeridos 4 dígitos para el tomo!',
+  folio: 'requeridos 4 dígitos para el folio!',
   name: 'requiere nombres compuestos sin números',
   tel: 'requiere números nacionales de 8 dígitos ',
   alpha: 'requerido letras, números y espacios',
@@ -143,7 +149,10 @@ export async function putRequestById(
     return error.message;
   }
 }
-export async function getRequestById(path: string, id: string | undefined): Promise<IFormInput | any> {
+export async function getRequestById(
+  path: string,
+  id: string | undefined,
+): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.get<IFormInput>(`/${path}/${id}`);
     const result = res.data;

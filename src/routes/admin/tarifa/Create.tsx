@@ -45,33 +45,34 @@ function Creator(props: { url: string }) {
           <StyledLabel capit m='1em 0 0 0'>
             Tiempo
           </StyledLabel>
-          <NumericInput 
-             label='time' 
-             register={register} 
-             errors={errors} required  
-             info={info.numeric}
-             />
+          <NumericInput
+            label='time'
+            register={register}
+            errors={errors}
+            required
+            info={info.numeric}
+          />
           <StyledLabel capit m='1em 0 0 0'>
             Precio de Tarifa
           </StyledLabel>
-          <NumericInput 
-             label='price' 
-             register={register} 
-             errors={errors} 
-             required 
-             info={info.numeric} 
-             />
+          <NumericInput
+            label='price'
+            register={register}
+            errors={errors}
+            required
+            info={info.numeric}
+          />
           <StyledLabel capit m='1em 0 0 0'>
             Estimar rango
           </StyledLabel>
-          <AlphaNumericInput 
-             label='range' 
-             register={register} 
-             errors={errors} 
-             required 
-             info={info.alpha}
-             />
-        <StyledLabel color='#009966' capit m='1em 0 0 0'>
+          <AlphaNumericInput
+            label='range'
+            register={register}
+            errors={errors}
+            required
+            info={info.alpha}
+          />
+          <StyledLabel color='#009966' capit m='1em 0 0 0'>
             Seleccione finalidad
           </StyledLabel>
           <HStack p='1em'>
@@ -87,4 +88,3 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
-
