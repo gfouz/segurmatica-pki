@@ -85,7 +85,7 @@ interface ISuggestedWords {
   email: string;
   password: string;
 }
-export const tip: ISuggestedWords = {
+export const info: ISuggestedWords = {
   name: 'nombre valido requerido.',
   id: 'solo numeros requeridos',
   email: 'Debe contener @ y un formato correcto',

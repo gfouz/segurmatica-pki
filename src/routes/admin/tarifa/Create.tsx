@@ -5,9 +5,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input } from '@chakra-ui/react';
 import { Heading, Flex } from '@chakra-ui/react';
-import { info } from './constants';
+import { info } from '../common/constants';
 import SelectList from './Select';
-import { text_type } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
 import NumericInput from '../common/NumericInput';
@@ -46,22 +45,33 @@ function Creator(props: { url: string }) {
           <StyledLabel capit m='1em 0 0 0'>
             Tiempo
           </StyledLabel>
-      
-            <NumericInput label='time' register={register} errors={errors} required  info={info.numeric}/>
-        
+          <NumericInput 
+             label='time' 
+             register={register} 
+             errors={errors} required  
+             info={info.numeric}
+             />
           <StyledLabel capit m='1em 0 0 0'>
             Precio de Tarifa
           </StyledLabel>
-          
-            <NumericInput label='price' register={register} errors={errors} required info={info.numeric} />
-        
+          <NumericInput 
+             label='price' 
+             register={register} 
+             errors={errors} 
+             required 
+             info={info.numeric} 
+             />
           <StyledLabel capit m='1em 0 0 0'>
-            Seleccione rango
+            Estimar rango
           </StyledLabel>
-          
-            <AlphaNumericInput label='range' register={register} errors={errors} required info={info.alpha}/>
-        
-          <StyledLabel color='#009966' capit m='1em 0 0 0'>
+          <AlphaNumericInput 
+             label='range' 
+             register={register} 
+             errors={errors} 
+             required 
+             info={info.alpha}
+             />
+        <StyledLabel color='#009966' capit m='1em 0 0 0'>
             Seleccione finalidad
           </StyledLabel>
           <HStack p='1em'>

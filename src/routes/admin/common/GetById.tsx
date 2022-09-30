@@ -4,7 +4,6 @@ import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { info } from './constants';
-import SuggestedList from './Tooltip';
 import { getRequestById, IFormInput } from './constants';
 import ObjectIterator from './ObjectIterator';
 import SpinnerIcon from './Spinner';
@@ -15,6 +14,7 @@ import NumericInput from './NumericInput';
 import { HStack, Input, Container } from '@chakra-ui/react';
 
 export default function GetById(props: { url: string; queryKey: string; msg?: string }) {
+  
   const { url, msg, queryKey } = props;
   const {
     register,
@@ -22,7 +22,8 @@ export default function GetById(props: { url: string; queryKey: string; msg?: st
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const [id, setId] = useState('');
+
+  const [id, setId] = useState<string | undefined>('');
   const [status, setStatus] = useState('');
   const { data, isLoading, refetch } = useQuery(queryKey, () => getRequestById(url, id), {
     staleTime: 2000,
@@ -34,9 +35,9 @@ export default function GetById(props: { url: string; queryKey: string; msg?: st
   React.useEffect(() => {
     setStatus(message);
   }, [message]);
-  React.useEffect(()=>{
+  React.useEffect(() => {
     refetch();
-  }, [id])
+  }, [id]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (id) => {
     const num = id;
@@ -50,13 +51,13 @@ export default function GetById(props: { url: string; queryKey: string; msg?: st
           <HStack p='1em'>
             <Container>
               <StyledLabel>Buscar por ID</StyledLabel>
-                <NumericInput 
-                  label='id' 
-                  register={register} 
-                  errors={errors} 
-                  required 
-                  info={info.numeric}
-                  />
+              <NumericInput
+                label='id'
+                register={register}
+                errors={errors}
+                required
+                info={info.numeric}
+              />
               <SubmitButton buttonstate={response?.isLoading} />
             </Container>
           </HStack>

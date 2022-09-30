@@ -6,8 +6,11 @@ interface IData {
   data: IFormInput;
 }
 function ObjectIterator({ data }: IData) {
-  if (data?.hasOwnProperty('name') || data?.hasOwnProperty('email')) {
-    const item = Object.assign({}, data);
+
+   const isKey = (prop: string) => data?.hasOwnProperty(prop);
+   if ( isKey('name') || isKey('email') || isKey('price')) {
+   const item = Object.assign({}, data);
+
     return (
       <>
         <StyledIterator>
@@ -19,6 +22,8 @@ function ObjectIterator({ data }: IData) {
               {item.folio && <li className='list__item'>FOLIO: {item?.folio}</li>}
               {item.email && <li className='list__item'>EMAIL: {item?.email}</li>}
               {item.phone && <li className='list__item'>{`TEL: ${item?.phone}`}</li>}
+              {item.price && <li className='list__item'>{`Precio: ${item?.price}`}</li>}
+              {item.range && <li className='list__item'>{`Rango: ${item?.range}`}</li>}
               <li className='list__item'>
                 {item?.enabled === true ? 'habilitado' : 'deshabilitado'}
               </li>

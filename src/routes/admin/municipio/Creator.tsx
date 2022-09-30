@@ -4,11 +4,12 @@ import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container, Badge, VStack, Heading } from '@chakra-ui/react';
-import { info } from './constants';
+import { info } from '../common/constants';
 import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
 import TextInput from '../common/TextInput';
 import SelectList from './Select';
+import StyledLabel from '../common/StyledLabel';
 import { getRequestAll, postRequest, IFormInput } from '../common/constants';
 
 function Creator(props: { url: string }) {
@@ -59,8 +60,3 @@ function Creator(props: { url: string }) {
 
 export default Creator;
 
-const StyledLabel = styled.h4`
-  color: ${(props) => props.color || '#888888'};
-  font-weight: bolder;
-  text-transform: ${(props) => props.text};
-`;

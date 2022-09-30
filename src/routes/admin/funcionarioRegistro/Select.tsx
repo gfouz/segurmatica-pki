@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Select } from '@chakra-ui/react';
 import { Path, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '../common/constants';
@@ -28,18 +29,24 @@ function SelectList(props: InputProps) {
         size='xm'
         onChange={onChange}
       >
-        {list &&
-          list.map((item, key) => {
-            const keys = Object.keys(item);
+        {Array.isArray(list) &&
+          list.map( (item, key) => {
+          
             return (
-              <option key={key} value={item.id}>
-                <span style={{ color: '#444444' }}>{item.email || item.name}</span>
+              <option value={item.id} key={key}>
+               <Span>{(item.email && item.email) || (item.name && item.name)}</Span>
               </option>
             );
-          })}
+          } )}
       </Select>
     </>
   );
 }
 
 export default SelectList;
+
+const Span = styled.p`
+ color: green;
+ text-transform: uppercase;
+ font-weight: bolder;
+`;

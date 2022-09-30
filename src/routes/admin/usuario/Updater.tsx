@@ -11,11 +11,13 @@ import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
 import { Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
 import { HStack, Input, Flex } from '@chakra-ui/react';
 import { email_type, password_type } from '../common/cardStore';
-import { tip } from './constants';
+import { info } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
 import PasswordInput from '../common/PasswordInput';
 import StyledLabel from '../common/StyledLabel';
 import EmailInput from './EmailInput';
+import ErrorWarnig from '../common/ErrorWarning';
+
 
 function Update(props: { url: string; queryKey: string }) {
   const snap = useSnapshot(store);
@@ -51,19 +53,23 @@ function Update(props: { url: string; queryKey: string }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Flex direction='column'>
+        <Flex direction='column' p='0 1em'>
           <StyledLabel color='#009966' m='1em 0'>
             Actualizar usuario
           </StyledLabel>
           <StyledLabel capit>Correo electrónico.</StyledLabel>
-          <EmailInput register={register} errors={errors} />
+          <EmailInput 
+            info={info.email}
+            register={register} 
+            errors={errors} 
+            />
           <StyledLabel capit>Escriba una contraseña.</StyledLabel>
           <PasswordInput label='password' register={register} errors={errors} required />
           <StyledLabel color='#009966' capit>
             Seleccione un rol
           </StyledLabel>
           <SelectList list={data?.result} label='rolId' register={register} required />
-          {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
+          <ErrorWarnig label='rolId' errors={errors} info={info.select}/>
           <HStack m='2em 0'>
             <StyledLabel capit color='#444444'>
               Deshabilitar o habilitar.

@@ -4,7 +4,7 @@ import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Flex } from '@chakra-ui/react';
-import { tip } from './constants';
+import { info } from '../common/constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SelectList from './Select';
 import SubmitButton from '../common/SubmitButton';
@@ -51,8 +51,11 @@ function Creator(props: { path: string }) {
             Añadir usuario
           </StyledLabel>
           <StyledLabel capit>Correo electrónico.</StyledLabel>
-          <EmailInput register={register} errors={errors} />
-
+          <EmailInput 
+            register={register} 
+            errors={errors} 
+            info={info.email}
+            />
           <StyledLabel capit>Escriba contraseña.</StyledLabel>
           <PasswordInput label='password' register={register} errors={errors} required />
 

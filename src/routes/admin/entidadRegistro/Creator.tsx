@@ -6,7 +6,7 @@ import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
 import { provinces, tooltip } from '../common/cardStore';
 import { text_type } from '../common/constants';
-import { info } from './constants';
+import { info } from '../common/constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
 import TextInput from '../common/TextInput';

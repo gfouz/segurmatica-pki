@@ -7,12 +7,13 @@ import store from '../common/store';
 import StatusHandler from '../common/StatusHandler';
 import SelectList from './Select';
 import { getRequestAll, putRequestById, councils } from './constants';
-import { info } from './constants';
+import { info } from '../common/constants';
 import TextInput from '../common/TextInput';
 import { HStack, Flex, Input } from '@chakra-ui/react';
 import { VStack, Switch, Heading, FormLabel } from '@chakra-ui/react';
 import SubmitButton from '../common/SubmitButton';
 import { IFormInput } from '../common/constants';
+import StyledLabel from '../common/StyledLabel';
 
 function Update(props: { url: string }) {
   const snap = useSnapshot(store);
@@ -45,7 +46,7 @@ function Update(props: { url: string }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack m='1em 0' align='left'>
-          <StyledLabel color='#009966' text='capitalize'>
+          <StyledLabel color='#009966' capit>
             {stack.name}
           </StyledLabel>
         </VStack>
@@ -78,8 +79,3 @@ function Update(props: { url: string }) {
 
 export default Update;
 
-const StyledLabel = styled.h4`
-  color: ${(props) => props.color || '#888888'};
-  font-weight: bolder;
-  text-transform: ${(props) => props.text};
-`;

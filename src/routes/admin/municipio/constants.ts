@@ -58,12 +58,6 @@ interface ISuggestedWords {
   name: string;
   select: string;
 }
-export const info: ISuggestedWords = {
-  name: 'se permiten nombres compuestos sin números',
-  tel: 'números nacionales de 8 dígitos ',
-  alpha: 'se permite letras, números y espacios',
-  select: 'esta selección es requerida',
-};
 
 export const councils = [
   'Chaparra',

@@ -48,7 +48,6 @@ function Updater() {
 
   const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
     response.mutateAsync(formdata);
-    console.log(formdata);
   };
 
   return (

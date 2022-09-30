@@ -15,7 +15,7 @@ import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
 import { HStack, Input, Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
 import { IDS, emailtips, tooltip, number_type, text_type } from '../common/cardStore';
 import SelectList from './Select';
-import { info } from './constants';
+import { info } from '../common/constants';
 
 function Update(props: { url: string }) {
   const [status, setStatus] = React.useState('');

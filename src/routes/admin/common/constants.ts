@@ -10,18 +10,18 @@ export const axiosApi = axios.create({
 });
 
 export type IFormInput = {
-  id?: string | number;
+  id?: string;
   id2?: string;
   ci?: string | undefined;
   erId?: string | number;
   eiId?: number;
   name?: string;
-  tome?: number;
-  time?: number;
-  price?: number;
+  tome?: string;
+  time?: string;
+  price?: string;
   range?: string;
-  folio?: number;
-  rolId?: number;
+  folio?: string;
+  rolId?: string;
   email?: string;
   phone?: string;
   namer?: string;
@@ -61,9 +61,13 @@ export interface IProps {
 }
 
 interface ISuggestedWords {
-  id: string;
   name: string;
+  tel: string;
+  alpha: string;
+  numeric: string;
   select: string;
+  email: string;
+  password: string;
 }
 export const info: ISuggestedWords = {
   name: 'requiere nombres compuestos sin números',
@@ -71,8 +75,9 @@ export const info: ISuggestedWords = {
   alpha: 'requerido letras, números y espacios',
   select: 'esta selección es requerida',
   numeric: 'requiere números enteros o decímales',
+  email: 'Debe contener @ y un formato correcto',
+  password: 'Debe tener 1 letra mayuscula y minuscula, 1 número y al menos 8 caracteres',
 };
-
 
 /*-----------css styles and Chakra attributes types.--------*/
 export type chakraProps = {
@@ -128,7 +133,7 @@ export async function postRequest(path: string, data: IFormInput): Promise<IForm
 export async function putRequestById(
   data: IFormInput,
   path: string,
-  id: string | any,
+  id: string | undefined,
 ): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.put<IFormInput>(`/${path}/${id}`, data);
@@ -138,7 +143,7 @@ export async function putRequestById(
     return error.message;
   }
 }
-export async function getRequestById(path: string, id: string): Promise<IFormInput | any> {
+export async function getRequestById(path: string, id: string | undefined): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.get<IFormInput>(`/${path}/${id}`);
     const result = res.data;

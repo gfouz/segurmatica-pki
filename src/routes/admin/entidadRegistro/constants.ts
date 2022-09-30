@@ -31,14 +31,3 @@ interface IData {
   data: IUser[];
 }
 
-interface ISuggestedWords {
-  id: string;
-  name: string;
-  select: string;
-}
-export const info: ISuggestedWords = {
-  name: 'se permiten nombres compuestos sin números',
-  id: 'solo numeros requeridos',
-  alpha: 'permite letras, números y espacios',
-  select: 'esta selección es requerida',
-};

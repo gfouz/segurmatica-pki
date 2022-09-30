@@ -4,6 +4,8 @@ import { IFormInput } from './constants';
 import { Input, Tooltip } from '@chakra-ui/react';
 import { Path, UseFormRegister } from 'react-hook-form';
 
+
+
 type InputProps = {
   info?: string;
   errors: object;
@@ -18,7 +20,6 @@ const NumericInput = ({ label, register, required, errors, defaultValue, info }:
       <Tooltip label={info} hasArrow arrowSize={15}>
         <Input
           size='sm'
-          type='number'
           cursor='pointer'
           variant='flushed'
           defaultValue={defaultValue}
