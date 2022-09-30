@@ -12,8 +12,7 @@ interface IErrorWarning {
 
 function ErrorWarning(props: IErrorWarning) {
   const { errors, label, info } = props;
-  
-  
+
   return (
     <StyledErrorWarning {...props}>
       {errors?.hasOwnProperty(label) && <p>{info}</p>}
@@ -34,27 +33,33 @@ const StyledErrorWarning = styled.div`
   padding: ${(props: IErrorWarning) => props.p};
   margin: ${(props: IErrorWarning) => props.m};
 
+  p {
+    overflow: hidden;
+    border-right: 0.15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em; /* Adjust as needed */
+    animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
 
-   p {
-  overflow: hidden; 
-  border-right: .15em solid orange; 
-  white-space: nowrap; 
-  margin: 0 auto;
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: 
-  typing 2s steps(40, end),
-  blink-caret .75s step-end infinite;
-}
+  /* The typing effect */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
-}
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: orange;
+    }
+  }
 `;

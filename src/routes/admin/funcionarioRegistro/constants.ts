@@ -61,48 +61,14 @@ export async function getRequestAll(path: string): Promise<IFormInput[] | any> {
   }
 }
 
-/*-----------css styles and Chakra attributes types.--------*/
-export type chakraProps = {
-  size: ResponsiveValue<(string & unknown) | 'sm' | 'md' | 'lg' | 'xs'> | undefined;
-  type: React.HTMLInputTypeAttribute | undefined;
-  variant:
-    | ResponsiveValue<(string & unknown) | 'outline' | 'flushed' | 'unstyled' | 'filled'>
-    | undefined;
-};
-
-// HTML AND CHAKRA ATTRIBUTES
-export const number_type: chakraProps = {
-  size: 'sm',
-  type: 'number',
-  variant: 'flushed',
-};
-export const text_type: chakraProps = {
-  size: 'sm',
-  type: 'text',
-  variant: 'flushed',
-};
-export const email_type: chakraProps = {
-  size: 'sm',
-  type: 'email',
-  variant: 'flushed',
-};
-export const password_type: chakraProps = {
-  size: 'sm',
-  type: 'password',
-  variant: 'flushed',
-};
-
 interface ISuggestedWords {
   id: string;
   name: string;
+  select: string;
 }
-export const tip: ISuggestedWords = {
-  name: 'nombre valido requerido.',
-  id: 'solo numeros requeridos',
+export const info: ISuggestedWords = {
+  name: 'se permiten nombres compuestos sin números',
+  tel: 'números nacionales de 8 dígitos ',
+  alpha: 'permite letras, números y espacios',
+  select: 'esta selección es requerida',
 };
-export const numbers = ['123456789'];
-export const empresas = [
-  'Universidad de Matanzas',
-  'Facultad de Medicina de Cárdenas',
-  'Empresa MICOM',
-];

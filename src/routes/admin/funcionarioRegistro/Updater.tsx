@@ -1,12 +1,12 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import store from '../common/store';
 import { state } from '../common/store';
 import { useSnapshot } from 'valtio';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { tip } from './constants';
-import { text_type } from '../common/cardStore';
+import { info } from './constants';
 import { getRequestEnabled, putRequestById, empresas } from './constants';
 import { IFormInput } from '../common/constants';
 import SelectList from '../entidadRegistro/Select';
@@ -57,9 +57,8 @@ function Updater(props: { url: string }) {
             <label htmlFor='name'>
               <strong className='byid-input-label'>Nombre del funcionario de registro</strong>
             </label>
-            
-              <TextInput label='name' register={register} errors={errors} required />
-      
+
+            <TextInput info={info.name} required label='name' register={register} errors={errors} />
           </Container>
         </HStack>
         <HStack p='1em'>
@@ -69,9 +68,8 @@ function Updater(props: { url: string }) {
                 Escriba el teléfono del funcionario de registro
               </strong>
             </label>
-            
-              <TelInput label='phone' register={register} errors={errors} required />
-        
+
+            <TelInput required info={info.tel} label='phone' errors={errors} register={register} />
           </Container>
         </HStack>
         <HStack p='1em'>
@@ -102,3 +100,8 @@ function Updater(props: { url: string }) {
 }
 
 export default Updater;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+`;

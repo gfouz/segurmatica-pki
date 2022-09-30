@@ -22,7 +22,7 @@ const TextInput = ({ label, register, required, errors, defaultValue, info }: In
           cursor='pointer'
           variant='flushed'
           defaultValue={defaultValue}
-          {...register(label, { pattern: /^[a-zA-Z\u00C0-\u017F\s]+$/  ,required })}
+          {...register(label, { pattern: /^[a-zA-Z\u00C0-\u017F\s]+$/, required })}
         />
       </Tooltip>
       <ErrorWarning label={label} errors={errors} info={info} />

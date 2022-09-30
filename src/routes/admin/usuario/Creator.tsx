@@ -3,14 +3,14 @@ import axios from 'axios';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { HStack, Input, Container } from '@chakra-ui/react';
+import { HStack, Input, Flex } from '@chakra-ui/react';
 import { tip } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SelectList from './Select';
 import SubmitButton from '../common/SubmitButton';
 import PasswordInput from '../common/PasswordInput';
 import EmailInput from './EmailInput';
-
+import StyledLabel from '../common/StyledLabel';
 
 const BASE_URL = 'http://localhost:5000';
 const axiosApi = axios.create({
@@ -46,39 +46,25 @@ function Creator(props: { path: string }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Su email</strong>
-            </label>
-          
-              <EmailInput  register={register} errors={errors}  />
-            
-          </Container>
-        </HStack>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>Su contraseña</strong>
-            </label>
-            
-              <PasswordInput label='password' register={register} errors={errors} required />
-        
-          </Container>
-        </HStack>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>Seleccione rol de usuario</strong>
-            </label>
+        <Flex direction='column'>
+          <StyledLabel color='#009966' m='1em 0' capit>
+            Añadir usuario
+          </StyledLabel>
+          <StyledLabel capit>Correo electrónico.</StyledLabel>
+          <EmailInput register={register} errors={errors} />
 
-            <SelectList list={data?.result} label='rolId' register={register} required />
+          <StyledLabel capit>Escriba contraseña.</StyledLabel>
+          <PasswordInput label='password' register={register} errors={errors} required />
 
-            {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
-          </Container>
-        </HStack>
-        <SubmitButton buttonstate={response?.isLoading} />
-        {status && <StatusHandler message={status} />}
+          <StyledLabel color='#009966' capit>
+            Seleccione rol de usuario.
+          </StyledLabel>
+          <SelectList list={data?.result} label='rolId' register={register} required />
+          {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
+
+          <SubmitButton buttonstate={response?.isLoading} />
+          {status && <StatusHandler message={status} />}
+        </Flex>
       </form>
     </>
   );

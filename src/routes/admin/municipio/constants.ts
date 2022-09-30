@@ -56,10 +56,13 @@ export async function postRequest(path: string, data: IFormInput): Promise<IForm
 interface ISuggestedWords {
   id: string;
   name: string;
+  select: string;
 }
-export const tip: ISuggestedWords = {
-  name: 'nombre valido requerido.',
-  id: 'solo numeros requeridos',
+export const info: ISuggestedWords = {
+  name: 'se permiten nombres compuestos sin números',
+  tel: 'números nacionales de 8 dígitos ',
+  alpha: 'se permite letras, números y espacios',
+  select: 'esta selección es requerida',
 };
 
 export const councils = [

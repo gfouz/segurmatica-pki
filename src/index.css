@@ -34,4 +34,5 @@ code {
   pointer-events: none;
   white-space: nowrap;
   cursor: pointer;
+  font-style: italic;
 }

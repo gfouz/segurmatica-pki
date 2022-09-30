@@ -7,7 +7,7 @@ import store from '../common/store';
 import StatusHandler from '../common/StatusHandler';
 import SelectList from './Select';
 import { getRequestAll, putRequestById, councils } from './constants';
-import { tip } from './constants';
+import { info } from './constants';
 import TextInput from '../common/TextInput';
 import { HStack, Flex, Input } from '@chakra-ui/react';
 import { VStack, Switch, Heading, FormLabel } from '@chakra-ui/react';
@@ -45,31 +45,23 @@ function Update(props: { url: string }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack m='1em 0' align='left'>
-          <Heading size='md' color='#009966' textTransform='capitalize'>
+          <StyledLabel color='#009966' text='capitalize'>
             {stack.name}
-          </Heading>
+          </StyledLabel>
         </VStack>
         <VStack align='left'>
-          <FormLabel size='sm' color='#333333'>
-            Nombre de municipio
-          </FormLabel>
-          
-            <TextInput label='name' register={register} errors={errors} required />
-          
+          <StyledLabel>Nombre de Municipio</StyledLabel>
+          <TextInput info={info.name} required label='name' errors={errors} register={register} />
         </VStack>
 
         <VStack align='left'>
-          <Heading size='sm' m='2em 0 0.5em 0'>
-            Provincia a que pertenece
-          </Heading>
+          <StyledLabel>Provincia a que pertenece</StyledLabel>
           <SelectList list={data?.result} label='provinciaId' register={register} required />
           {errors.provinciaId && <span style={{ color: 'red' }}>Field is required</span>}
         </VStack>
 
         <VStack align='left'>
-          <Heading size='sm' color='#444444' m='2em 0 0 0'>
-            Deshabilitar o habilitar
-          </Heading>
+          <StyledLabel>Deshabilitar o habilitar</StyledLabel>
           <Switch
             {...register('enabled')}
             size='sm'
@@ -85,3 +77,9 @@ function Update(props: { url: string }) {
 }
 
 export default Update;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+  text-transform: ${(props) => props.text};
+`;

@@ -50,27 +50,7 @@ export async function postRequest(path: string, data: IFormInput) {
   }
 }
 
-// HTML AND CHAKRA ATTRIBUTES
-export const number_type: chakraProps = {
-  size: 'sm',
-  type: 'number',
-  variant: 'flushed',
-};
-export const text_type: chakraProps = {
-  size: 'sm',
-  type: 'text',
-  variant: 'flushed',
-};
-export const email_type: chakraProps = {
-  size: 'sm',
-  type: 'email',
-  variant: 'flushed',
-};
-export const password_type: chakraProps = {
-  size: 'sm',
-  type: 'password',
-  variant: 'flushed',
-};
+
 export const range_type: chakraProps = {
   size: 'sm',
   type: 'text',
@@ -80,8 +60,12 @@ export const range_type: chakraProps = {
 interface ISuggestedWords {
   id: string;
   name: string;
+  select: string;
 }
-export const tip: ISuggestedWords = {
-  name: 'nombre valido requerido.',
-  id: 'solo numeros requeridos',
+export const info: ISuggestedWords = {
+  name: 'requiere nombres compuestos sin números',
+  tel: 'requiere números nacionales de 8 dígitos ',
+  alpha: 'requerido letras, números y espacios',
+  select: 'esta selección es requerida',
+  numeric: 'requiere números enteros o decímales',
 };

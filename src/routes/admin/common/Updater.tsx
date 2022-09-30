@@ -19,8 +19,7 @@ interface IProps {
 }
 
 function Update(props: IProps) {
-
-  const info = 'se permiten nombres compuestos sin números';
+  const info = 'se requiere nombres compuestos sin números';
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
 
@@ -56,15 +55,14 @@ function Update(props: IProps) {
         <HStack p='1em'>
           <Container>
             <StyledLabel>Actualice nombre</StyledLabel>
-              <TextInput
-                info={info}
-                required
-                label='name'
-                errors={errors}
-                register={register}
-                defaultValue={stack.name}
-              />
-          
+            <TextInput
+              info={info}
+              required
+              label='name'
+              errors={errors}
+              register={register}
+              defaultValue={stack.name}
+            />
           </Container>
         </HStack>
         <HStack>

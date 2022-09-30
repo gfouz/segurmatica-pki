@@ -16,7 +16,7 @@ interface ISuggestedWords {
 export const info: ISuggestedWords = {
   name: 'se permiten nombres compuestos sin números',
   id: 'solo numeros requeridos',
-  select: 'esta selección es requerida'
+  select: 'esta selección es requerida',
 };
 export const empresas = [
   'Universidad de Matanzas',

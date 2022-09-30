@@ -1,9 +1,10 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container, Badge, VStack, Heading } from '@chakra-ui/react';
-import { tip } from './constants';
+import { info } from './constants';
 import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
 import TextInput from '../common/TextInput';
@@ -36,20 +37,14 @@ function Creator(props: { url: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>Nombre de Municipio</strong>
-            </label>
-          
-              <TextInput label='name' register={register} errors={errors} required />
-      
+            <StyledLabel>Nombre de Municipio</StyledLabel>
+            <TextInput info={info.name} required label='name' errors={errors} register={register} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <VStack align='left'>
-              <Heading size='sm' m='2em 0 0.5em 0'>
-                Provincia a que pertenece
-              </Heading>
+              <StyledLabel>Provincia a que pertenece</StyledLabel>
               <SelectList list={data?.result} label='provinciaId' register={register} required />
               {errors.provinciaId && <span style={{ color: 'red' }}>Field is required</span>}
             </VStack>
@@ -63,3 +58,9 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+  text-transform: ${(props) => props.text};
+`;

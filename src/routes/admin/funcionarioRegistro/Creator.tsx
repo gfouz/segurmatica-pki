@@ -1,9 +1,9 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { tip } from './constants';
-import { text_type } from '../common/cardStore';
+import { info } from './constants';
 import { getRequestEnabled, postRequest, empresas } from './constants';
 import { IFormInput, IProps } from '../common/constants';
 import SelectList from '../entidadRegistro/Select';
@@ -37,42 +37,27 @@ function Creator(props: { url: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='name'>
-              <strong className='byid-input-label'>
-                Escriba el nombre del funcionario de registro
-              </strong>
-            </label>
-            
-              <TextInput label='name' register={register} errors={errors} required />
-          
+            <StyledLabel>Nombre del funcionario de registro</StyledLabel>
+
+            <TextInput info={info.name} required label='name' register={register} errors={errors} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Teléfono del funcionario de registro</strong>
-            </label>
-            
-              <TelInput label='phone' register={register} errors={errors} required />
-      
+            <StyledLabel>Teléfono del funcionario de registro</StyledLabel>
+            <TelInput required info={info.tel} label='phone' errors={errors} register={register} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
-                Seleccione entidad de registro a la que pertenece
-              </strong>
-            </label>
+            <StyledLabel>Seleccione entidad de registro a la que pertenece</StyledLabel>
             <SelectList list={entidad?.result} label='erId' register={register} required />
             {errors.erId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong>Seleccione usuario al que se vincula</strong>
-            </label>
+            <StyledLabel>Seleccione usuario al que se vincula</StyledLabel>
             <SelectList list={users?.result} label='userId' register={register} required />
             {errors.userId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
@@ -85,3 +70,8 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+`;

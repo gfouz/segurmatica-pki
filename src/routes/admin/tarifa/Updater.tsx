@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -12,7 +13,7 @@ import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
 import NumericInput from '../common/NumericInput';
 import AlphaNumericInput from '../common/AlphaNumericInput';
-
+import StyledLabel from '../common/StyledLabel';
 
 function Update(props: { url: string }) {
   const { url } = props;
@@ -41,41 +42,38 @@ function Update(props: { url: string }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex p='1em' direction='column'>
-          <Heading size='sm' p='1em'>
+          <StyledLabel m='0 0 2em 0' capit color='#009966' center>
+            Actualizar tarifa
+          </StyledLabel>
+          <StyledLabel m='1em 0 0 0' capit>
             Tiempo
-          </Heading>
-          <HStack>
-          
-              <NumericInput label='time' register={register} errors={errors} required />
+          </StyledLabel>
       
-          </HStack>
-          <Heading size='sm' p='1em'>
+            <NumericInput label='time' register={register} errors={errors} required />
+
+          <StyledLabel m='1em 0 0 0' capit>
             Precio de Tarifa
-          </Heading>
-          <HStack>
-          
-              <NumericInput label='price' register={register} errors={errors} required />
-        
-          </HStack>
-          <Heading size='sm' p='1em'>
+          </StyledLabel>
+    
+            <NumericInput label='price' register={register} errors={errors} required />
+  
+          <StyledLabel m='1em 0 0 0' capit>
             Seleccione rango
-          </Heading>
-          <HStack>
-            
-              <AlphaNumericInput label='range' register={register} errors={errors} required />
+          </StyledLabel>
       
-          </HStack>
-          <Heading size='sm' p='1em'>
+            <AlphaNumericInput label='range' register={register} errors={errors} required />
+        
+          <StyledLabel m='2em 0 0 0' capit color='#009966'>
             Seleccione finalidad
-          </Heading>
-          <Flex p='1em' direction ='column'>
+          </StyledLabel>
+          <Flex p='1em' direction='column'>
             <SelectList list={data?.result} label='finalidadId' register={register} required />
             {errors.finalidadId && <span style={{ color: 'red' }}>Field is required</span>}
           </Flex>
-          <HStack p='1em'>
-            <Heading size='sm' m='0 1em'>
+          <HStack>
+            <StyledLabel m='0 1em'>
               Deshabilitar o habilitar
-            </Heading>
+            </StyledLabel>
             <Switch {...register('enabled')} id='enabled' size='sm' colorScheme='red' />
           </HStack>
           <SubmitButton buttonstate={response?.isLoading} />
@@ -87,3 +85,4 @@ function Update(props: { url: string }) {
 }
 
 export default Update;
+

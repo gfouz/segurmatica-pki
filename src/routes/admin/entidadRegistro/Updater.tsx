@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import { useSnapshot } from 'valtio';
 import store from '../common/store';
@@ -14,6 +15,7 @@ import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
 import { HStack, Input, Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
 import { IDS, emailtips, tooltip, number_type, text_type } from '../common/cardStore';
 import SelectList from './Select';
+import { info } from './constants';
 
 function Update(props: { url: string }) {
   const [status, setStatus] = React.useState('');
@@ -54,44 +56,35 @@ function Update(props: { url: string }) {
 
         <HStack>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>Nombre de la Entidad de registro</strong>
-            </label>
-            
-              <TextInput
-                required
-                label='name'
-                errors={errors}
-                register={register}
-                defaultValue={stack.name}
-              />
-            
-            {errors.name && <span style={{ color: 'red' }}>Field is required</span>}
+            <StyledLabel>Nombre de la Entidad de registro</StyledLabel>
+
+            <TextInput
+              info={info.name}
+              required
+              label='name'
+              errors={errors}
+              register={register}
+              defaultValue={stack.name}
+            />
           </Container>
         </HStack>
         <HStack>
           <Container>
-            <label htmlFor='address'>
-              <strong className='byid-input-label'>Dirección de la entidad de registro</strong>
-            </label>
-            
-              <AlphaNumericInput
-                required
-                label='address'
-                errors={errors}
-                register={register}
-                defaultValue={stack.address}
-              />
-          
+            <StyledLabel>Dirección de la entidad de registro</StyledLabel>
+
+            <AlphaNumericInput
+              info={info.alpha}
+              required
+              label='address'
+              errors={errors}
+              register={register}
+              defaultValue={stack.address}
+            />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='byid-input-label'>
-                Seleccione municipio de entidad de registro
-              </strong>
-            </label>
+            <StyledLabel>Seleccione municipio de entidad de registro</StyledLabel>
 
             <SelectList list={data?.result} label='municipioId' register={register} required />
 
@@ -114,3 +107,8 @@ function Update(props: { url: string }) {
 }
 
 export default Update;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+`;

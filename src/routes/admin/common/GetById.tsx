@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { IDS, tooltip, text_type } from './cardStore';
+import { info } from './constants';
 import SuggestedList from './Tooltip';
 import { getRequestById, IFormInput } from './constants';
 import ObjectIterator from './ObjectIterator';
 import SpinnerIcon from './Spinner';
 import SubmitButton from '../common/SubmitButton';
+import StyledLabel from './StyledLabel';
+import NumericInput from './NumericInput';
 
 import { HStack, Input, Container } from '@chakra-ui/react';
 
@@ -32,9 +34,13 @@ export default function GetById(props: { url: string; queryKey: string; msg?: st
   React.useEffect(() => {
     setStatus(message);
   }, [message]);
+  React.useEffect(()=>{
+    refetch();
+  }, [id])
 
   const onSubmit: SubmitHandler<IFormInput> = async (id) => {
-    refetch();
+    const num = id;
+    setId(num.id);
   };
 
   return (
@@ -43,23 +49,17 @@ export default function GetById(props: { url: string; queryKey: string; msg?: st
         <form onSubmit={handleSubmit(onSubmit)}>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='provinces'>
-                <strong className='byid-input-label'>Buscar por ID</strong>
-              </label>
-              <SuggestedList message={msg}>
-                <Input
-                  list='provincias'
-                  {...register('id', { required: true })}
-                  onChange={(evt) => setId(evt.target.value)}
-                  size='sm'
-                  type='number'
-                  variant='flushed'
-                />
-              </SuggestedList>
+              <StyledLabel>Buscar por ID</StyledLabel>
+                <NumericInput 
+                  label='id' 
+                  register={register} 
+                  errors={errors} 
+                  required 
+                  info={info.numeric}
+                  />
               <SubmitButton buttonstate={response?.isLoading} />
             </Container>
           </HStack>
-          {errors.id && <span style={{ color: 'red' }}>Field is required</span>}
         </form>
         <HStack>{isLoading ? <SpinnerIcon /> : <ObjectIterator data={response} />}</HStack>
         <HStack>{status && <StatusHandler message={status} />}</HStack>

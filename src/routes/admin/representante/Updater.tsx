@@ -62,7 +62,7 @@ function Updater() {
                   <p className='form-title'>Actualizar representante:</p>
                 </label>
               </HStack>
-                <StyledLabel>Nro de Carnet del representante</StyledLabel>
+              <StyledLabel>Nro de Carnet del representante</StyledLabel>
 
               <IdentityNumberInput
                 required

@@ -24,7 +24,6 @@ export type IFormInput = {
   nominationTemplate: string;
 };
 
-
 export type IStoreProps = IFormInput;
 export type IList = IFormInput;
 
@@ -51,7 +50,7 @@ export interface IProps {
 }
 
 interface Itip {
-  ci: string; 
+  ci: string;
   tome: string;
   folio: string;
   name: string;
@@ -87,7 +86,6 @@ export const file_type: chakraProps = {
   variant: 'flushed',
 };
 
-
 export async function postRequest(path: string, data: IFormInput): Promise<IFormInput | any> {
   try {
     const res = await axiosApi.post<IFormInput>(path, data);
@@ -97,8 +95,6 @@ export async function postRequest(path: string, data: IFormInput): Promise<IForm
     return error?.message;
   }
 }
-
-
 
 export async function putRequestById(
   data: IFormInput,
@@ -123,8 +119,6 @@ export async function getRequestById(path: string, id: string) {
     return error.message;
   }
 }
-
-
 
 export async function getRequestEnabled(path: string): Promise<IFormInput[] | any> {
   try {

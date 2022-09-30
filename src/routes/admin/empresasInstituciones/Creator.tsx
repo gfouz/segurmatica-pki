@@ -13,8 +13,6 @@ import SelectList from './Select';
 import ErrorWarning from '../common/ErrorWarning';
 
 function Creator(props: { url: string }) {
-
-
   const [status, setStatus] = React.useState('');
   const {
     register,
@@ -40,25 +38,24 @@ function Creator(props: { url: string }) {
         <HStack p='1em'>
           <Container>
             <StyledLabel>Nombre de empresa o instit...</StyledLabel>
-            <TextInput label='name' register={register} errors={errors} required info={info.name}/>
-          </Container>
-        </HStack>
-        <HStack p='1em'>
-          <Container>
 
-              <StyledLabel>seleccione organismo</StyledLabel>
-            
-            <SelectList list={org?.result} label='organismoId' register={register} required />
-            <ErrorWarning label='organismoId' errors={errors}  info={info.select}/>
+            <TextInput label='name' register={register} errors={errors} required info={info.name} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            
-             <StyledLabel>seleccione municipio</StyledLabel>
-            
+            <StyledLabel>seleccione organismo</StyledLabel>
+
+            <SelectList list={org?.result} label='organismoId' register={register} required />
+            <ErrorWarning label='organismoId' errors={errors} info={info.select} />
+          </Container>
+        </HStack>
+        <HStack p='1em'>
+          <Container>
+            <StyledLabel>seleccione municipio</StyledLabel>
+
             <SelectList list={mun?.result} label='municipioId' register={register} required />
-            <ErrorWarning label='municipioId' errors={errors}  info={info.select}/>
+            <ErrorWarning label='municipioId' errors={errors} info={info.select} />
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />
@@ -74,4 +71,3 @@ const StyledLabel = styled.h4`
   color: #888888;
   font-weight: bolder;
 `;
-

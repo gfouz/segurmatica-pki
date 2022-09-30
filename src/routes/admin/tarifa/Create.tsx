@@ -1,17 +1,18 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input } from '@chakra-ui/react';
 import { Heading, Flex } from '@chakra-ui/react';
-import { tip } from './constants';
+import { info } from './constants';
 import SelectList from './Select';
 import { text_type } from './constants';
 import { postRequest, getRequestAll, IFormInput } from '../common/constants';
 import SubmitButton from '../common/SubmitButton';
 import NumericInput from '../common/NumericInput';
+import StyledLabel from '../common/StyledLabel';
 import AlphaNumericInput from '../common/AlphaNumericInput';
-
 
 function Creator(props: { url: string }) {
   const { url } = props;
@@ -39,33 +40,30 @@ function Creator(props: { url: string }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex p='1em' direction='column'>
-          <Heading size='sm' p='1em'>
+          <StyledLabel m='0 0 2em 0' capit color='#009966' center>
+            Añadir tarifa
+          </StyledLabel>
+          <StyledLabel capit m='1em 0 0 0'>
             Tiempo
-          </Heading>
-          <HStack>
-            
-              <NumericInput label='time' register={register} errors={errors} required />
-            
-          </HStack>
-          <Heading size='sm' p='1em'>
+          </StyledLabel>
+      
+            <NumericInput label='time' register={register} errors={errors} required  info={info.numeric}/>
+        
+          <StyledLabel capit m='1em 0 0 0'>
             Precio de Tarifa
-          </Heading>
-          <HStack>
+          </StyledLabel>
+          
+            <NumericInput label='price' register={register} errors={errors} required info={info.numeric} />
         
-              <NumericInput label='price' register={register} errors={errors} required />
-        
-          </HStack>
-          <Heading size='sm' p='1em'>
+          <StyledLabel capit m='1em 0 0 0'>
             Seleccione rango
-          </Heading>
-          <HStack p='1em'>
-            
-              <AlphaNumericInput label='range' register={register} errors={errors} required />
+          </StyledLabel>
+          
+            <AlphaNumericInput label='range' register={register} errors={errors} required info={info.alpha}/>
         
-          </HStack>
-          <Heading size='sm' p='1em'>
+          <StyledLabel color='#009966' capit m='1em 0 0 0'>
             Seleccione finalidad
-          </Heading>
+          </StyledLabel>
           <HStack p='1em'>
             <SelectList list={data?.result} label='finalidadId' register={register} required />
             {errors.finalidadId && <span style={{ color: 'red' }}>Field is required</span>}
@@ -79,3 +77,4 @@ function Creator(props: { url: string }) {
 }
 
 export default Creator;
+

@@ -15,7 +15,6 @@ import TextInput from '../common/TextInput';
 import SubmitButton from '../common/SubmitButton';
 import ErrorWarning from '../common/ErrorWarning';
 
-
 function Update(props: { url: string }) {
   const snap = useSnapshot(store);
   const snap2 = useSnapshot(state);
@@ -105,6 +104,6 @@ function Update(props: { url: string }) {
 export default Update;
 
 const StyledLabel = styled.h4`
-  color: ${props => props.color || '#888888'};
+  color: ${(props) => props.color || '#888888'};
   font-weight: bolder;
 `;

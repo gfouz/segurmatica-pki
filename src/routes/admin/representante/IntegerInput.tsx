@@ -22,8 +22,7 @@ const IntegerInput = ({ label, register, required, errors, defaultValue, info }:
           cursor='pointer'
           variant='flushed'
           defaultValue={defaultValue}
-          {...register(label, { pattern: /^\d+$/, required, minLength: 4,
-            maxLength: 4, })}
+          {...register(label, { pattern: /^\d+$/, required, minLength: 4, maxLength: 4 })}
         />
       </Tooltip>
       <ErrorWarning label={label} errors={errors} info={info} />

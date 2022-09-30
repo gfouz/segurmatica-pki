@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { getRequestAll } from './constants';
 import { Spinner, Heading } from '@chakra-ui/react';
+import StyledLabel from '../common/StyledLabel';
 
 //const payload = localStorage.getItem("jwt")
 
@@ -31,11 +32,9 @@ export default function Getter(props: { url: string; queryKey: string }) {
       )}
       <StyledTextContainer>
         {status && <StatusHandler message={status} />}
-        <label htmlFor='terminos'>
-          <Heading color='#009966' size='md' m='1em 0'>
-            Terminos y condiciones.
-          </Heading>
-        </label>
+
+        <StyledLabel color='#009966'>Terminos y condiciones.</StyledLabel>
+
         <StyledParagraph>{data?.data}</StyledParagraph>
       </StyledTextContainer>
     </StyledGetter>

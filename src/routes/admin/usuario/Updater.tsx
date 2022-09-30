@@ -9,13 +9,13 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { putRequestById, IFormInput, getRequestAll } from '../common/constants';
 import { Container, Switch, FormLabel, Heading } from '@chakra-ui/react';
-import { HStack, Input } from '@chakra-ui/react';
+import { HStack, Input, Flex } from '@chakra-ui/react';
 import { email_type, password_type } from '../common/cardStore';
 import { tip } from './constants';
 import SubmitButton from '../common/SubmitButton';
 import PasswordInput from '../common/PasswordInput';
+import StyledLabel from '../common/StyledLabel';
 import EmailInput from './EmailInput';
-
 
 function Update(props: { url: string; queryKey: string }) {
   const snap = useSnapshot(store);
@@ -51,47 +51,23 @@ function Update(props: { url: string; queryKey: string }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <HStack>
-          <Heading size='sm' color='#009966' m='1em'>
-            {stack.email}
-          </Heading>
-        </HStack>
-        <HStack>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>correo electrónico</strong>
-            </label>
-          
-              <EmailInput  register={register} errors={errors} />
-  
-          </Container>
-        </HStack>
-        <HStack>
-          <Container>
-            <label htmlFor='password'>
-              <strong className='byid-input-label'>Escriba una contraseña</strong>
-            </label>
-          
-              <PasswordInput label='password' register={register} errors={errors} required />
-    
-          </Container>
-        </HStack>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>Seleccione un rol</strong>
-            </label>
-
-            <SelectList list={data?.result} label='rolId' register={register} required />
-
-            {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
-          </Container>
-        </HStack>
-        <HStack>
+        <Flex direction='column'>
+          <StyledLabel color='#009966' m='1em 0'>
+            Actualizar usuario
+          </StyledLabel>
+          <StyledLabel capit>Correo electrónico.</StyledLabel>
+          <EmailInput register={register} errors={errors} />
+          <StyledLabel capit>Escriba una contraseña.</StyledLabel>
+          <PasswordInput label='password' register={register} errors={errors} required />
+          <StyledLabel color='#009966' capit>
+            Seleccione un rol
+          </StyledLabel>
+          <SelectList list={data?.result} label='rolId' register={register} required />
+          {errors.rolId && <span style={{ color: 'red' }}>Field is required</span>}
           <HStack m='2em 0'>
-            <FormLabel htmlFor='enabled' m='0 0 0 2em' color='#ab8ffe'>
-              Deshabilitar o habilitar
-            </FormLabel>
+            <StyledLabel capit color='#444444'>
+              Deshabilitar o habilitar.
+            </StyledLabel>
             <Switch
               defaultChecked={stack.enabled}
               {...register('enabled')}
@@ -100,9 +76,10 @@ function Update(props: { url: string; queryKey: string }) {
               colorScheme='red'
             />
           </HStack>
-        </HStack>
-        <SubmitButton buttonstate={response?.isLoading} />
-        {status && <StatusHandler message={status} />}
+
+          <SubmitButton buttonstate={response?.isLoading} />
+          {status && <StatusHandler message={status} />}
+        </Flex>
       </form>
     </>
   );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import StatusHandler from '../common/StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
@@ -42,42 +43,28 @@ function Creator(props: { path: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>
-                Escriba el nombre de la Entidad de registro
-              </strong>
-            </label>
-            
-              <TextInput label='name' register={register} errors={errors} required />
-          
-          </Container>
-        </HStack>
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>Dirección de la entidad de registro</strong>
-            </label>
+            <StyledLabel>Nombre de la Entidad de registro</StyledLabel>
 
-        
-              <AlphaNumericInput
-                required
-                label='address'
-                errors={errors}
-                register={register}
-              />
-          
+            <TextInput required label='name' errors={errors} info={info.name} register={register} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
-            <label htmlFor='provinces'>
-              <strong className='input-label'>
-                Seleccione el municipio de la entidad de registro
-              </strong>
-            </label>
+            <StyledLabel>Dirección de la entidad de registro</StyledLabel>
+            <AlphaNumericInput
+              info={info.alpha}
+              required
+              label='address'
+              errors={errors}
+              register={register}
+            />
+          </Container>
+        </HStack>
+        <HStack p='1em'>
+          <Container>
+            <StyledLabel>Seleccione el municipio de la entidad de registro</StyledLabel>
 
             <SelectList list={data?.result} label='municipioId' register={register} required />
-
             {errors.municipioId && <span style={{ color: 'red' }}>Field is required</span>}
           </Container>
         </HStack>
@@ -89,3 +76,8 @@ function Creator(props: { path: string }) {
 }
 
 export default Creator;
+
+const StyledLabel = styled.h4`
+  color: ${(props) => props.color || '#888888'};
+  font-weight: bolder;
+`;

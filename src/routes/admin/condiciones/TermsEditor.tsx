@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery, useMutation } from 'react-query';
 import { postRequest, getRequestAll } from './constants';
 import SubmitButton from '../common/SubmitButton';
+import StyledLabel from '../common/StyledLabel';
 import { ITerms } from './constants';
 
 export default function GetById(props: { url: string; queryKey: string }) {
@@ -47,11 +48,10 @@ export default function GetById(props: { url: string; queryKey: string }) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='terminos'>
-                <Heading color='#009966' size='md' m='1em 0'>
-                  Editar condiciones.
-                </Heading>
-              </label>
+              <StyledLabel color='#009966' m='1em 0' center>
+                Editar condiciones.
+              </StyledLabel>
+
               <Textarea defaultValue={text} placeholder='Terminos y condiciones' minWidth='320px' />
               <SubmitButton buttonstate={response?.isLoading} />
             </Container>

@@ -11,7 +11,6 @@ import SubmitButton from '../common/SubmitButton';
 import TextInput from './TextInput';
 
 function Creator(props: { url: string; msg?: string }) {
-
   const info = 'se permiten nombres compuestos sin números';
   const { url, msg } = props;
   const [status, setStatus] = React.useState('');
@@ -36,8 +35,8 @@ function Creator(props: { url: string; msg?: string }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack p='1em'>
           <Container>
-           <StyledLabel>Nombre</StyledLabel>
-           <TextInput label='name' register={register} errors={errors} required  info={info} />
+            <StyledLabel>Nombre</StyledLabel>
+            <TextInput label='name' register={register} errors={errors} required info={info} />
           </Container>
         </HStack>
         <SubmitButton buttonstate={response?.isLoading} />

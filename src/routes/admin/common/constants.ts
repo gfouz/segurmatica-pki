@@ -60,6 +60,20 @@ export interface IProps {
   labelForName?: string;
 }
 
+interface ISuggestedWords {
+  id: string;
+  name: string;
+  select: string;
+}
+export const info: ISuggestedWords = {
+  name: 'requiere nombres compuestos sin números',
+  tel: 'requiere números nacionales de 8 dígitos ',
+  alpha: 'requerido letras, números y espacios',
+  select: 'esta selección es requerida',
+  numeric: 'requiere números enteros o decímales',
+};
+
+
 /*-----------css styles and Chakra attributes types.--------*/
 export type chakraProps = {
   size: ResponsiveValue<(string & unknown) | 'sm' | 'md' | 'lg' | 'xs'> | undefined;

@@ -39,5 +39,6 @@ interface ISuggestedWords {
 export const info: ISuggestedWords = {
   name: 'se permiten nombres compuestos sin números',
   id: 'solo numeros requeridos',
-  select: 'esta selección es requerida'
+  alpha: 'permite letras, números y espacios',
+  select: 'esta selección es requerida',
 };
