@@ -1,4 +1,0 @@
-import{s as g,r as m,j as s,F as h,a as i,J as p,K as x}from"./index.65025839.js";import{h as y,c as F,S as j}from"./Card.8f9da9f1.js";import{u as C,b as q}from"./index.esm.63595e96.js";import{T as A}from"./TextInput.bdfc726e.js";function E(u){var n;const c="se permiten nombres compuestos sin n\xFAmeros",{url:l,msg:L}=u,[a,d]=m.exports.useState(""),{register:b,handleSubmit:f,formState:{errors:r}}=C(),t=q(o=>y(l,o)),S=async o=>{t.mutateAsync(o)},e=(n=t==null?void 0:t.data)==null?void 0:n.message;return m.exports.useEffect(()=>{e&&d(e)},[e]),console.log(r),s(h,{children:i("form",{onSubmit:f(S),children:[s(p,{p:"1em",children:i(x,{children:[s(H,{children:"Nombre"}),s(A,{label:"name",register:b,errors:r,required:!0,info:c})]})}),s(F,{buttonstate:t==null?void 0:t.isLoading}),a&&s(j,{message:a})]})})}const H=g.h4`
-  color: #888888;
-  font-weight: bolder;
-`;export{E as C};

@@ -1,0 +1,4 @@
+import{s as g,r as n,j as s,F as x,a as m,J as y,K as F}from"./index.197da568.js";import{u as i,b as j,s as C}from"./store.37b8cf4e.js";import{h as q,c as A,S as H}from"./Card.94feb51f.js";import{u as L,b as T}from"./index.esm.b0a48d8a.js";import{T as k}from"./TextInput.21524544.js";function N(u){var r;const c="se permiten nombres compuestos sin n\xFAmeros",{url:l,msg:B}=u,[o,d]=n.exports.useState("");i(j);const p=i(C),{register:b,handleSubmit:f,formState:{errors:S}}=L(),t=T(a=>q(l,a)),h=async a=>{t.mutateAsync(a)},e=(r=t==null?void 0:t.data)==null?void 0:r.message;return n.exports.useEffect(()=>{e&&d(e),e==="created"&&p.setOption("mostrar")},[e]),s(x,{children:m("form",{onSubmit:f(h),children:[s(y,{p:"1em",children:m(F,{children:[s(w,{children:"Nombre"}),s(k,{label:"name",register:b,errors:S,required:!0,info:c})]})}),s(A,{buttonstate:t==null?void 0:t.isLoading}),o&&s(H,{message:o})]})})}const w=g.h4`
+  color: #888888;
+  font-weight: bolder;
+`;export{N as C};
