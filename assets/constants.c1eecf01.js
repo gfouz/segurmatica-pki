@@ -1,0 +1,1 @@
+function i(t,n,r){return parseInt(t.toString().substring(n,r))}let e=new Date().getFullYear();new Date().getMonth()+1;e=i(e,2,4);const o={green:"linear-gradient(to right, #222222, #9900FF );",rainbow:"linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);"};export{o as t};
