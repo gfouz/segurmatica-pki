@@ -31,11 +31,9 @@ export default function Getter(props: { url: string; queryKey: string }) {
         </div>
       )}
       <StyledTextContainer>
-        {status && <StatusHandler message={status} />}
-
-        <StyledLabel color='#009966'>Terminos y condiciones.</StyledLabel>
-
+        <StyledLabel color='#009966' m='2em 0'>Terminos y condiciones.</StyledLabel>
         <StyledParagraph>{data?.data}</StyledParagraph>
+        {status && <StatusHandler message={status} />}
       </StyledTextContainer>
     </StyledGetter>
   );

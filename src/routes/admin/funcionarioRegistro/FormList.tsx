@@ -1,5 +1,4 @@
 import GetEnabled from '../common/GetEnabled';
-import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Updater from './Updater';
 import Creator from './Creator';
@@ -22,7 +21,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='funcionarios-registro' queryKey='funcReg-id' />,
+    comp: <GetByName allnames='funcionarios-registro'/>,
   },
   {
     option: 'habilitados',
@@ -42,14 +41,5 @@ export const FormsList: IOptions[] = [
       />
     ),
   },
-  {
-    option: 'por nombre',
-    comp: (
-      <GetByName
-        path='funcionarios-registro/name'
-        allnames='funcionarios-registro'
-        queryKey='func_by_name'
-      />
-    ),
-  },
+  
 ];

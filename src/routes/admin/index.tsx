@@ -12,7 +12,6 @@ import { state } from './common/store';
 
 function Admin() {
   const snap = useSnapshot(state);
-  //const toggle = useCardStore((state) => state.setOption);
   const navigate = useNavigate();
   const token = localStorage.getItem('jwt');
 
@@ -34,27 +33,27 @@ function Admin() {
             </li>
             <li className='list__item'>
               <Link to='/rols' onClick={() => snap.setOption('mostrar')}>
-                Administrar rol
+                Rols
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/users' onClick={() => snap.setOption('mostrar')}>
-                Administrar usuario
+                Usuarios
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/tarifas' onClick={() => snap.setOption('mostrar')}>
-                Administrar tarifas
+                Tarifas
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/estados' onClick={() => snap.setOption('mostrar')}>
-                Administrar Estados
+                Estados
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/empresasInstituciones' onClick={() => snap.setOption('mostrar')}>
-                Admin..Empresas-inst
+                Empresas-instituciones
               </Link>
             </li>
             <li className='list__item'>
@@ -64,32 +63,42 @@ function Admin() {
             </li>
             <li className='list__item'>
               <Link to='/representante' onClick={() => snap.setOption('mostrar')}>
-                Admin...representante
+                Representante
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/municipios' onClick={() => snap.setOption('mostrar')}>
-                Administrar Municipios
+                Municipios
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/provinces' onClick={() => snap.setOption('mostrar')}>
-                Administrar provincias
+                Provincias
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/organismos' onClick={() => snap.setOption('mostrar')}>
-                Administrar Organismos
+                Organismos
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/funcionalidades' onClick={() => snap.setOption('mostrar')}>
-                Administrar Funcionalidad
+                Funcionalidades
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/entidadRegistro' onClick={() => snap.setOption('mostrar')}>
+                Entidad de Registro
               </Link>
             </li>
             <li className='list__item'>
               <Link to='/funcionarioregistro' onClick={() => snap.setOption('mostrar')}>
-                Admin..Funcionario de Reg...
+                Funcionario de Registro
+              </Link>
+            </li>
+            <li className='list__item'>
+              <Link to='/generacion' onClick={() => snap.setOption('mostrar')}>
+                Generación
               </Link>
             </li>
           </ul>
@@ -104,7 +113,7 @@ export default Admin;
 const StyledAdmin = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-image: url(./images/menu.jpg);
+  background-image: url(./images/coffee.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;

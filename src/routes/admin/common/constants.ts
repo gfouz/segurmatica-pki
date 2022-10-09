@@ -66,23 +66,31 @@ interface ISuggestedWords {
   folio: string;
   name: string;
   tel: string;
+  file: string;
+  tutor: string;
+  occupancy: string;
   alpha: string;
   numeric: string;
   select: string;
   email: string;
   password: string;
+  password2: string;
 }
 export const info: ISuggestedWords = {
-  ci: 'requerido 11 dígitos y ser mayor de 18 años!',
-  tome: 'requeridos 4 dígitos para el tomo!',
-  folio: 'requeridos 4 dígitos para el folio!',
-  name: 'requiere nombres compuestos sin números',
-  tel: 'requiere números nacionales de 8 dígitos ',
-  alpha: 'requerido letras, números y espacios',
+  ci: 'Require 11 dígitos y ser mayor de 18 años!',
+  tome: 'Requiere 4 dígitos para el tomo!',
+  folio: 'Requeridos 4 dígitos para el folio!',
+  name: 'Requiere nombres compuestos sin números',
+  tel: 'Requiere números nacionales de 8 dígitos ',
+  alpha: 'Requiere letras, números y espacios',
   select: 'esta selección es requerida',
-  numeric: 'requiere números enteros o decímales',
+  tutor: 'Este dato solo admite letras.',
+  occupancy: 'Este dato solo admite letras',
+  file: 'Adjunte documento del nombramiento',
+  numeric: 'Requiere números enteros o decímales',
   email: 'Debe contener @ y un formato correcto',
-  password: 'Debe tener 1 letra mayuscula y minuscula, 1 número y al menos 8 caracteres',
+  password: 'Letras, números y al menos 8 caracteres',
+  password2: 'Require al menos una letra mayuscula y minuscula, números y minimo 8 caracteres',
 };
 
 /*-----------css styles and Chakra attributes types.--------*/

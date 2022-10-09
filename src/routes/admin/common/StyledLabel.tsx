@@ -4,6 +4,7 @@ interface IProps {
   color?: string;
   m?: string;
   size?: string;
+  upper?: boolean;
   center?: boolean;
   italic?: boolean;
   capit?: boolean;
@@ -21,7 +22,8 @@ const Heading = styled.h4<IProps>`
   font-size: ${(props) => props.size};
   font-style: ${(props) => (props.italic ? 'italic' : 'normal')};
   font-weight: bolder;
-  text-transform: ${(props) => (props.capit ? 'capitalize' : 'uppercase')};
+  text-transform: ${(props) => (props.capit ? 'capitalize' : 'normal')};
+  text-transform: ${(props) => props.upper && 'uppercase'};
 `;
 
 export default StyledLabel;

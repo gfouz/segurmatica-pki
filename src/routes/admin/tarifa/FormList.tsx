@@ -1,7 +1,7 @@
 import GetEnabled from '../common/GetEnabled';
-import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Update from './Updater';
+import GetByName from '../common/GetByName';
 import Creator from './Create';
 import { Heading } from '@chakra-ui/react';
 
@@ -21,7 +21,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='tarifas' queryKey='tarifas-id' />,
+    comp: <GetByName allnames='rols' />,
   },
   {
     option: 'habilitados',
@@ -38,9 +38,5 @@ export const FormsList: IOptions[] = [
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
-  },
-  {
-    option: 'por nombre',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
   },
 ];

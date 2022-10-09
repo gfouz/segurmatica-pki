@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import useMediaQuery from "./useMediaQuery";
 import StatusHandler from '../common/StatusHandler';
 import { Heading, Textarea, Text } from '@chakra-ui/react';
-import { Container, HStack } from '@chakra-ui/react';
+import { Container, Flex, HStack } from '@chakra-ui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useQuery, useMutation } from 'react-query';
 import { postRequest, getRequestAll } from './constants';
@@ -41,21 +42,29 @@ export default function GetById(props: { url: string; queryKey: string }) {
     //response.mutateAsync(formdata);
     console.log(formdata);
   };
-
+  const isTablet = useMediaQuery('(min-width: 600px)');
   return (
     <>
       <StyledGetter>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <HStack p='1em'>
-            <Container>
-              <StyledLabel color='#009966' m='1em 0' center>
-                Editar condiciones.
-              </StyledLabel>
-
-              <Textarea defaultValue={text} placeholder='Terminos y condiciones' minWidth='320px' />
-              <SubmitButton buttonstate={response?.isLoading} />
-            </Container>
-          </HStack>
+          <Flex direction='column'>
+            <StyledLabel
+              upper
+              center
+              color='#009966'
+              m='1em 0'
+            >
+              Editar condiciones.
+            </StyledLabel>
+            <Textarea
+              width={isTablet ? '595px' : '320px'}
+              minWidth='320px'
+              minHeight='400px'
+              defaultValue={text}
+              placeholder='Terminos y condiciones'
+            />
+            <SubmitButton buttonstate={response?.isLoading} />
+          </Flex>
           {errors.condiciones && <span style={{ color: 'red' }}>Field is required</span>}
         </form>
         <HStack>{status && <StatusHandler message={status} />}</HStack>
@@ -70,3 +79,5 @@ const StyledGetter = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+//<Textarea defaultValue={text} placeholder='Terminos y condiciones' minWidth='320px' />

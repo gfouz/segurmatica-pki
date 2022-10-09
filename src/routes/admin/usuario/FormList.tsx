@@ -1,8 +1,9 @@
 import GetEnabled from '../common/GetEnabled';
-import GetById from '../common/GetById';
+import GetByName from '../common/GetByName';
 import Getter from '../common/Getter';
 import Update from './Updater';
 import Creator from './Creator';
+import GetByParams from './GetByParams';
 import { Heading } from '@chakra-ui/react';
 
 export interface IOptions {
@@ -21,7 +22,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='users' queryKey='user-id' />,
+    comp: <GetByName allnames='users' />,
   },
   {
     option: 'habilitados',
@@ -33,14 +34,11 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'asociado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
+    comp: <GetByParams />,
   },
   {
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
   },
-  {
-    option: 'por nombre',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
-  },
+  
 ];

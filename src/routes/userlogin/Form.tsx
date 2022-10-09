@@ -1,17 +1,17 @@
 import * as React from 'react';
 import axios from 'axios';
-import { useMutation } from 'react-query';
-//import { toast } from 'react-toastify';
-import { email_type } from './constants';
 //import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { info } from '../admin/common/constants';
 import styled from 'styled-components';
-import PasswordInput from './PasswordInput';
 import StatusHandler from './StatusHandler';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import SubmitButton from './SubmitButton';
+import EmailInput from './EmailInput';
+import PasswordInput from './PasswordInput';
+import StyledLabel from '../admin/common/StyledLabel'
 import ErrorWarning from '../admin/common/ErrorWarning';
-
-import { HStack, Center, Input, Heading, Container } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 const BASE_URL = 'http://localhost:5000/';
 const axiosApi = axios.create({
@@ -20,8 +20,8 @@ const axiosApi = axios.create({
 });
 axiosApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-interface IUserCredentials {
-  email?: string;
+interface IFormInput {
+  email: string;
   password: string;
 }
 
@@ -34,9 +34,9 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUserCredentials>();
+  } = useForm<IFormInput>();
 
-  async function postRequest(formdata: IUserCredentials): Promise<IUserCredentials | any> {
+  async function postRequest(formdata: IFormInput): Promise<IFormInput | any> {
     try {
       const res = await axiosApi.post('login', formdata);
       setStatus(res.data?.message);
@@ -49,9 +49,9 @@ const Form = () => {
   }
 
   const { data, mutateAsync, isLoading, isError, isSuccess } = useMutation(
-    (value: IUserCredentials) => postRequest(value),
+    (value: IFormInput) => postRequest(value),
   );
-  const onSubmit: SubmitHandler<IUserCredentials> = (formData: IUserCredentials) => {
+  const onSubmit: SubmitHandler<IFormInput> = (formData: IFormInput) => {
     mutateAsync(formData);
   };
 
@@ -66,41 +66,44 @@ const Form = () => {
   //data?.jwt && localStorage.setItem('jwt', data?.jwt);
 
   return (
-    <StyledForm>
+    <StyledBox>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Center w='100%' p='1.5em'>
-          <Heading as='h3' size='lg' color='#B22222'>
-            Inicio de sesión.
-          </Heading>
-        </Center>
-
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='email'>
-              <strong className='byid-input-label'>Escriba su email.</strong>
-            </label>
-            <Input {...register('email', { required: true })} {...email_type} />
-          </Container>
-        </HStack>
-        <ErrorWarning label='email' errors={errors} m='0 2em' />
-        <HStack p='1em'>
-          <Container>
-            <label htmlFor='password'>
-              <strong className='input-label'>Escriba su contraseña.</strong>
-            </label>
-            <PasswordInput label='password' register={register} required />
-          </Container>
-        </HStack>
+        <Flex direction='column'>
+          <StyledLabel m='2em 0' color='#009966' upper center>
+              Inicio de sesión.
+          </StyledLabel>
+            <StyledLabel m='1em 0 0 0'>
+              Correo electrónico
+            </StyledLabel>
+            <EmailInput 
+              register={register} 
+              errors={errors} 
+              info={info.email} 
+              />
+            <ErrorWarning label='email' errors={errors} m='0 2em' />
+            <StyledLabel m='1em 0 0 0'>
+              Contraseña
+            </StyledLabel>
+            <PasswordInput 
+              info={info}
+              errors={errors}
+              label='password' 
+              register={register} 
+              required 
+              />
         <ErrorWarning label='password' errors={errors} m='0 2em' />
         <SubmitButton buttonstate={isLoading} />
+        {status && <StatusHandler message={status} />}
+       </Flex>
       </form>
-      {status && <StatusHandler message={status} />}
-    </StyledForm>
+      
+    </StyledBox>
   );
 };
 export default Form;
-const StyledForm = styled.div`
-  max-width: 500px;
-  border: 1px solid #cccccc;
+const StyledBox = styled.div`
+  min-width: 320px;
+  padding: 2em;
+  box-shadow: 1px 1px 10px #222222;
   border-radius: 15px;
 `;

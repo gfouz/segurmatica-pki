@@ -28,10 +28,11 @@ function Dashboard({ children }: IProps) {
 export default Dashboard;
 
 const StyledDashboard = styled.div`
-  border: 1px solid black;
+  border: 1px solid red;
   display: grid;
   width: 100%;
   min-height: 100vh;
+
   grid-template-areas:
     'header header'
     'main  main'

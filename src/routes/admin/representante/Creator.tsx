@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container } from '@chakra-ui/react';
-import { tip } from './constants';
+import { info } from '../common/constants';
 import { getRequestEnabled, postRequest, file_type } from './constants';
 import { IFormInput } from './constants';
 import SuggestedWords from '../common/SuggestedWords';
@@ -41,47 +41,43 @@ function Creator() {
         <HStack p='1em'>
           <Container>
             <StyledLabel>Nro de Carnet del representante</StyledLabel>
-
-            <IdentityNumberInput register={register} errors={errors} required info={tip.ci} />
+            <IdentityNumberInput register={register} errors={errors} required info={info.ci} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel>Tomo del representante</StyledLabel>
-
             <IntegerInput
               label='tome'
               register={register}
               errors={errors}
               required
-              info={tip.tome}
+              info={info.tome}
             />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel>Folio del representante</StyledLabel>
-
             <IntegerInput
               label='folio'
               register={register}
               errors={errors}
               required
-              info={tip.folio}
+              info={info.folio}
             />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel>Nombre y apellidos de representante</StyledLabel>
-
-            <SuggestedWords message={tip.name}>
+            <SuggestedWords message={info.name}>
               <TextInput
                 label='name'
                 register={register}
                 errors={errors}
                 required
-                info={tip.name}
+                info={info.name}
               />
             </SuggestedWords>
           </Container>
@@ -89,20 +85,18 @@ function Creator() {
         <HStack p='1em'>
           <Container>
             <StyledLabel>Teléfono del representante</StyledLabel>
-
-            <TelInput label='phone' register={register} errors={errors} required info={tip.phone} />
+            <TelInput label='phone' register={register} errors={errors} required info={info.tel} />
           </Container>
         </HStack>
         <HStack p='1em'>
           <Container>
             <StyledLabel>Nombre y apellidos de quien lo nombra</StyledLabel>
-
             <TextInput
               label='namer'
               register={register}
               errors={errors}
               required
-              info={tip.tutor}
+              info={info.tutor}
             />
           </Container>
         </HStack>
@@ -115,7 +109,7 @@ function Creator() {
               register={register}
               errors={errors}
               required
-              info={tip.occupancy}
+              info={info.occupancy}
             />
           </Container>
         </HStack>
@@ -123,7 +117,7 @@ function Creator() {
           <Container>
             <StyledLabel>Adjunte el documento del nombramiento</StyledLabel>
 
-            <SuggestedWords message={tip.file}>
+            <SuggestedWords message={info.file}>
               <Input
                 list='representantes'
                 {...register('nominationTemplate', { required: true })}
@@ -145,7 +139,6 @@ function Creator() {
         <HStack p='1em'>
           <Container>
             <StyledLabel>Selecciona usuario al que se vincula</StyledLabel>
-
             <SelectList list={users?.result} label='userId' register={register} required />
             {errors.userId && <span style={{ color: '#c40550' }}>campo requerido</span>}
           </Container>

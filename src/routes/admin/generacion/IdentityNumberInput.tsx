@@ -2,22 +2,8 @@ import * as React from 'react';
 import { Tooltip } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import ErrorWarning from '../common/ErrorWarning';
-import { Path, UseFormRegister } from 'react-hook-form';
-
-export type IFormInput = {
-  id: string;
-  ci: string;
-  eiId: string;
-  userId: string;
-  name: string;
-  tome: string;
-  folio: string;
-  phone: string;
-  namer: string;
-  enabled: string;
-  namerCharge: string;
-  nominationTemplate: string;
-};
+import { UseFormRegister } from 'react-hook-form';
+import { IFormInput } from './constants';
 
 let year = new Date().getFullYear();
 const month = new Date().getMonth() + 1;
@@ -28,21 +14,20 @@ type InputProps = {
   required?: boolean;
   info?: string;
   defaultValue?: any;
-  label: Path<IFormInput>;
   register: UseFormRegister<IFormInput>;
 };
 
-const IdentityNumberInput = ({ label, register, errors, defaultValue, info }: InputProps) => {
+const IdentityNumberInput = ({ register, errors, defaultValue, info }: InputProps) => {
   return (
     <>
-      <Tooltip label='campo requerido de 11 dígitos' hasArrow arrowSize={15}>
+      <Tooltip label={info} hasArrow arrowSize={15}>
         <Input
           size='sm'
           type='number'
           cursor='pointer'
           variant='flushed'
           defaultValue={defaultValue}
-          {...register(label, {
+          {...register('ci', {
             required: true,
             validate: {
               isOlder: (ci: string) =>

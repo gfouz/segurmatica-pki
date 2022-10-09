@@ -14,9 +14,12 @@ const OrganismAdmin = lazy(() => import('./admin/organismos/index'));
 const PropositosAdmin = lazy(() => import('./admin/propositos/index'));
 const FunctionalityAdmin = lazy(() => import('./admin/funcionalidad/index'));
 const EmpresaInstAdmin = lazy(() => import('./admin/empresasInstituciones/index'));
+const LogEntityAdmin = lazy(() => import('./admin/entidadRegistro/index'));
 const LoggerAdmin = lazy(() => import('./admin/funcionarioRegistro/index'));
 const TermsAdmin = lazy(() => import('./admin/condiciones/index'));
 const AgentAdmin = lazy(() => import('./admin/representante/index'));
+const GenerationAdmin = lazy(() => import('./admin/generacion/index'));
+const TermsAndPolicies = lazy(() => import('./admin/policy/index'));
 
 export default [
   {
@@ -80,6 +83,10 @@ export default [
     element: <EmpresaInstAdmin />,
   },
   {
+    path: '/entidadRegistro',
+    element: <LogEntityAdmin  />,
+  },
+  {
     path: '/funcionarioregistro',
     element: <LoggerAdmin />,
   },
@@ -90,5 +97,13 @@ export default [
   {
     path: '/representante',
     element: <AgentAdmin />,
+  },
+  {
+    path: '/terminos',
+    element: <TermsAndPolicies />,
+  },
+  {
+    path: '/generacion',
+    element: <GenerationAdmin />,
   },
 ];

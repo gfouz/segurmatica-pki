@@ -1,5 +1,4 @@
 import GetEnabled from '../common/GetEnabled';
-import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Updater from '../common/Updater';
 import Creator from '../common/Creator';
@@ -32,7 +31,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='provincias' queryKey='prov-id' msg={msg.id} />,
+    comp: <GetByName allnames='provincias' />,
   },
   {
     option: 'habilitados',
@@ -46,8 +45,5 @@ export const FormsList: IOptions[] = [
     option: 'asociado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
   },
-  {
-    option: 'por nombre',
-    comp: <GetByName path='provincias/name' allnames='provincias' queryKey='func_by_name' />,
-  },
+  
 ];

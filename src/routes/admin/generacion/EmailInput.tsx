@@ -1,17 +1,14 @@
 import * as React from 'react';
 import { Input, Tooltip } from '@chakra-ui/react';
-import ErrorWarning from './ErrorWarning';
+import ErrorWarning from '../common/ErrorWarning';
 import { UseFormRegister } from 'react-hook-form';
-
-interface IFormValue {
-  email: string | undefined;
-}
+import { IFormInput } from './constants';
 
 type InputProps = {
   info?: string;
   errors: object;
   defaultValue?: string;
-  register: UseFormRegister<IFormValue>;
+  register: UseFormRegister<IFormInput>;
 };
 
 const EmailInput = ({ register, errors, defaultValue, info }: InputProps) => {
@@ -30,7 +27,7 @@ const EmailInput = ({ register, errors, defaultValue, info }: InputProps) => {
           })}
         />
       </Tooltip>
-      <ErrorWarning label='email' errors={errors}  info={info} />
+      <ErrorWarning label='email' errors={errors} info={info} />
     </>
   );
 };

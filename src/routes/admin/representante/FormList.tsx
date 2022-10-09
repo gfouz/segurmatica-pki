@@ -1,5 +1,4 @@
 import GetEnabled from '../common/GetEnabled';
-import GetById from '../common/GetById';
 import Getter from '../common/Getter';
 import Updater from './Updater';
 import Creator from './Creator';
@@ -23,7 +22,7 @@ export const FormsList: IOptions[] = [
   },
   {
     option: 'buscar',
-    comp: <GetById url='representantes' queryKey='agent-id' />,
+    comp: <GetByName  allnames='representantes' />,
   },
   {
     option: 'habilitados',
@@ -47,10 +46,5 @@ export const FormsList: IOptions[] = [
     option: 'asociado habilitado',
     comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
   },
-  {
-    option: 'por nombre',
-    comp: (
-      <GetByName path='representantes/name' allnames='representantes' queryKey='func_by_name' />
-    ),
-  },
+  
 ];

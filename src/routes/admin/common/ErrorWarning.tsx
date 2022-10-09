@@ -26,7 +26,6 @@ const StyledErrorWarning = styled.div`
   width: 100%;
   color: #c40550;
   font-weight: bolder;
-  font-style: italic;
   font-size: 10px;
   text-transform: uppercase;
   text-align: ${(props: IErrorWarning) => props.align || 'center'};

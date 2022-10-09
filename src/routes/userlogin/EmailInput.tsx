@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Input, Tooltip } from '@chakra-ui/react';
-import ErrorWarning from './ErrorWarning';
 import { UseFormRegister } from 'react-hook-form';
+import ErrorWarning from '../admin/common/ErrorWarning';
 
 interface IFormValue {
-  email: string | undefined;
+  email: string;
+  password:string;
 }
 
 type InputProps = {
@@ -30,7 +31,7 @@ const EmailInput = ({ register, errors, defaultValue, info }: InputProps) => {
           })}
         />
       </Tooltip>
-      <ErrorWarning label='email' errors={errors}  info={info} />
+      <ErrorWarning label='email' errors={errors} info={info} />
     </>
   );
 };

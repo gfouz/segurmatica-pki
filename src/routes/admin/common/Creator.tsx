@@ -37,7 +37,7 @@ function Creator(props: { url: string; msg?: string }) {
     message && setStatus(message);
     message === 'created' && snap2.setOption('mostrar');
   }, [message]);
-  
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

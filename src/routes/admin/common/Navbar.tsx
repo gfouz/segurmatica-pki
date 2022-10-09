@@ -38,10 +38,6 @@ function Navbar(props: HeaderProps) {
       option: 'habilitados',
       icon: <FormText />,
     },
-    {
-      option: 'por nombre',
-      icon: <FormText />,
-    },
   ];
 
   return (
@@ -59,7 +55,7 @@ function Navbar(props: HeaderProps) {
                     reverse();
                   }}
                 >
-                  <a className='nav__link'>{item.option}</a>
+                  <a className='nav__link'>{item.option && item.option}</a>
                 </button>
               </div>
             </div>

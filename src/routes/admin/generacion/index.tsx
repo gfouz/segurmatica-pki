@@ -1,15 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import CaretLeft from '../../../icons/CaretLeft';
 import { theme } from '../../constants';
 import ToastVariant from '../../../components/Toast';
 import Dashboard from '../common/Dashboard';
-import Card from '../common/Card';
-import FormsIterator from '../common/FormsIterator';
-import { FormsList } from './FormList';
 import { axiosApi } from '../common/constants';
+import Generate from './Generate';
 
-
-function TermsAdmin() {
+function GenerationAdmin() {
   const token = localStorage.getItem('jwt');
   React.useEffect(() => {
     if (token) {
@@ -22,16 +20,14 @@ function TermsAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Terminos y...' >
-            <FormsIterator form={FormsList} />
-          </Card>
+          <Generate />
         </Dashboard>
       </StyledProvince>
     </>
   );
 }
 
-export default TermsAdmin;
+export default GenerationAdmin;
 
 const StyledProvince = styled.div`
   width: 100%;

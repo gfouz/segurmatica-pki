@@ -35,4 +35,7 @@ code {
   white-space: nowrap;
   cursor: pointer;
   font-style: italic;
+  box-shadow: 1px 1px 10px solid black;
 }
+
+

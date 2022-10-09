@@ -9,7 +9,7 @@ import FormsIterator from '../common/FormsIterator';
 import { FormsList } from './FormList';
 import { axiosApi } from '../common/constants';
 
-function RegistrationEntityAdmin() {
+function LogEntityAdmin() {
   const token = localStorage.getItem('jwt');
   React.useEffect(() => {
     if (token) {
@@ -31,7 +31,7 @@ function RegistrationEntityAdmin() {
   );
 }
 
-export default RegistrationEntityAdmin;
+export default LogEntityAdmin;
 
 const StyledRegistrationEntity = styled.div`
   width: 100%;

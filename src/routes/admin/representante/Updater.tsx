@@ -9,7 +9,7 @@ import { useMutation, useQuery } from 'react-query';
 import { HStack, Input, Container, Switch } from '@chakra-ui/react';
 import { getRequestEnabled, putRequestById, file_type } from './constants';
 import { IFormInput } from './constants';
-import { tip } from './constants';
+import { info } from '../common/constants';
 import SuggestedWords from '../common/SuggestedWords';
 import SubmitButton from '../common/SubmitButton';
 import SelectList from './Select';
@@ -65,7 +65,7 @@ function Updater() {
 
               <IdentityNumberInput
                 required
-                info={tip.ci}
+                info={info.ci}
                 errors={errors}
                 register={register}
                 defaultValue={stack.ci}
@@ -77,7 +77,7 @@ function Updater() {
               <StyledLabel>Tomo del representante</StyledLabel>
 
               <IntegerInput
-                info={tip.tome}
+                info={info.tome}
                 required
                 label='tome'
                 errors={errors}
@@ -91,7 +91,7 @@ function Updater() {
               <StyledLabel>Folio del representante</StyledLabel>
 
               <IntegerInput
-                info={tip.folio}
+                info={info.folio}
                 required
                 label='folio'
                 register={register}
@@ -103,8 +103,8 @@ function Updater() {
           <HStack p='1em'>
             <Container>
               <StyledLabel>Nombre y apellidos de representante</StyledLabel>
-
               <TextInput
+                info={info.name}
                 label='name'
                 register={register}
                 errors={errors}
@@ -118,6 +118,7 @@ function Updater() {
               <StyledLabel>Teléfono del representante</StyledLabel>
 
               <TelInput
+                info={info.tel}
                 label='phone'
                 register={register}
                 errors={errors}
@@ -131,6 +132,7 @@ function Updater() {
               <StyledLabel>Nombre y apellidos de quien lo nombra</StyledLabel>
 
               <TextInput
+                info={info.name}
                 label='namer'
                 register={register}
                 errors={errors}
@@ -142,8 +144,8 @@ function Updater() {
           <HStack p='1em'>
             <Container>
               <StyledLabel>Cargo del que lo nombra</StyledLabel>
-
               <TextInput
+                info={info.occupancy}
                 label='namerCharge'
                 register={register}
                 errors={errors}
@@ -156,7 +158,7 @@ function Updater() {
             <Container>
               <StyledLabel>Adjunte el documento del nombramiento</StyledLabel>
 
-              <SuggestedWords message={tip.file}>
+              <SuggestedWords message={info.file}>
                 <Input list='representantes' {...register('nominationTemplate')} {...file_type} />
               </SuggestedWords>
               {errors.nominationTemplate && <span style={{ color: 'red' }}>Field is required</span>}

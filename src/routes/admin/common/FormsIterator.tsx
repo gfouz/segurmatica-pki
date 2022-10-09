@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IFormList } from './constants';
 import { useSnapshot } from 'valtio';
 import { state } from './store';
-//import { useCardStore } from '../common/cardStore';
+
 
 function FormsIterator({ form }: IFormList) {
   //let selected = useCardStore((state) => state.option);

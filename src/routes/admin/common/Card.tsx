@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import { state, switcher } from '../common/store';
 import { useSnapshot } from 'valtio';
+import { IFormList } from './constants';
 
 interface ILayout {
   btncolor?: string;
@@ -37,12 +38,13 @@ export default function Card(props: ILayout) {
 const StyledCard = styled.div`
   box-shadow: 1px 1px 10px #222222;
   background-color: #ffffff;
-  margin: 2em 0;
+  
   position: relative;
   display: grid;
   min-width: 320px;
   max-width: 700px;
   min-height: 400px;
+
   grid-template-areas:
     'header header'
     'main  main'
