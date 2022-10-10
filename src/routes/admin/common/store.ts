@@ -11,7 +11,7 @@ const store: IStoreData = proxy({
   setStack: (info) => Object.assign(store.stack, info),
 });
 
-//this another is for sidebar options.
+//this another is for sidebar or menu options.
 interface IStateData {
   opt: string;
   setOption: (option: string) => string;

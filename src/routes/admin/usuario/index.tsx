@@ -22,8 +22,8 @@ function UserAdmin() {
       <StyledUser>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='usuarios'>
-            <FormsIterator form={FormsList} />
+          <Card name='usuarios' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledUser>

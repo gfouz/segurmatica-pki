@@ -5,39 +5,39 @@ import Creator from '../common/Creator';
 import GetByName from '../common/GetByName';
 import { Heading } from '@chakra-ui/react';
 
-export interface IOptions {
-  option: string;
-  comp: React.ReactNode;
-}
+import { IListProps } from '../common/constants';
+import Edit from '../common/icons/Edit';
+import Rocket from '../common/icons/Rocket'
+import Search from '../common/icons/Search';
+import FileAlt from '../common/icons/FileAlt';
+import CodeBranch from '../common/icons/CodeBranch';
+import SearchPlus from '../common/icons/SearchPlus';
 
-export const FormsList: IOptions[] = [
+export const FormsList: IListProps[] = [
   {
     option: 'añadir',
+    icon: <Edit />,
     comp: <Creator url='rols' />,
   },
   {
     option: 'mostrar',
+    icon: <SearchPlus />,
     comp: <Getter url='rols' queryKey='rols' />,
   },
   {
     option: 'buscar',
+    icon: <Search />,
     comp: <GetByName allnames='rols' />,
+    
   },
   {
     option: 'habilitados',
-    comp: <GetEnabled queryKey='rolsenabled' url='rols/enabled/true' />,
+    icon: <Rocket />,
+    comp: <GetEnabled queryKey='rols-enabled' url='rols/enabled/true' />,
   },
   {
     option: 'actualizar',
+    icon: <Edit />,
     comp: <Updater url='rols' />,
   },
-  {
-    option: 'asociado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
-  },
-  {
-    option: 'asociado habilitado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
-  },
-  
 ];

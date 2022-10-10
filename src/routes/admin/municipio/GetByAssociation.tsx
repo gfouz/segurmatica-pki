@@ -9,6 +9,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import SubmitButton from '../common/SubmitButton';
 import { HStack, Container, Heading } from '@chakra-ui/react';
 import { IFormInput } from '../common/constants';
+import StyledLabel from '../common/StyledLabel';
+
 
 function GetByAssociation() {
   const [id, setId] = React.useState('');
@@ -43,11 +45,9 @@ function GetByAssociation() {
         <Container>
           <HStack p='1em'>
             <Container>
-              <label htmlFor='municipios'>
-                <Heading size='md' m='0.5em 0'>
+                <StyledLabel upper m='1em 0'>
                   Municipios por Provincias
-                </Heading>
-              </label>
+                </StyledLabel>
               <Select
                 list={list?.result}
                 label='provinciaId'

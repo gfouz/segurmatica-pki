@@ -6,39 +6,44 @@ import Creator from './Creator';
 import GetByParams from './GetByParams';
 import { Heading } from '@chakra-ui/react';
 
-export interface IOptions {
-  option: string;
-  comp: React.ReactNode;
-}
+import { IListProps } from '../common/constants';
+import Edit from '../common/icons/Edit';
+import Rocket from '../common/icons/Rocket'
+import Search from '../common/icons/Search';
+import FileAlt from '../common/icons/FileAlt';
+import CodeBranch from '../common/icons/CodeBranch';
+import SearchPlus from '../common/icons/SearchPlus';
 
-export const FormsList: IOptions[] = [
+export const FormsList: IListProps[] = [
   {
     option: 'añadir',
+    icon: <Edit />,
     comp: <Creator path='users' />,
   },
   {
     option: 'mostrar',
+    icon: <SearchPlus />,
     comp: <Getter url='users' queryKey='all-users' />,
   },
   {
     option: 'buscar',
+    icon: <Search />,
     comp: <GetByName allnames='users' />,
+    
   },
   {
     option: 'habilitados',
+    icon: <Rocket />,
     comp: <GetEnabled queryKey='users-enabled' url='users/enabled/true' />,
   },
   {
-    option: 'actualizar',
-    comp: <Update queryKey='user-update' url='users' />,
-  },
-  {
     option: 'asociado',
+    icon: <CodeBranch />,
     comp: <GetByParams />,
   },
   {
-    option: 'asociado habilitado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
+    option: 'actualizar',
+    icon: <Edit />,
+    comp: <Update queryKey='user-update' url='users' />,
   },
-  
 ];

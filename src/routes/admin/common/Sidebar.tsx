@@ -3,15 +3,17 @@ import styled from 'styled-components';
 import Navbar from './Navbar';
 import { useSnapshot } from 'valtio';
 import { switcher } from './store';
+import { IOptions } from './constants';
 
-export default function Sidebar() {
+export default function Sidebar(props: IOptions) {
+  
   const snap = useSnapshot(switcher);
   const { st } = snap;
 
   return (
     <StyledSidebar>
       <div className={st ? 'opened' : 'closed'}>
-        <Navbar column />
+        <Navbar column options={props.options}/>
       </div>
     </StyledSidebar>
   );

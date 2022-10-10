@@ -21,8 +21,8 @@ function OrganismAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Organismos'>
-            <FormsIterator form={FormsList} />
+          <Card name='Organismos' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProvince>

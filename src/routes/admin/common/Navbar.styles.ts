@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 
-export interface IOptions {
-  option: string;
+export interface IListProps {
   icon: React.ReactNode;
+  option: string;
+  comp: React.ReactNode;
 }
 
-export interface HeaderProps {
+export interface INavProps {
   color?: string;
   bg?: string;
   top?: string;
@@ -15,16 +16,14 @@ export interface HeaderProps {
   margin?: string;
   padding?: string;
   column?: boolean;
-  set?: () => void;
-  get?: () => void;
-  getById?: () => void;
+  options: IListProps[];
 }
 
 export const StyledNavbar = styled.div`
   width: 100%;
-  background-color: ${(props: HeaderProps) => props.bg};
-  margin: ${(props: HeaderProps) => props.margin};
-  padding: ${(props: HeaderProps) => props.padding || '1em 0'};
+  background-color: ${(props: INavProps) => props.bg};
+  margin: ${(props: INavProps) => props.margin};
+  padding: ${(props: INavProps) => props.padding || '1em 0'};
 
   .nav {
     width: 100%;
@@ -73,7 +72,7 @@ export const StyledNavbar = styled.div`
     font-family: inherit;
   }
 
-  ${(props: HeaderProps) =>
+  ${(props: INavProps) =>
     props.mixed &&
     css`
       background-image: linear-gradient(#808080, #000000);
@@ -84,7 +83,7 @@ export const StyledNavbar = styled.div`
       }
     `}
 
-  ${(props: HeaderProps) =>
+  ${(props: INavProps) =>
     props.dark &&
     css`
       background-color: #666666;
@@ -93,7 +92,7 @@ export const StyledNavbar = styled.div`
       }
     `}
 
-  ${(props: HeaderProps) =>
+  ${(props: INavProps) =>
     props.column &&
     css`
       .nav {

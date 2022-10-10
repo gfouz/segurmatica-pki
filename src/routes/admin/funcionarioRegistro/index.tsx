@@ -22,8 +22,8 @@ function LoggerAdmin() {
       <StyledLogger>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Funcinario..regist'>
-            <FormsIterator form={FormsList} />
+          <Card name='Funcinario..regist' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledLogger>

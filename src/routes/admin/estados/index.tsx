@@ -21,8 +21,8 @@ function EstadosAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='estados'>
-            <FormsIterator form={FormsList} />
+          <Card name='estados' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProvince>

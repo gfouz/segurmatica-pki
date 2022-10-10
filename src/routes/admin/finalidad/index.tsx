@@ -21,8 +21,8 @@ function FinalidadAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='finalidades'>
-            <FormsIterator form={FormsList} />
+          <Card name='finalidades' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProvince>

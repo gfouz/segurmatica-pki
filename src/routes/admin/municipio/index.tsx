@@ -22,8 +22,8 @@ function CouncilAdmin() {
       <StyledCouncil>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Municipios'>
-            <FormsIterator form={FormsList} />
+          <Card name='Municipios' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledCouncil>

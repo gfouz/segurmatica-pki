@@ -22,8 +22,8 @@ function TarifaAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='tarifas'>
-            <FormsIterator form={FormsList} />
+          <Card name='tarifas' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProvince>

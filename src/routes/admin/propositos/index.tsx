@@ -22,8 +22,8 @@ function PropositosAdmin() {
       <StyledProposito>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='provincia'>
-            <FormsIterator form={FormsList} />
+          <Card name='provincia' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProposito>

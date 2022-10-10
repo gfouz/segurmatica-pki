@@ -27,8 +27,12 @@ function GetByName(props: IProps) {
     <>
       <HStack p='1em'>
         <Container>
-          <StyledLabel m='0.5em 0' color='#009966'>
-            Utilitario de búsqueda por nombre.
+          <StyledLabel
+           m='0.5em 0' 
+           color='#009966' 
+           upper
+           >
+            Búsqueda por nombre.
           </StyledLabel>
           <ReactSearch data={list} />
           <StyledGetter>

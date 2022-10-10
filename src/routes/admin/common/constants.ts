@@ -41,9 +41,15 @@ export type IFormInput = {
 export type IStoreProps = IFormInput;
 export type IList = IFormInput;
 
+export interface IListProps {
+  icon: React.ReactNode;
+  option: string;
+  comp: React.ReactNode;
+}
+
 //Types for FormsIterator
-export interface IFormList {
-  form: TForm[];
+export interface IOptions {
+  options: IListProps[];
 }
 type TForm = {
   option: string;

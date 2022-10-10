@@ -5,38 +5,39 @@ import GetByName from '../common/GetByName';
 import Creator from './Create';
 import { Heading } from '@chakra-ui/react';
 
-export interface IOptions {
-  option: string;
-  comp: React.ReactNode;
-}
+import { IListProps } from '../common/constants';
+import Edit from '../common/icons/Edit';
+import Rocket from '../common/icons/Rocket'
+import Search from '../common/icons/Search';
+import FileAlt from '../common/icons/FileAlt';
+import CodeBranch from '../common/icons/CodeBranch';
+import SearchPlus from '../common/icons/SearchPlus';
 
-export const FormsList: IOptions[] = [
+export const FormsList: IListProps[] = [
   {
     option: 'añadir',
+    icon: <Edit />,
     comp: <Creator url='tarifas' />,
   },
   {
     option: 'mostrar',
+    icon: <SearchPlus />,
     comp: <Getter url='tarifas' queryKey='all-tarifas' />,
   },
   {
     option: 'buscar',
-    comp: <GetByName allnames='rols' />,
+    icon: <Search />,
+    comp: <GetByName allnames='tarifas' />,
+    
   },
   {
     option: 'habilitados',
+    icon: <Rocket />,
     comp: <GetEnabled url='tarifas/enabled/true' queryKey='tarifas-active' />,
   },
   {
     option: 'actualizar',
+    icon: <Edit />,
     comp: <Update url='tarifas' />,
-  },
-  {
-    option: 'asociado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES!</Heading>,
-  },
-  {
-    option: 'asociado habilitado',
-    comp: <Heading size='md'>NO EXISTEN ASOCIACIONES !</Heading>,
   },
 ];

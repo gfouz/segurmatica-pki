@@ -10,7 +10,9 @@ import { axiosApi } from '../common/constants';
 
 
 function TermsAdmin() {
+
   const token = localStorage.getItem('jwt');
+
   React.useEffect(() => {
     if (token) {
       axiosApi.defaults.headers.common['jwt'] = token;
@@ -22,8 +24,8 @@ function TermsAdmin() {
       <StyledProvince>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Terminos y...' >
-            <FormsIterator form={FormsList} />
+          <Card name='Terminos y...' options={FormsList} >
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledProvince>

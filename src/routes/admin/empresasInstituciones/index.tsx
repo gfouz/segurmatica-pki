@@ -21,8 +21,8 @@ function EmpresaInstAdmin() {
       <StyledEmpresaInst>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Empresa-inst...'>
-            <FormsIterator form={FormsList} />
+          <Card name='Empresa-inst...' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledEmpresaInst>

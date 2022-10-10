@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Button from './Button';
 import { state, switcher } from '../common/store';
 import { useSnapshot } from 'valtio';
-import { IFormList } from './constants';
+import { IListProps } from './constants';
 
 interface ILayout {
+  options: IListProps[];
   btncolor?: string;
   headercolor?: string;
   headerbg?: string;
@@ -28,7 +29,7 @@ export default function Card(props: ILayout) {
         <h2 className='header__title'>Admin...{props.name}</h2>
         <Button st={st} reverse={reverse} />
       </header>
-      <Sidebar />
+      <Sidebar options={props.options} />
       <main onClick={setFalse}>{props.children}</main>
       <footer>{opt}</footer>
     </StyledCard>

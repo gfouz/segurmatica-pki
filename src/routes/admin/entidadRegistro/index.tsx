@@ -22,8 +22,8 @@ function LogEntityAdmin() {
       <StyledRegistrationEntity>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Entidad registro'>
-            <FormsIterator form={FormsList} />
+          <Card name='Entidad registro' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledRegistrationEntity>

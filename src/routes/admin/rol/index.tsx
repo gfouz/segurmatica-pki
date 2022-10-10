@@ -21,8 +21,8 @@ function RolAdmin() {
       <StyledRol>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='rol'>
-            <FormsIterator form={FormsList} />
+          <Card name='rol' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledRol>

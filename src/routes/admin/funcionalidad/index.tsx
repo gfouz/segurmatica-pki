@@ -21,8 +21,8 @@ function FunctionalityAdmin() {
       <StyledFunctionality>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='Functionalidad'>
-            <FormsIterator form={FormsList} />
+          <Card name='Functionalidad' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledFunctionality>

@@ -21,8 +21,8 @@ function AgentAdmin() {
       <StyledRepresentative>
         <ToastVariant linear={theme.green} color='#ffffff' />
         <Dashboard>
-          <Card name='representante'>
-            <FormsIterator form={FormsList} />
+          <Card name='representante' options={FormsList}>
+            <FormsIterator options={FormsList} />
           </Card>
         </Dashboard>
       </StyledRepresentative>
