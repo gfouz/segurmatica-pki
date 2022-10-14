@@ -31,7 +31,7 @@ function Creator(props: { url: string; msg?: string }) {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     response.mutateAsync(data);
   };
-  const message = response?.data?.message;
+  const message = response?.data?.message || response?.data;
 
   React.useEffect(() => {
     message && setStatus(message);

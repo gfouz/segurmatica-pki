@@ -7,13 +7,7 @@ import Layout from '../layout/Layout';
 export default function Login() {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('auth');
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      token && navigate('/');
-    }, 1000);
-  }, [token]);
+  const token = localStorage.getItem('jwt');
 
   return (
     <>

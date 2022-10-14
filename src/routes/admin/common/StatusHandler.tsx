@@ -1,50 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const messages = [
-  'ok',
-  'updated',
-  'enabled',
-  'associated',
-  'created',
-  'accepted',
-  'not-authorized',
-  'bad-request',
-  'Bad Request',
-  'Forbidden',
-  'Network Error',
-  'unprocessable',
-  'Unprocessable-data',
-  'not-found',
-  'Not Found',
-  'found by id',
-  'gotten-by-id',
-];
-
-interface IStatusProps {
-  message?: string;
+interface IComponentProps {
+  message: string;
 }
 
-function StatusHandler({ message }: IStatusProps | any) {
+function StatusHandler({ message }: IComponentProps) {
   const [status, setStatus] = React.useState('');
   React.useEffect(() => {
-    messages.map((item) => {
-      switch (message) {
-        case item:
-          setStatus(item);
-          break;
-        default: {
-          setStatus(message);
-          break;
-        }
-      }
-    });
+    setStatus(message);
   }, [message]);
 
   return (
     <>
       <StatusStyled>
-        <p className={message}>{status}</p>
+        <p className={status}>{status}</p>
       </StatusStyled>
     </>
   );
@@ -70,7 +40,7 @@ const StatusStyled = styled.div`
     color: red;
   }
   .not-found {
-    color: #222222;
+    color: red;
   }
   .bad-request {
     color: red;

@@ -1,54 +1,44 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+const messages = [
+  'ok',
+  'updated',
+  'enabled',
+  'associated',
+  'created',
+  'accepted',
+  'not-authorized',
+  'bad-request',
+  'Bad Request',
+  'Forbidden',
+  'Network Error',
+  'unprocessable',
+  'Unprocessable-data',
+  'not-found',
+  'Not Found',
+  'found by id',
+  'gotten-by-id',
+];
+
 interface IStatusProps {
   message?: string;
 }
 
-function StatusHandler({ message }: IStatusProps) {
+function StatusHandler({ message }: IStatusProps | any) {
   const [status, setStatus] = React.useState('');
-
   React.useEffect(() => {
-    switch (message) {
-      case 'ok': //200
-        setStatus('todo bien!');
-        break;
-      case 'accepted': //201
-        setStatus('aceptado!');
-        break;
-      case 'created': //201
-        setStatus('realizado!');
-        break;
-      case 'updated': //201
-        setStatus('Actualizado correcto!');
-        break;
-      case 'not-authorized': //401
-        setStatus('no autorizado!');
-        break;
-      case 'bad-request': //400
-        setStatus('solicitud errada!');
-        break;
-      case 'Bad Request': //400
-        setStatus('solicitud errada!');
-        break;
-      case 'Forbidden': //403
-        setStatus('email o password incorrecto!');
-        break;
-      case 'Network Error': //403
-        setStatus('error de red!');
-        break;
-      case 'unprocessable': //422
-        setStatus('datos no procesados!');
-        break;
-      case 'Unprocessable-data': //422
-        setStatus('datos incompletos!');
-        break;
-      case 'Request failed with status code 400': //400
-        setStatus('solicitud fallida!');
-        break;
-      case 'not-found': //404
-        setStatus('datos no encontrados!');
-    }
+    messages.map((item) => {
+      switch (message) {
+        case item:
+          setStatus(item);
+          break;
+        default: {
+          setStatus(message);
+          break;
+        }
+      }
+    });
   }, [message]);
 
   return (
@@ -66,7 +56,10 @@ const StatusStyled = styled.div`
   margin: 2em;
   font-weight: bolder;
   text-transform: uppercase;
-
+  text-align: center;
+  p {
+    font-size: 0.7em;
+  }
   .ok {
     color: green;
   }
@@ -84,5 +77,8 @@ const StatusStyled = styled.div`
   }
   .unprocessable {
     color: yellow;
+  }
+  .enabled {
+    color: #446344;
   }
 `;

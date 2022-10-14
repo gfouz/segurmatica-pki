@@ -17,7 +17,7 @@ function GetByName(props: IProps) {
 
   const { data, isError, isLoading } = useQuery('all-names', () => getRequestAll(allnames));
   const list = data?.result;
-  const message = data?.response?.data?.message || data?.message;
+  const message = data?.message || data;
 
   React.useEffect(() => {
     getServerMessage(message, setStatus);

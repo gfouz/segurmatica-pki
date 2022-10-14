@@ -35,7 +35,7 @@ export default [
     element: <Admin />,
   },
   {
-    path: '/provinces',
+    path: '/provincias',
     element: <ProvinceAdmin />,
   },
   {
@@ -79,15 +79,15 @@ export default [
     element: <PropositosAdmin />,
   },
   {
-    path: '/empresasInstituciones',
+    path: '/empresas-instituciones',
     element: <EmpresaInstAdmin />,
   },
   {
-    path: '/entidadRegistro',
+    path: '/entidades-registro',
     element: <LogEntityAdmin  />,
   },
   {
-    path: '/funcionarioregistro',
+    path: '/funcionario-registro',
     element: <LoggerAdmin />,
   },
   {

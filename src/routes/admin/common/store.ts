@@ -1,7 +1,7 @@
 import { proxy } from 'valtio';
 import { IStoreProps } from './constants';
 
-//this state is for storing comming data from server.
+//this state is for storing incoming data from server.
 interface IStoreData {
   stack: IStoreProps;
   setStack: (info: object) => object;
@@ -9,6 +9,31 @@ interface IStoreData {
 const store: IStoreData = proxy({
   stack: {},
   setStack: (info) => Object.assign(store.stack, info),
+});
+
+interface IUserProps {
+  id: string;
+  email: string;
+  password: string;
+  rolId: string;
+  enabled: boolean;
+}
+interface IUserState {
+  user: IUserProps;
+  setUser: (newuser: IUserProps) => IUserProps;
+}
+
+const user: IUserProps = {
+  id: '',
+  email: '',
+  password: '',
+  rolId: '',
+  enabled: false,
+};
+
+export const users: IUserState = proxy({
+  user: user,
+  setUser: (newuser) => Object.assign(users.user, newuser),
 });
 
 //this another is for sidebar or menu options.

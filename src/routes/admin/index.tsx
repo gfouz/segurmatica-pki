@@ -52,7 +52,7 @@ function Admin() {
               </Link>
             </li>
             <li className='list__item'>
-              <Link to='/empresasInstituciones' onClick={() => snap.setOption('mostrar')}>
+              <Link to='/empresas-instituciones' onClick={() => snap.setOption('mostrar')}>
                 Empresas-instituciones
               </Link>
             </li>
@@ -72,7 +72,7 @@ function Admin() {
               </Link>
             </li>
             <li className='list__item'>
-              <Link to='/provinces' onClick={() => snap.setOption('mostrar')}>
+              <Link to='/provincias' onClick={() => snap.setOption('mostrar')}>
                 Provincias
               </Link>
             </li>
@@ -87,12 +87,12 @@ function Admin() {
               </Link>
             </li>
             <li className='list__item'>
-              <Link to='/entidadRegistro' onClick={() => snap.setOption('mostrar')}>
+              <Link to='/entidades-registro' onClick={() => snap.setOption('mostrar')}>
                 Entidad de Registro
               </Link>
             </li>
             <li className='list__item'>
-              <Link to='/funcionarioregistro' onClick={() => snap.setOption('mostrar')}>
+              <Link to='/funcionario-registro' onClick={() => snap.setOption('mostrar')}>
                 Funcionario de Registro
               </Link>
             </li>

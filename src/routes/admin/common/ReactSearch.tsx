@@ -33,7 +33,7 @@ const ReactSearch = ({ data }: IData) => {
     setValue(query);
     if (query.length > 1) {
       const filterSuggestions = list?.filter(
-        (suggestion) => suggestion.toLowerCase().indexOf(query) > -1,
+        (suggestion) => suggestion?.toLowerCase().indexOf(query) > -1,
       );
       setSuggestions(filterSuggestions);
       setSuggestionsActive(true);
@@ -134,7 +134,12 @@ const ReactSearch = ({ data }: IData) => {
 
 export default ReactSearch;
 
-const Searchbox = styled.div``;
+const Searchbox = styled.div`
+.suggestions {
+  color: #0F5BFF;
+  font-weight: bolder;
+}
+`;
 
 const ItemList = styled.div`
   margin: 1em 0;

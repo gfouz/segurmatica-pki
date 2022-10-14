@@ -1,47 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const messages = [
-  'ok',
-  'updated',
-  'enabled',
-  'associated',
-  'created',
-  'accepted',
-  'not-authorized',
-  'bad-request',
-  'Bad Request',
-  'Forbidden',
-  'Network Error',
-  'unprocessable',
-  'Unprocessable-data',
-  'not-found',
-  'Not Found',
-  'found by id',
-  'gotten-by-id',
-  'Unprocessable Entity',
-  'Request failed with status code 401',
-  'Request failed with status code 422',
-];
-
-interface IStatusProps {
-  message?: string;
+interface IComponentProps {
+  message: string;
 }
 
-function StatusHandler({ message }: IStatusProps) {
+function StatusHandler({ message }: IComponentProps) {
+
   const [status, setStatus] = React.useState('');
   React.useEffect(() => {
-    messages.map((item) => {
-      switch (message) {
-        case item:
-          setStatus(item);
-          break;
-        default: {
-          message;
-          break;
-        }
-      }
-    });
+    setStatus(message);
   }, [message]);
 
   return (

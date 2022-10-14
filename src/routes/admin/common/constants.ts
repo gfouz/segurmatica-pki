@@ -160,7 +160,7 @@ export async function putRequestById(
     const result = res.data;
     return result;
   } catch (error: any) {
-    return error.message;
+    return error?.message;
   }
 }
 export async function getRequestById(
@@ -172,7 +172,7 @@ export async function getRequestById(
     const result = res.data;
     return result;
   } catch (error: any) {
-    return error.message;
+    return error?.message;
   }
 }
 
@@ -182,7 +182,7 @@ export async function getByParams(path: string, params: string): Promise<IFormIn
     const result = res.data;
     return result;
   } catch (error: any) {
-    return error.message;
+    return error?.message;
   }
 }
 
@@ -194,7 +194,7 @@ export async function getRequestEnabled(path: string): Promise<IFormInput[] | an
     const result = res.data;
     return result;
   } catch (error: any) {
-    return error.message;
+    return error?.message;
   }
 }
 
@@ -203,8 +203,8 @@ export async function getRequestAll(path: string): Promise<IFormInput[] | any> {
     const res = await axiosApi.get<IFormInput[]>(path);
     const result = res.data;
     return result;
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return error?.message;
   }
 }
 
@@ -216,7 +216,7 @@ export async function getByDoubleAssociation(id1: string, id2: string): Promise<
     const result = res.data;
     return result;
   } catch (error: any) {
-    return error.message;
+    return error?.message;
   }
 }
 
@@ -226,3 +226,27 @@ export const getServerMessage = (
 ) => {
   setStatus(message);
 };
+
+//Posible incoming messages from server.
+export const messages = [
+  'ok',
+  'updated',
+  'enabled',
+  'associated',
+  'created',
+  'accepted',
+  'not-authorized',
+  'bad-request',
+  'Bad Request',
+  'Forbidden',
+  'Network Error',
+  'unprocessable',
+  'Unprocessable-data',
+  'not-found',
+  'Not Found',
+  'found by id',
+  'gotten-by-id',
+  'Unprocessable Entity',
+  'Request failed with status code 401',
+  'Request failed with status code 422',
+];

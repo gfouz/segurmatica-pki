@@ -29,7 +29,7 @@ function GetByAssociation() {
   const onSubmit: SubmitHandler<IFormInput> = async (formdata) => {
     setId(data?.provinciaId);
   };
-  console.log(data?.message);
+  
   const message = data?.message;
 
   React.useEffect(() => {

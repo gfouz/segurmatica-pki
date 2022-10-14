@@ -47,7 +47,7 @@ function Creator(props: { path: string }) {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex direction='column'>
-          <StyledLabel color='#009966' m='1em 0' capit>
+          <StyledLabel color='#009966' m='1em 0' upper>
             Añadir usuario
           </StyledLabel>
           <StyledLabel capit>Correo electrónico.</StyledLabel>
